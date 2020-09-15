@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "pretty": true,
+        "sourceMap": true,
+        "target": "es6",
+        "lib": [
+            "dom",
+            "es2017"
+        ],
+        "outDir": "../www",
+        "baseUrl": "./src",
+        "alwaysStrict": true
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules"]
+}
