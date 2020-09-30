@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button id="addresses-list" [routerLink]="['/', profilePath, detailsPath]" routerDirection="back">
+        <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Addresses
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button id="add-address" [routerLink]="['/', profilePath, addressesPath, createPath]" routerDirection="forward">
+        <ion-icon slot="end" name="add-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="!addresses.length">
+    <div class="ion-text-center ion-padding">No data</div>
+  </ng-container>
+  <ng-container *ngIf="addresses.length">
+    <ion-list>
+      <ion-item *ngFor="let address of addresses; let i=index">
+        <ion-label>
+          <p>{{getAddress(address)}}, {{address.city}}</p>
+        </ion-label>
+        <div item-right>
+          <ion-button (click)="delete(address);$event.stopPropagation();" color="danger">Delete</ion-button>
+          <ion-button (click)="edit(address);$event.stopPropagation();" color="primary">Edit</ion-button>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+
+</ion-content>

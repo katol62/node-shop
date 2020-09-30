@@ -1,0 +1,48 @@
+{
+    "cities": [
+        {
+            "name":  "Simferopol",
+            "streets": [
+                "SimStreet 1",
+                "SimStreet 2",
+                "SimStreet 3",
+                "SimStreet 4",
+                "SimStreet 5",
+                "SimStreet 6",
+                "SimStreet 7",
+                "SimStreet 8",
+                "SimStreet 9",
+                "SimStreet 10",
+                "SimStreet 11",
+                "SimStreet 12",
+                "SimStreet 13",
+                "SimStreet 14",
+                "SimStreet 15",
+                "SimStreet 16",
+                "SimStreet 17"
+            ]
+        },
+        {
+            "name":  "Sevastopol",
+            "streets": [
+                "SevStreet 1",
+                "SevStreet 2",
+                "SevStreet 3",
+                "SevStreet 4",
+                "SevStreet 5",
+                "SevStreet 6",
+                "SevStreet 7",
+                "SevStreet 8",
+                "SevStreet 9",
+                "SevStreet 10",
+                "SevStreet 11",
+                "SevStreet 12",
+                "SevStreet 13",
+                "SevStreet 14",
+                "SevStreet 15",
+                "SevStreet 16",
+                "SevStreet 17"
+            ]
+        }
+    ]
+}

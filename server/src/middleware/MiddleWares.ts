@@ -21,6 +21,14 @@ export const checkJwt: RequestHandler = (req: Request, res: Response, next: Next
     next();
 };
 
+export const checkAuthorized: RequestHandler = (req: Request, res: Response, next: NextFunction) => {
+    const user: IUser = req.body.decoded;
+    if (!user) {
+        return res.status(401).json({success: false, message: 'Not Authorized'} as IBaseResponse);
+    }
+    next();
+};
+
 export const hasRole = (roles: any[]) => {
     return (req: Request, res: Response, next: NextFunction) => {
         const user: IUser = req.body.decoded;

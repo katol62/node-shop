@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button id="home" [routerLink]="['/']" routerDirection="back">
+                <ion-icon size="large" slot="start" name="home-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            Login
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-subtitle>Enter credentials</ion-card-subtitle>
+            <ion-card-title>Login</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <form [formGroup]="loginForm">
+                <ion-item *ngIf="!mobile || (mobile && state === 'phone')">
+                    <ion-label>Phone</ion-label>
+                    <ion-input type="tel" #phoneInput formControlName="phone" placeholder="+7 (xxx) xxx-xxxx"></ion-input>
+                </ion-item>
+                <ion-item *ngIf="!mobile">
+                    <ion-label>Password</ion-label>
+                    <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
+                </ion-item>
+                <ng-container *ngIf="mobile">
+                    <ion-input type="hidden" formControlName="verified"></ion-input>
+                </ng-container>
+            </form>
+            <ng-container *ngIf="mobile && state === 'code'">
+                <div class="ion-text-center ion-padding">
+                    <ion-text>Check the code we sent to your phone</ion-text>
+                </div>
+                <ion-item>
+                    <ion-label>Code</ion-label>
+                    <ion-input type="number" [(ngModel)]="code" (ngModelChange)="processCode($event)" placeholder="Enter code"></ion-input>
+                </ion-item>
+            </ng-container>
+            <div class="ion-text-center ion-margin-top">
+                <ion-button size="small" color="primary" (click)="logIn()" [disabled]="!loginForm.valid">
+                    {{ !mobile || (mobile && state === 'phone') ? 'Sign In' : 'Next' }}
+                </ion-button>
+            </div>
+        </ion-card-content>
+    </ion-card>
+    <div class="ion-justify-content-center ion-text-center">
+        <ion-button  class="ion-justify-content-center" id="reg" [routerLink]="['/', profilePath, registerPath]" routerDirection="back">
+            Register
+        </ion-button>
+    </div>
+
+</ion-content>

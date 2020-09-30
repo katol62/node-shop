@@ -19,28 +19,30 @@ export class ApiAuthRoute {
         });
 
         this.router.post('/', async (req: express.Request, res: express.Response, next) => {
-            if ((req.body.email && req.body.password) || (req.body.softcode && req.body.type && req.body.type === 'customer') ) {
-                let email: string;
+            if ((req.body.phone && req.body.password) || (req.body.phone && req.body.verified) ) {
+                let phone: string;
                 let password: string;
-                if (req.body.email && req.body.password) {
-                    email = req.body.email;
+                if (req.body.phone && req.body.password) {
+                    phone = req.body.phone;
                     password = req.body.password;
                 } else {
-                    email = req.body.softcode;
-                    password = req.body.softcode;
+                    phone = req.body.phone;
                 }
                 try {
-                    const users = await this.User.find({email});
+                    const users = await this.User.find({phone});
                     if (!users.length) {
                         return res.status(404).json({ success: false, message: 'User not found' } as IBaseResponse);
                     }
-                    const hash = users[0].password;
-                    const doesMatch = await bcrypt.compare(password, hash);
+                    let doesMatch = true;
+                    if (req.body.password) {
+                        const hash = users[0].password;
+                        doesMatch = await bcrypt.compare(password, hash);
+                    }
                     if (doesMatch){
                         const user: IUser = users[0];
                         const payload = {
                             id: user.id,
-                            email: user.email,
+                            phone: user.phone,
                             role: user.role
                         };
                         const token = jwt.sign(payload, config.secret as Secret, {

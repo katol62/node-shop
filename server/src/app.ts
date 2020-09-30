@@ -45,7 +45,7 @@ class App {
     }
 
     private configStaticRoutes() {
-        const distDir = '../www/client';
+        const distDir = '../../www/client';
         this.app.use(express.static(path.join(__dirname, distDir)));
         this.app.use(/^((?!(api)).)*/, (req, res) => {
             res.sendFile(path.join(__dirname, distDir + '/index.html'));

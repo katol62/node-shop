@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start:node": "nodemon -L",
+    "start": "tsc && nodemon dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -18,7 +20,7 @@
     "helmet": "^4.1.1",
     "jsonwebtoken": "^8.5.1",
     "method-override": "^3.0.0",
-    "mysql": "^2.18.1"
+    "mysql": "github:mysqljs/mysql"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
