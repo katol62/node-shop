@@ -3,7 +3,7 @@ import {AuthService} from "../../../shared/services/auth.service";
 import {IAuthResponse} from "../../../shared/misc/http-data";
 import {Subscription} from "rxjs";
 import {Platform} from "@ionic/angular";
-import {addressesPath, detailsPath, profilePath} from "../../../shared/misc/constants";
+import {addressesPath, adminPath, detailsPath, profilePath} from "../../../shared/misc/constants";
 import {AuthorizedComponent} from "../../../shared/components/authorized/authorized.component";
 
 @Component({
@@ -16,6 +16,7 @@ export class DetailsPage extends AuthorizedComponent implements OnInit, OnDestro
     public profilePath = profilePath;
     public detailPath = detailsPath;
     public addressesPath = addressesPath;
+    public adminPath = adminPath;
 
     public mobile: boolean;
 

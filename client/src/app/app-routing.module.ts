@@ -1,24 +1,26 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {adminPath, homePath, profilePath} from "./shared/misc/constants";
+import {AuthGuard} from "./shared/guards/auth.guard";
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
-  },
-  {
     path: '',
-    redirectTo: 'home',
+    redirectTo: homePath,
     pathMatch: 'full'
   },
   {
-    path: 'profile',
+    path: homePath,
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
+  },
+  {
+    path: profilePath,
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
-    path: 'admin',
+    path: adminPath,
     loadChildren: () => import('./pages/admin/admin.module').then( m => m.AdminPageModule)
-  },
+  }
 ];
 
 @NgModule({

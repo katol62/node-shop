@@ -24,5 +24,18 @@ export class PlaceService {
         return this.places.find( place => place.name === city)['streets'];
     }
 
+    public cities(): Promise<any> {
+        return new Promise((resolve) => {
+            const cities = this.places.map(item => item.name);
+            resolve(cities);
+        })
+    }
+
+    public strrets(city: string): Promise<any> {
+        return new Promise((resolve) => {
+            const streets = this.places.find( place => place.name === city)['streets'];;
+            resolve(streets);
+        })
+    }
 
 }

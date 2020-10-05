@@ -61,7 +61,12 @@ export class AddressesEditPage extends AuthorizedComponent implements OnInit, On
         }
 
         this.form.patchValue({userId: this.authInfo.user.id});
-        this.cities = this.placeService.getCities();
+        // this.cities = this.placeService.getCities();
+        this.placeService.cities().then(
+            result => {
+                this.cities = result;
+            }
+        )
     }
 
     ngOnDestroy(): void {
@@ -72,10 +77,12 @@ export class AddressesEditPage extends AuthorizedComponent implements OnInit, On
         this.restService.get(`/addresses/${id}` ).subscribe({
             next: (value: IBaseResponse) => {
                 const data = value.data;
-                this.streets = this.placeService.getStreets(data.city);
-                setTimeout(() => {
-                    this.form.patchValue(value.data);
-                }, 500);                
+                this.placeService.strrets(data.city).then(
+                    result => {
+                        this.streets = result;
+                        this.form.patchValue(data);
+                    }
+                )
             },
             error: err => {}
         })

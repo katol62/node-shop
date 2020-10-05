@@ -8,6 +8,11 @@
         <ion-title>
             Details
         </ion-title>
+        <ion-buttons slot="end" *ngIf="!mobile">
+            <ion-button id="end" [routerLink]="['/', adminPath]" routerDirection="forward">
+                <ion-icon slot="start" name="person-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
