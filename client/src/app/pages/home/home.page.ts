@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {profilePath} from "../../shared/misc/constants";
 
 @Component({
@@ -6,10 +6,14 @@ import {profilePath} from "../../shared/misc/constants";
     templateUrl: 'home.page.html',
     styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
     public profilePath = profilePath;
 
-    constructor() {}
+    constructor() {
+    }
+
+    ngOnInit(): void {
+    }
 
 }

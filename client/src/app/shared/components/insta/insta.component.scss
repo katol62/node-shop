@@ -1,0 +1,18 @@
+:host {
+  ion-img {
+    &.insta {
+      width: 100%    !important;
+      height: auto   !important;
+      max-width: 700px !important;
+      margin: 0 auto;
+    }
+  }
+  video {
+    &.insta {
+      width: 100%    !important;
+      height: auto   !important;
+      max-width: 700px !important;
+      margin: 0 auto;
+    }
+  }
+}

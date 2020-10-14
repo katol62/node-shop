@@ -42,11 +42,9 @@ class ApiAddressesRoute {
                     message: 'Address successfully retrieved',
                     data: rAddress
                 } as IBaseResponse);
-
             } catch (e) {
                 return res.status(500).json({ success: false, message: e.message} as IBaseResponse);
             }
-
         });
         this.router.post('/create', async (req: express.Request, res: express.Response) => {
             let rAddress: IAddress = req.body.data;

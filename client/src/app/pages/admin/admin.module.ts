@@ -7,19 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { AdminPageRoutingModule } from './admin-routing.module';
 
 import { AdminPage } from './admin.page';
-import {MenuComponent} from "../../shared/components/menu/menu.component";
-import {MenuHeaderComponent} from "../../shared/components/menu-header/menu-header.component";
+import {SharedModule} from "../../shared/shared.module";
 
 @NgModule({
     imports: [
         CommonModule,
-        FormsModule,
+        SharedModule,
         IonicModule,
         AdminPageRoutingModule
     ],
     exports: [
-        MenuComponent
     ],
-    declarations: [AdminPage, MenuComponent]
+    declarations: [AdminPage]
 })
 export class AdminPageModule {}

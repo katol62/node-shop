@@ -3,10 +3,12 @@ import {IUser, User} from "../models/User";
 import {IBaseResponse} from "../misc/db";
 import * as bcrypt from 'bcrypt';
 import {checkAuthorized} from "../middleware/MiddleWares";
+import {Address} from "../models/Address";
 
 class ApiUserRoute {
     public router: express.Router = express.Router();
     private userModel: User = new User();
+    private addressesModel: Address = new Address();
 
     constructor() {
         this.config();
@@ -93,6 +95,7 @@ class ApiUserRoute {
         this.router.delete('/:id', checkAuthorized, async (req: express.Request, res: express.Response) => {
             const id: number = Number(req.params.id);
             try {
+                const resultAddress = await this.addressesModel.deleteByUser(id);
                 const result = await this.userModel.delete(id);
                 if (!result.affectedRows) {
                     return res.status(204).json({ success: false, message: 'No content'} as IBaseResponse);

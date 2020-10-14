@@ -11,7 +11,7 @@
         ],
         "outDir": "../www",
         "baseUrl": "./src",
-        "alwaysStrict": true
+        "alwaysStrict": false
     },
     "include": ["src/**/*.ts"],
     "exclude": ["node_modules"]

@@ -39,9 +39,6 @@
                     <ion-label>Email</ion-label>
                     <ion-input type="email" formControlName="email" placeholder="Email"></ion-input>
                 </ion-item>
-                <ng-container *ngIf="mobile">
-                    <ion-input type="hidden" formControlName="verified"></ion-input>
-                </ng-container>
             </form>
             <ng-container *ngIf="mobile && state === 'code'">
                 <div class="ion-text-center ion-padding">

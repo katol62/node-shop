@@ -4,5 +4,10 @@
       <ion-menu-button (click)="openMenu()"></ion-menu-button>
     </ion-buttons>
     <ion-title>{{title}}</ion-title>
+    <ion-buttons slot="end" *ngIf="link">
+      <ion-button (click)="rightButtonClick()" >
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>

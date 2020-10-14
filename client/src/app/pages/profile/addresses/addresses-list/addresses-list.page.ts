@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {addressesPath, createPath, detailsPath, profilePath} from "../../../../shared/misc/constants";
+import {addressesPath, adminPath, createPath, detailsPath, profilePath, usersPath} from "../../../../shared/misc/constants";
 import {RestService} from "../../../../shared/services/rest.service";
 import {IAddress} from "../../../../../../../server/src/models/Address";
-import {IBaseResponse} from "../../../../shared/misc/http-data";
+import {IBaseResponse, IUser} from "../../../../shared/misc/http-data";
 import {pluck} from "rxjs/operators";
 import {from, of} from "rxjs";
 import {Router} from "@angular/router";
@@ -71,14 +71,12 @@ export class AddressesListPage implements OnInit {
     delete( address: IAddress ) {
          this.alertService.confirm('Confirm', 'Delete address?', {data: address}).then(res => {
              if (res) {
-                 debugger;
                  this.deleteAddress(res.data.id);
              }
          })
     }
 
     processDelete(data: ConfirmData, parent: any): void {
-         debugger;
          parent.deleteAddress(data.data.id);
     }
 

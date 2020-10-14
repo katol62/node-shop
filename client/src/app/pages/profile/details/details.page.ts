@@ -1,10 +1,11 @@
 import {Component, Injector, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "../../../shared/services/auth.service";
-import {IAuthResponse} from "../../../shared/misc/http-data";
+import {IAuthResponse, IBaseResponse, IUser} from "../../../shared/misc/http-data";
 import {Subscription} from "rxjs";
 import {Platform} from "@ionic/angular";
-import {addressesPath, adminPath, detailsPath, profilePath} from "../../../shared/misc/constants";
+import {addressesPath, adminPath, detailsPath, editPath, profilePath} from "../../../shared/misc/constants";
 import {AuthorizedComponent} from "../../../shared/components/authorized/authorized.component";
+import {RestService} from "../../../shared/services/rest.service";
 
 @Component({
     selector: 'app-details',
@@ -18,10 +19,10 @@ export class DetailsPage extends AuthorizedComponent implements OnInit, OnDestro
     public addressesPath = addressesPath;
     public adminPath = adminPath;
 
-    public mobile: boolean;
+    public details: IUser;
 
     constructor(protected injector: Injector,
-                private platform: Platform) {
+                private restService: RestService) {
         super(injector);
     }
 
@@ -31,10 +32,30 @@ export class DetailsPage extends AuthorizedComponent implements OnInit, OnDestro
 
     protected afterInit(): void {
         console.log(this.authInfo);
+        this.getProfile();
     }
 
     ngOnDestroy(): void {
         super.ngOnDestroy();
     }
 
+    edit() {
+        this.router.navigate(['/', profilePath, editPath])
+    }
+
+    logout() {
+        this.authService.onLogout();
+        this.router.navigate(['/']);
+    }
+
+    /**
+     * Rest
+     */
+    private getProfile(): void {
+        this.restService.get('me').subscribe({
+            next: ((result: IBaseResponse) => {
+                this.details = result.data;
+            })
+        })
+    }
 }

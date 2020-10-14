@@ -1,9 +1,24 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>list</ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<app-menu-header [title]="title" [link]="link"></app-menu-header>
 <ion-content>
-
+    <ng-container *ngIf="!categories.length">
+        <div class="ion-text-center ion-padding ion-margin-top">No data</div>
+    </ng-container>
+    <ng-container *ngIf="categories.length">
+        <ion-list>
+            <ion-item *ngFor="let category of categories; let i=index">
+                <ion-thumbnail slot="start">
+                    <img [src]="getSrc(category)">
+                </ion-thumbnail>
+                <ion-label>
+                    <h2>{{category.name}}</h2>
+                    <h4>{{category.description}}</h4>
+                    <p>displayed: {{category.display ? 'Yes' : 'No'}}</p>
+                </ion-label>
+                <div item-right>
+                    <ion-button (click)="delete(category);$event.stopPropagation();" color="danger">Delete</ion-button>
+                    <ion-button (click)="edit(category);$event.stopPropagation();" color="primary">Edit</ion-button>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ng-container>
 </ion-content>

@@ -14,8 +14,7 @@
 <ion-content padding>
     <ion-card>
         <ion-card-header>
-            <ion-card-subtitle>Enter credentials</ion-card-subtitle>
-            <ion-card-title>Login</ion-card-title>
+            <ion-card-subtitle>{{!mobile || (mobile && state === 'phone') ? 'Enter credentials' : 'Enter code'}}</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
             <form [formGroup]="loginForm">

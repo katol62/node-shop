@@ -4,7 +4,7 @@ CREATE TABLE `users` (
                          `id` int(11) NOT NULL AUTO_INCREMENT,
                          `phone` varchar(128) COLLATE utf8_bin NOT NULL,
                          'verified' BOOLEAN DEFAULT 0,
-                         `password` varchar(128) COLLATE utf8_bin NOT NULL,
+                         `password` varchar(128) COLLATE utf8_bin DEFAULT NULL,
                          `firstName` varchar(128) COLLATE utf8_bin DEFAULT NULL,
                          `lastName` varchar(128) COLLATE utf8_bin DEFAULT NULL,
                          `email` varchar(128) COLLATE utf8_bin DEFAULT NULL,
@@ -33,3 +33,22 @@ CREATE TABLE `user_address` (
 
 ALTER TABLE `user_address`
     ADD UNIQUE KEY `user_address` (`user`,`address`);
+
+CREATE TABLE `banners` (
+                           `id` int(11) NOT NULL AUTO_INCREMENT,
+                           `image` BLOB NOT NULL,
+                           `name` varchar(128) COLLATE utf8_bin NOT NULL,
+                           `description` varchar(128) COLLATE utf8_bin DEFAULT NULL,
+                           `display` BOOLEAN DEFAULT 0,
+                           PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+CREATE TABLE `category` (
+                            `id` int(11) NOT NULL AUTO_INCREMENT,
+                            `image` LONGBLOB NOT NULL,
+                            `name` varchar(128) COLLATE utf8_bin NOT NULL,
+                            `description` varchar(128) COLLATE utf8_bin DEFAULT NULL,
+                            `display` BOOLEAN DEFAULT 0,
+                            PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+

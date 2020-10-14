@@ -5,8 +5,9 @@ import {AuthService} from "../../../shared/services/auth.service";
 import {IAuthRequest} from "../../../shared/misc/http-data";
 import {detailsPath, profilePath, registerPath} from "../../../shared/misc/constants";
 import {IonInput, Platform} from "@ionic/angular";
-import { createTextMaskInputElement } from 'text-mask-core';
-import {VerificationService} from "../../../shared/services/verification.service";
+import {createTextMaskInputElement} from 'text-mask-core';
+import {ICode, VerificationService} from "../../../shared/services/verification.service";
+import {IMessageItem, NotificationMessageType, NotificationService} from "../../../shared/services/notification.service";
 
 export enum VerificationState {
     phone = 'phone', code = 'code', done = 'done'
@@ -50,6 +51,7 @@ export class LoginPage implements OnInit {
     constructor(private formBuilder: FormBuilder,
                 private router: Router,
                 private platform: Platform,
+                private notificationService: NotificationService,
                 private verificationService: VerificationService,
                 private authService: AuthService) {
         this.loginForm = this.formBuilder.group({
@@ -90,10 +92,18 @@ export class LoginPage implements OnInit {
         if (this.mobile) {
             if (this.state === VerificationState.phone) {
                 this.verificationService.verifyPhone(phone).subscribe({
-                    next: ((result: boolean) => {
+                    next: ((result: ICode) => {
                         if (result) {
-                            this.showCode = true;
-                            this.state = VerificationState.code;
+                            if (result.code.toString() === '1') {
+                                this.state = VerificationState.code;
+                            } else {
+                                const message: IMessageItem = {
+                                    type: NotificationMessageType.error,
+                                    message: result.message,
+                                    messageCode: String(result.code)
+                                }
+                                this.notificationService.show(message);
+                            }
                         }
                     })
                 })

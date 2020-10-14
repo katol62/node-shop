@@ -89,4 +89,14 @@ export class Address {
         }
     }
 
+    public async deleteByUser(id: number): Promise<any> {
+        const query = 'DELETE FROM address where userId = ?';
+        const params = [id];
+        try {
+            return await this.asyncQuery(query, params);
+        } catch (e) {
+            throw (e);
+        }
+    }
+
 }

@@ -4,6 +4,11 @@ import {checkJwt, hasRole} from "../middleware/MiddleWares";
 import {usersRoutes} from "./ApiUserRoute";
 import {regRoutes} from "./ApiRegisterRoute";
 import {addressesRoutes} from "./ApiAddressesRoute";
+import {verifyRoutes} from "./ApiVerifyRoute";
+import {meRoutes} from "./ApiMeRoute";
+import {bannerRoutes} from "./ApiBannerRoute";
+import {categoryRoutes} from "./ApiCategoryRoute";
+import {instaRoutes} from "./ApiInstaRoute";
 
 class ApiRoutes {
 
@@ -28,8 +33,13 @@ class ApiRoutes {
         );
         this.router.use('/auth', authRoutes.router);
         this.router.use('/register', regRoutes.router);
+        this.router.use('/verify', verifyRoutes.router);
+        this.router.use('/insta', instaRoutes.router);
+        this.router.use('/me', checkJwt, meRoutes.router);
+        this.router.use('/banners', bannerRoutes.router);
+        this.router.use('/categories', categoryRoutes.router);
         this.router.use('/addresses', checkJwt, addressesRoutes.router);
-        this.router.use('/users', checkJwt, hasRole(['admin']), usersRoutes.router);
+        this.router.use('/users', checkJwt, hasRole(['super', 'admin']), usersRoutes.router);
     }
 }
 

@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { UsersPage } from './users.page';
 import {listPath} from "../../../shared/misc/constants";
+import {AuthGuard} from "../../../shared/guards/auth.guard";
+import {RoleGuard} from "../../../shared/guards/role.guard";
 
 const routes: Routes = [
   {
@@ -19,6 +21,7 @@ const routes: Routes = [
       },
       {
         path: ':id',
+        canActivate: [AuthGuard, RoleGuard], data: {roles: ['super']},
         loadChildren: () => import('./edit/edit.module').then( m => m.EditPageModule)
       },
     ]

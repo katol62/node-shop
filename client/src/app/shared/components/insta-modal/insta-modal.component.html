@@ -1,0 +1,26 @@
+<ion-header translucent>
+    <ion-toolbar>
+        <ion-title>{{mediaData ? modalTitle() : ''}}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="closeModal()">Close</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding>
+    <ion-grid>
+        <ion-row>
+            <ion-col size="12">
+                <ion-img *ngIf="mediaData.media_type !== 'VIDEO'" class="insta" [src]="mediaData.media_url"></ion-img>
+                <video class="insta" *ngIf="mediaData.media_type === 'VIDEO'" controls="" name="media">
+                    <source [src]="mediaData.media_url" type="video/mp4">
+                </video>
+            </ion-col>
+            <ion-col size="12">
+                <ion-text class="ion-text-start">
+                    {{mediaData.caption}}
+                </ion-text>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-content>

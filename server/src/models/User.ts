@@ -72,7 +72,8 @@ export class User {
     }
 
     public async delete(id: number): Promise<any> {
-        const query = 'DELETE u.*, a.* FROM users u LEFT JOIN address a ON a.userId=u.id where u.id = ?';
+        // const query = 'DELETE u.*, a.* FROM users u LEFT JOIN address a ON a.userId=u.id where u.id = ?';
+        const query = 'DELETE from users where id = ?';
         const params = [id];
         try {
             return await this.asyncQuery(query, params);

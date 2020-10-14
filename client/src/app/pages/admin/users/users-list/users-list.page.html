@@ -1,4 +1,16 @@
-<app-menu-header title="Users List"></app-menu-header>
+<app-menu-header [title]="title"></app-menu-header>
 <ion-content>
-
+    <ion-list *ngIf="users && users.length">
+        <ion-item *ngFor="let user of users">
+            <ion-label>
+                <h2>{{user.firstName ? user.firstName : 'Unknown'}} {{user.lastName}} {{hostId === user.id ? '(You)' : ''}}</h2>
+                <h3>{{user.phone}}</h3>
+                <p>Role: {{user.role}}</p>
+            </ion-label>
+            <div item-right>
+                <ion-button *ngIf="hostId !== user.id" (click)="delete(user);$event.stopPropagation();" color="danger">Delete</ion-button>
+                <ion-button (click)="edit(user);$event.stopPropagation();" color="primary">Edit</ion-button>
+            </div>
+        </ion-item>
+    </ion-list>
 </ion-content>

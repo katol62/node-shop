@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ProfilePage } from './profile.page';
-import {addressesPath, detailsPath, loginPath, profilePath, registerPath} from "../../shared/misc/constants";
+import {addressesPath, detailsPath, editPath, loginPath, profilePath, registerPath} from "../../shared/misc/constants";
 import {AuthGuard} from "../../shared/guards/auth.guard";
 
 const routes: Routes = [
@@ -31,6 +31,11 @@ const routes: Routes = [
         path: addressesPath,
         canActivate: [AuthGuard],
         loadChildren: () => import('./addresses/addresses.module').then( m => m.AddressesPageModule)
+      },
+      {
+        path: editPath,
+        canActivate: [AuthGuard],
+        loadChildren: () => import('./edit/edit.module').then(m => m.EditPageModule)
       }
     ]
   },

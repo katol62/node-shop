@@ -7,12 +7,12 @@ import { IonicModule } from '@ionic/angular';
 import { AddressesEditPageRoutingModule } from './addresses-edit-routing.module';
 
 import { AddressesEditPage } from './addresses-edit.page';
+import {SharedModule} from "../../../../shared/shared.module";
 
 @NgModule({
     imports: [
         CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
+        SharedModule,
         IonicModule,
         AddressesEditPageRoutingModule
     ],

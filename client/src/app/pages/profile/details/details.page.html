@@ -17,16 +17,38 @@
 </ion-header>
 
 <ion-content>
-    <ng-container *ngIf="!authInfo">
+    <div class="">
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <div class="ion-text-end">
+                        <ion-button size="small" (click)="edit()" routerDirection="forward">
+                            <ion-icon name="pencil-outline" slot="start"></ion-icon>
+                            Edit Profile
+                        </ion-button>
+                    </div>
+                </ion-col>
+                <ion-col>
+                    <div class="ion-text-start">
+                        <ion-button size="small" color="danger" (click)="logout()" routerDirection="back">
+                            <ion-icon name="log-out-outline" slot="start"></ion-icon>
+                            Logout
+                        </ion-button>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+    <ng-container *ngIf="!details">
         <div class="ion-text-center ion-padding">No data</div>
     </ng-container>
-    <ng-container *ngIf="authInfo">
+    <ng-container *ngIf="details">
         <ion-list>
             <ion-item>
-                <ion-label>Hello {{authInfo.user && authInfo.user.firstName ? authInfo.user.firstName : ''}}</ion-label>
+                <ion-label>Hello {{details && details.firstName ? details.firstName : ''}}</ion-label>
             </ion-item>
             <ion-item>
-                <ion-label>Your phone: +{{authInfo.user.phone}}</ion-label>
+                <ion-label>Your phone: +{{details.phone}}</ion-label>
             </ion-item>
             <ion-item>
                 <ion-label>Addresses</ion-label>

@@ -10,13 +10,13 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./shared/guards/auth.interceptor";
-import {ToastComponent} from "./shared/components/toast/toast.component";
+import {SharedModule} from "./shared/shared.module";
 
 
 @NgModule({
-    declarations: [AppComponent, ToastComponent],
+    declarations: [AppComponent],
     entryComponents: [],
-    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
+    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, SharedModule],
     providers: [
         StatusBar,
         SplashScreen,

@@ -1,18 +1,39 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Here Not There
-    </ion-title>
-    <ion-buttons slot="end">
-      <ion-button id="admin" [routerLink]="['/', profilePath]" routerDirection="forward">
-        <ion-icon size="large" slot="start" name="enter-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>
+            Here Not There
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button id="admin" [routerLink]="['/', profilePath]" routerDirection="forward">
+                <ion-icon size="large" slot="start" name="enter-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div id="container">
-    <strong>This is main content</strong>
-  </div>
+    <ion-grid>
+        <ion-row>
+            <ion-col size="12">
+                <app-slider></app-slider>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12">
+                <app-insta></app-insta>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-text slot="start" class="ion-padding-start">
+            &copy; Here Not There 2020
+        </ion-text>
+        <ion-buttons slot="end">
+            <ion-button id="changeText" onClick="toggleText()">
+                <ion-icon slot="start" name="refresh"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

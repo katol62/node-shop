@@ -1,15 +1,16 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {IonInput, Platform} from "@ionic/angular";
-import {VerificationService} from "../../../shared/services/verification.service";
+import {ICode, VerificationService} from "../../../shared/services/verification.service";
 import {AuthService} from "../../../shared/services/auth.service";
 import {ValidationService} from "../../../shared/services/validation.service";
-import {IAuthRequest, IBaseResponse} from "../../../shared/misc/http-data";
+import {IAuthRequest, IBaseResponse, IRegRequest} from "../../../shared/misc/http-data";
 import {VerificationState} from "../login/login.page";
 import {detailsPath, profilePath} from "../../../shared/misc/constants";
 import {createTextMaskInputElement} from "text-mask-core";
 import {Router} from "@angular/router";
 import {RestService} from "../../../shared/services/rest.service";
+import {IMessageItem, NotificationMessageType, NotificationService} from "../../../shared/services/notification.service";
 
 @Component({
     selector: 'app-register',
@@ -17,7 +18,7 @@ import {RestService} from "../../../shared/services/rest.service";
     styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-    private registerForm : FormGroup;
+    public registerForm : FormGroup;
     public mobile: boolean;
     public state: VerificationState = VerificationState.phone;
     public code: string = '';
@@ -44,6 +45,7 @@ export class RegisterPage implements OnInit {
                 private router: Router,
                 private platform: Platform,
                 private verificationService: VerificationService,
+                private notificationService: NotificationService,
                 private authService: AuthService,
                 private restService: RestService
     ) {
@@ -54,7 +56,7 @@ export class RegisterPage implements OnInit {
             firstName: [''],
             lastName: [''],
             email: [''],
-            verified: [false],
+            verified: [false]
         })
     }
 
@@ -64,12 +66,18 @@ export class RegisterPage implements OnInit {
     }
 
     private resetForm() {
-        this.registerForm.reset();
+        this.registerForm.reset({
+            phone: null,
+            password: '',
+            confirmPassword: '',
+            firstName: '',
+            lastName: '',
+            email: '',
+            verified: this.mobile ? true : false
+        });
         this.registerForm.get('password').setErrors(null);
         this.registerForm.get('confirmPassword').setErrors(null);
-        this.registerForm.get('verified').setErrors(null);
         this.registerForm.get('password').setValidators(null);
-        this.registerForm.get('verified').setValidators(null);
 
         if (!this.mobile) {
             this.registerForm.get('password').setValidators([Validators.required, Validators.minLength(3)]);
@@ -82,14 +90,25 @@ export class RegisterPage implements OnInit {
      */
     signUp(): void {
         console.log(this.registerForm.value);
+        const value = this.registerForm.value;
         const full = this.registerForm.get('phone').value;
         const phone = full.replace(/\D+/g, '');
+        let regRequest: IRegRequest = {...value, phone: phone};
         if (this.mobile) {
             if (this.state === VerificationState.phone) {
                 this.verificationService.verifyPhone(phone).subscribe({
-                    next: ((result: boolean) => {
+                    next: ((result: ICode) => {
                         if (result) {
-                            this.state = VerificationState.code;
+                            if (result.code.toString() === '1') {
+                                this.state = VerificationState.code;
+                            } else {
+                                const message: IMessageItem = {
+                                    type: NotificationMessageType.error,
+                                    message: result.message,
+                                    messageCode: String(result.code)
+                                }
+                                this.notificationService.show(message);
+                            }
                         }
                     })
                 })
@@ -98,9 +117,8 @@ export class RegisterPage implements OnInit {
                 this.verificationService.verifyCode(code).subscribe({
                     next: ((result: boolean) => {
                         if (result) {
-                            this.state = VerificationState.phone;
-                            const authData: IAuthRequest = {phone: phone, verified: true};
-                            this.processRegister(authData);
+                            // this.state = VerificationState.phone;
+                            this.processRegister(regRequest);
                         } else {
                             this.state = VerificationState.phone;
                             this.resetForm();
@@ -109,17 +127,15 @@ export class RegisterPage implements OnInit {
                 })
             }
         } else {
-            const authData: IAuthRequest = {phone: phone, password: this.registerForm.get('password').value};
-            this.processRegister(authData);
+            this.processRegister(regRequest);
         }
 
     }
 
-    private processRegister(authData: IAuthRequest): void {
+    private processRegister(authData: IRegRequest): void {
         this.restService.postForm('register', authData).subscribe({
             next: (value: IBaseResponse) => {
                 // const authData: IAuthRequest = value.data;
-                debugger;
                 this.authService.login(authData)
                     .subscribe({
                         next: value => {
@@ -130,6 +146,7 @@ export class RegisterPage implements OnInit {
             error: error => {
                 console.log(error);
                 this.resetForm();
+                this.state = VerificationState.phone;
             }
         })
     }
@@ -149,7 +166,7 @@ export class RegisterPage implements OnInit {
         });
     }
 
+
     processCode( $event: any ) {
     }
-
 }

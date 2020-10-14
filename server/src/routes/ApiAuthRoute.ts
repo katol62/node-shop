@@ -20,21 +20,15 @@ export class ApiAuthRoute {
 
         this.router.post('/', async (req: express.Request, res: express.Response, next) => {
             if ((req.body.phone && req.body.password) || (req.body.phone && req.body.verified) ) {
-                let phone: string;
-                let password: string;
-                if (req.body.phone && req.body.password) {
-                    phone = req.body.phone;
-                    password = req.body.password;
-                } else {
-                    phone = req.body.phone;
-                }
+                const phone: string = req.body.phone;
+                const password: string = req.body.password;
                 try {
                     const users = await this.User.find({phone});
                     if (!users.length) {
                         return res.status(404).json({ success: false, message: 'User not found' } as IBaseResponse);
                     }
                     let doesMatch = true;
-                    if (req.body.password) {
+                    if (password) {
                         const hash = users[0].password;
                         doesMatch = await bcrypt.compare(password, hash);
                     }

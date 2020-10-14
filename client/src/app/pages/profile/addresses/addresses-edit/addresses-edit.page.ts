@@ -61,7 +61,6 @@ export class AddressesEditPage extends AuthorizedComponent implements OnInit, On
         }
 
         this.form.patchValue({userId: this.authInfo.user.id});
-        // this.cities = this.placeService.getCities();
         this.placeService.cities().then(
             result => {
                 this.cities = result;

@@ -1,15 +1,98 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injector, OnDestroy, OnInit} from '@angular/core';
+import {AuthorizedComponent} from "../../../../shared/components/authorized/authorized.component";
+import {adminPath, categoriesPath, createPath} from "../../../../shared/misc/constants";
+import {IBaseResponse} from "../../../../shared/misc/http-data";
+import {RestService} from "../../../../shared/services/rest.service";
+import {DomSanitizer} from "@angular/platform-browser";
+import {AlertService} from "../../../../shared/services/alert.service";
+import {ICategory} from "../../../../../../../server/src/models/Category";
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.page.html',
-  styleUrls: ['./list.page.scss'],
+    selector: 'app-list',
+    templateUrl: './list.page.html',
+    styleUrls: ['./list.page.scss'],
 })
-export class ListPage implements OnInit {
+export class ListPage extends AuthorizedComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+    public title: string = 'Categories List';
+    public link: string = '/' + adminPath + '/' + categoriesPath + '/' + createPath;
 
-  ngOnInit() {
-  }
+    public categories: ICategory[] = [];
+
+    constructor(
+        protected injector: Injector,
+        private restService: RestService,
+        private sanitizer : DomSanitizer,
+        private alertService: AlertService
+    )
+    {
+        super(injector);
+    }
+
+    ngOnInit() {
+        super.ngOnInit();
+    }
+
+    ngOnDestroy() {
+        super.ngOnDestroy();
+    }
+
+    protected afterInit(): void {
+    }
+
+    ionViewWillEnter() {
+        this.getCategories();
+    }
+
+    /**
+     * Rest
+     */
+
+    private getCategories() {
+        const req: any = {all: true};
+        this.restService.get('categories', req).subscribe({
+            next: ((result: IBaseResponse) => {
+                this.categories = result.data;
+            })
+        })
+    }
+
+    private deleteCategory( id: number ) {
+        this.restService.delete(`categories/${id}`).subscribe({
+            next: (value: IBaseResponse ) => {
+                this.alertService.alert('Success', 'Category deleted').then(
+                    result => {
+                        this.getCategories();
+                    }
+                );
+            }
+        })
+    }
+
+    /**
+     * Actions
+     */
+
+    public delete( category: ICategory ) {
+        this.alertService.confirm('Confirm', 'Delete category?', {data: category}).then(res => {
+            if (res) {
+                this.deleteCategory(res.data.id);
+            }
+        })
+    }
+
+    public edit( category: ICategory ) {
+        this.router.navigate(['/', adminPath, categoriesPath, category.id]);
+    }
+
+
+    /**
+     * Misc
+     */
+
+
+    public getSrc(item: ICategory): any {
+        return this.sanitizer.bypassSecurityTrustResourceUrl(item.src);
+    }
 
 }
