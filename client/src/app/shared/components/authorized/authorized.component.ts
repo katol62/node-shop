@@ -3,7 +3,7 @@ import {IAuthResponse} from "../../misc/http-data";
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
-import {Platform} from "@ionic/angular";
+import {HelpService} from "../../services/help.service";
 
 @Component({
     selector: 'app-authorized',
@@ -18,17 +18,16 @@ export abstract class AuthorizedComponent implements OnInit, OnDestroy {
     protected authSubscriber: Subscription;
     protected router: Router;
     protected authService: AuthService;
-    protected platform: Platform
-
+    protected helpService: HelpService;
 
     protected constructor(protected injector: Injector) {
         this.router = injector.get(Router);
         this.authService = injector.get(AuthService);
-        this.platform = injector.get(Platform);
+        this.helpService = injector.get(HelpService);
     }
 
     ngOnInit() {
-        this.mobile = this.platform.is('mobile');
+        this.mobile = this.helpService.isMobile();
         this.authSubscriber = this.authService.authInfo
             .subscribe((info: IAuthResponse) => {
                 this.authInfo = info.data ? info.data : info;

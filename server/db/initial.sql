@@ -3,6 +3,7 @@ CREATE DATABASE `shopdb` CHARACTER SET utf8 COLLATE utf8_bin;
 CREATE TABLE `users` (
                          `id` int(11) NOT NULL AUTO_INCREMENT,
                          `phone` varchar(128) COLLATE utf8_bin NOT NULL,
+                         `deviceId` varchar(128) COLLATE utf8_bin DEFAULT NULL,
                          'verified' BOOLEAN DEFAULT 0,
                          `password` varchar(128) COLLATE utf8_bin DEFAULT NULL,
                          `firstName` varchar(128) COLLATE utf8_bin DEFAULT NULL,

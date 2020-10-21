@@ -3,7 +3,7 @@ import {adminPath, bannersPath, listPath} from "../../../../shared/misc/constant
 import {AuthorizedComponent} from "../../../../shared/components/authorized/authorized.component";
 import {RestService} from "../../../../shared/services/rest.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {IBannerRequest, IBaseRequest, IBaseResponse} from "../../../../shared/misc/http-data";
+import {IBannerRequest, IBaseResponse} from "../../../../shared/misc/http-data";
 import {IMessageItem, NotificationMessageType, NotificationService} from "../../../../shared/services/notification.service";
 import {AlertService} from "../../../../shared/services/alert.service";
 import {ActivatedRoute} from "@angular/router";
@@ -81,7 +81,7 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
                 next: (value: IBaseResponse) => {
                     const banner = {...value.data, image: ''};
                     this.form.patchValue(banner);
-                    this.form.patchValue({display: banner.display === 1 ? true : false});
+                    this.form.patchValue({display: banner.display === 1});
                 }
             }
         );

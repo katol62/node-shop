@@ -5,6 +5,8 @@ import * as bodyParser from 'body-parser';
 import * as helmet from "helmet";
 import * as methodOverride from 'method-override';
 import {apiRoutes} from "./routes/ApiRoutes";
+import config from './misc/config';
+import {expressCspHeader, INLINE, NONE, SELF} from "express-csp-header";
 
 class App {
     public app: express.Application;
@@ -20,10 +22,24 @@ class App {
     private config() {
         this.app.use(bodyParser.json());
         this.app.use(express.json({limit: '50mb'}));
-        this.app.use(express.urlencoded({limit: '50mb', extended: true}));
+        this.app.use(express.urlencoded({limit: '50mb', extended: false}));
         this.app.use(cors());
         this.app.use(helmet());
         this.app.use(methodOverride());
+        if (config.env === 'prod') {
+            this.app.use(expressCspHeader({
+                directives: {
+                    'default-src': [SELF],
+                    'script-src': [SELF, INLINE],
+                    'style-src': [SELF, 'https:', INLINE],
+                    'font-src': [SELF, 'https:', 'data:'],
+                    'img-src': [SELF, 'data:', '*.cdninstagram.com'],
+                    'media-src': [SELF, 'data:', '*.cdninstagram.com'],
+                    'frame-ancestors': [SELF],
+                    'worker-src': [NONE],
+                }
+            }));
+        }
         this.configureRoutes();
     }
 

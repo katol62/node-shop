@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.hasRole = exports.checkJwt = void 0;
+exports.hasRole = exports.checkAuthorized = exports.checkJwt = void 0;
 const jwt = require("jsonwebtoken");
 const config_1 = require("../misc/config");
 exports.checkJwt = (req, res, next) => {
@@ -16,6 +16,13 @@ exports.checkJwt = (req, res, next) => {
         // If token is not valid, respond with 401 (unauthorized)
         res.status(401).send({ success: false, message: 'Invalid token' });
         return;
+    }
+    next();
+};
+exports.checkAuthorized = (req, res, next) => {
+    const user = req.body.decoded;
+    if (!user) {
+        return res.status(401).json({ success: false, message: 'Not Authorized' });
     }
     next();
 };

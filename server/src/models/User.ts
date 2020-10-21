@@ -6,6 +6,7 @@ export interface IUser {
     firstName?: string;
     lastName?: string;
     phone?: string;
+    deviceId?: string;
     verified?: boolean;
     email?: string;
     password?: string;
@@ -32,11 +33,12 @@ export class User {
     }
 
     public async create( user: IUser): Promise<any> {
-        const query = 'INSERT INTO users (firstName, lastName, phone, email, password, verified, role) SELECT ?, ?, ?, ?, ?, ?, ? FROM DUAL WHERE NOT EXISTS (SELECT * FROM users WHERE phone=?) LIMIT 1';
+        const query = 'INSERT INTO users (firstName, lastName, phone, deviceId, email, password, verified, role) SELECT ?, ?, ?, ?, ?, ?, ?, ? FROM DUAL WHERE NOT EXISTS (SELECT * FROM users WHERE phone=?) LIMIT 1';
         const params = [
             user.firstName,
             user.lastName,
             user.phone,
+            user.deviceId,
             user.email,
             user.password,
             user.verified,
@@ -52,18 +54,16 @@ export class User {
     public async update( user: IUser): Promise<any> {
         console.log(user);
         const id = user.id;
-        const name = user.firstName;
-        const last = user.lastName;
-        const phone = user.phone;
-        const email = user.email;
+        const name = user.firstName ? user.firstName : null;
+        const last = user.lastName ? user.lastName : null;
+        const phone = user.phone ? user.phone : null;
+        const email = user.email ? user.email : null;
+        const deviceId = user.deviceId ? user.deviceId : null;
         const password = user.password ? user.password : null;
-        const role = user.role;
-        let query = 'UPDATE users SET firstName = ?, lastName = ?, email = ?, phone = ?, password = ?, role = ? WHERE id = ?';
-        let params = [name, last, email, phone, password, role, id];
-        if (password == null) {
-            query = 'UPDATE users SET firstName = ?, lastName = ?, email = ?, phone = ?, role = ? WHERE id = ?';
-            params = [name, last, email, phone, role, id];
-        }
+        const verified = user.verified ? user.verified : null;
+        const role = user.role ? user.role : null;
+        const query = 'UPDATE users SET firstName = COALESCE(?, firstName), lastName = COALESCE(?, lastName), deviceId = COALESCE(?, deviceId), email = COALESCE(?, email), phone = COALESCE(?, phone), password = COALESCE(?, password), role = COALESCE(?, role), verified = COALESCE(?, verified) WHERE id = ?';
+        const params = [name, last, deviceId, email, phone, password, role, verified, id];
         try {
             return await this.asyncQuery(query, params);
         } catch (e) {

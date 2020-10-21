@@ -18,6 +18,8 @@ class ApiBannerRoute {
             try {
                 const banners = await this.bannerModel.find(filter);
                 banners.forEach(banner => {
+                    const parsedImage = banner.image.toString('utf-8');
+                    banner.image = parsedImage;
                     banner.src = banner.image.toString('utf-8');
                 })
                 return res.status(200).json({
@@ -37,6 +39,8 @@ class ApiBannerRoute {
                     return res.status(404).json({ success: false, message: 'Not found'} as IBaseResponse);
                 }
                 const rBanner = result[0];
+                const parsedImage = rBanner.image.toString('utf-8');
+                rBanner.image = parsedImage;
                 return res.status(200).json({
                     success: true,
                     message: 'Banner successfully retrieved',

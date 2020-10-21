@@ -8,6 +8,7 @@ import {IonInput, Platform} from "@ionic/angular";
 import {createTextMaskInputElement} from 'text-mask-core';
 import {ICode, VerificationService} from "../../../shared/services/verification.service";
 import {IMessageItem, NotificationMessageType, NotificationService} from "../../../shared/services/notification.service";
+import {HelpService} from "../../../shared/services/help.service";
 
 export enum VerificationState {
     phone = 'phone', code = 'code', done = 'done'
@@ -24,7 +25,6 @@ export class LoginPage implements OnInit {
     public mobile: boolean;
 
     public code: string = '';
-    public showCode: boolean;
     public state: VerificationState = VerificationState.phone;
 
     public profilePath = profilePath;
@@ -50,9 +50,9 @@ export class LoginPage implements OnInit {
 
     constructor(private formBuilder: FormBuilder,
                 private router: Router,
-                private platform: Platform,
                 private notificationService: NotificationService,
                 private verificationService: VerificationService,
+                private helpService: HelpService,
                 private authService: AuthService) {
         this.loginForm = this.formBuilder.group({
             phone: [null, [Validators.required]],
@@ -62,7 +62,7 @@ export class LoginPage implements OnInit {
     }
 
     ngOnInit() {
-        this.mobile = this.platform.is('mobile');
+        this.mobile = this.helpService.isMobile();
         this.resetForm();
     }
 

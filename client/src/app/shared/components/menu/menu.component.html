@@ -14,5 +14,11 @@
                 <ion-label>{{item.label}}</ion-label>
             </ion-item>
         </ion-list>
+        <div class="bottom">
+            <ion-item class="ion-text-end" (click)="signOut()">
+                <ion-icon slot="end" size="large" name="log-out-outline"></ion-icon>
+                <ion-label>Sign Out</ion-label>
+            </ion-item>
+        </div>
     </ion-content>
 </ion-menu>

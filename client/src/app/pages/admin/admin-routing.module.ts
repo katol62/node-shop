@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminPage } from './admin.page';
-import {bannersPath, categoriesPath, detailsPath, ordersPath, productsPath, usersPath} from "../../shared/misc/constants";
+import {bannersPath, categoriesPath, detailsPath, notificationsPath, ordersPath, productsPath, usersPath} from "../../shared/misc/constants";
 import {AuthGuard} from "../../shared/guards/auth.guard";
 
 const routes: Routes = [
@@ -12,7 +12,8 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: categoriesPath
+        redirectTo: categoriesPath,
+        pathMatch: 'full'
       },
       {
         path: categoriesPath,
@@ -36,7 +37,13 @@ const routes: Routes = [
       },
       {
         path: bannersPath,
+        canActivate: [AuthGuard],
         loadChildren: () => import('./banners/banners.module').then( m => m.BannersPageModule)
+      },
+      {
+        path: notificationsPath,
+        canActivate: [AuthGuard],
+        loadChildren: () => import('./notifications/notifications.module').then( m => m.NotificationsPageModule)
       },
     ]
   },

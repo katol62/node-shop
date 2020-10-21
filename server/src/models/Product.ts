@@ -12,11 +12,8 @@ export interface IProduct {
 }
 
 export interface IProductExt extends IProduct{
-    category?: number[];
+    category?: any[];
 }
-
-export const table: string = 'product';
-export const ref_table: string = 'product_category';
 
 export class Product {
     private db = connection;
@@ -29,9 +26,9 @@ export class Product {
     public async find( filter: IProductExt | any): Promise<any> {
         const where = filter ? Object.keys(filter).map(key => (Product.filterOption(key, this.db.escape(filter[key])))) : [];
         const whereStr = where.length ? ' WHERE ' + where.join(' AND ') : '';
-        const leftJoinStr = filter.category ? ` LEFT JOIN ${ref_table} c ` : '';
+        const leftJoinStr = filter.category ? ' LEFT JOIN product_category c ' : '';
         const onStr = filter.category ? ` ON c.product = t.id` : '';
-        const query = `SELECT t.* from ${table} t ${leftJoinStr} ${whereStr} ${onStr}`;
+        const query = `SELECT t.* from product t ${leftJoinStr} ${onStr} ${whereStr}`;
         try {
             return await this.asyncQuery(query);
         } catch (e) {
@@ -39,7 +36,17 @@ export class Product {
         }
     }
 
-    public async create( product: IProduct): Promise<any> {
+    public async getCategories( id: number): Promise<any> {
+        const query = 'SELECT category from product_category WHERE product = ?';
+        const params = [id];
+        try {
+            return await this.asyncQuery(query, params);
+        } catch (e) {
+            throw (e);
+        }
+    }
+
+    public async create( product: IProductExt): Promise<any> {
         const query = `INSERT INTO product (name, description, image1, image2, image3, image4) SELECT ?, ?, ?, ?, ?, ? FROM DUAL WHERE NOT EXISTS (SELECT * FROM product WHERE name=?) LIMIT 1`;
         const params = [
             product.name,
@@ -48,6 +55,7 @@ export class Product {
             product.image2 ? product.image2 : null,
             product.image3 ? product.image3 : null,
             product.image4 ? product.image4 : null,
+            product.name,
         ];
         try {
             return await this.asyncQuery(query, params);
@@ -56,8 +64,29 @@ export class Product {
         }
     }
 
-    public async reference(id: number, category: number[]): Promise<any> {
+    public async reference(product: number, category: number): Promise<any> {
+        const query = `INSERT INTO product_category (product, category) SELECT ?, ? FROM DUAL WHERE NOT EXISTS (SELECT * FROM product_category WHERE product=? AND category=?) LIMIT 1`;
+        const params = [
+            product,
+            category,
+            product,
+            category
+        ]
+        try {
+            return await this.asyncQuery(query, params);
+        } catch (e) {
+            throw (e);
+        }
+    }
 
+    public async clearReference(product: number): Promise<any> {
+        const query = `DELETE FROM product_category WHERE product = ?`;
+        const params = [product];
+        try {
+            return await this.asyncQuery(query, params);
+        } catch (e) {
+            throw (e);
+        }
     }
 
     public async update( product: IProduct ): Promise<any> {
@@ -93,7 +122,7 @@ export class Product {
      */
     private static filterOption(key: string, value: any): string {
         if (key === 'category') {
-            return `c.${key} IN [${value.join(',')}]`;
+            return `c.${key} IN (${value})`;
         }
         return `t.${key} = ${value}`;
     }

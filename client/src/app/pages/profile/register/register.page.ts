@@ -1,16 +1,20 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {IonInput, Platform} from "@ionic/angular";
+import {IonInput} from "@ionic/angular";
 import {ICode, VerificationService} from "../../../shared/services/verification.service";
 import {AuthService} from "../../../shared/services/auth.service";
 import {ValidationService} from "../../../shared/services/validation.service";
-import {IAuthRequest, IBaseResponse, IRegRequest} from "../../../shared/misc/http-data";
+import {IBaseResponse, IRegRequest} from "../../../shared/misc/http-data";
 import {VerificationState} from "../login/login.page";
 import {detailsPath, profilePath} from "../../../shared/misc/constants";
 import {createTextMaskInputElement} from "text-mask-core";
 import {Router} from "@angular/router";
 import {RestService} from "../../../shared/services/rest.service";
 import {IMessageItem, NotificationMessageType, NotificationService} from "../../../shared/services/notification.service";
+import { Plugins } from '@capacitor/core';
+import {HelpService} from "../../../shared/services/help.service";
+
+export const { Device } = Plugins;
 
 @Component({
     selector: 'app-register',
@@ -43,10 +47,10 @@ export class RegisterPage implements OnInit {
 
     constructor(private formBuilder: FormBuilder,
                 private router: Router,
-                private platform: Platform,
                 private verificationService: VerificationService,
                 private notificationService: NotificationService,
                 private authService: AuthService,
+                private helpService: HelpService,
                 private restService: RestService
     ) {
         this.registerForm = this.formBuilder.group({
@@ -56,13 +60,15 @@ export class RegisterPage implements OnInit {
             firstName: [''],
             lastName: [''],
             email: [''],
+            deviceId: [''],
             verified: [false]
         })
     }
 
     ngOnInit() {
-        this.mobile = this.platform.is('mobile');
+        this.mobile = this.helpService.isMobile();
         this.resetForm();
+        this.getDeviceInfo();
     }
 
     private resetForm() {
@@ -73,6 +79,7 @@ export class RegisterPage implements OnInit {
             firstName: '',
             lastName: '',
             email: '',
+            deviceId: [''],
             verified: this.mobile ? true : false
         });
         this.registerForm.get('password').setErrors(null);
@@ -83,6 +90,21 @@ export class RegisterPage implements OnInit {
             this.registerForm.get('password').setValidators([Validators.required, Validators.minLength(3)]);
             this.registerForm.get('confirmPassword').setValidators([Validators.required, Validators.minLength(3), ValidationService.compare('password')]);
         }
+    }
+
+    private getDeviceInfo(): void {
+        Device.getInfo().then(
+            info => {
+                debugger;
+                console.log(info);
+                if (this.mobile) {
+                    this.registerForm.patchValue({deviceId: info.uuid});
+                }
+            }
+        ).catch( e => {
+            debugger;
+            console.log(e);
+        })
     }
 
     /**
@@ -166,7 +188,7 @@ export class RegisterPage implements OnInit {
         });
     }
 
-
     processCode( $event: any ) {
     }
+
 }

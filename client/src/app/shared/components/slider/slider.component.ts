@@ -35,7 +35,10 @@ export class SliderComponent implements OnInit {
         this.getBanners();
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        console.log('GET BANNERS');
+        this.getBanners();
+    }
 
     private initSlider(): void {
         this.slider = {
@@ -52,6 +55,7 @@ export class SliderComponent implements OnInit {
     private getBanners(): void {
         this.restService.get('banners').subscribe({
             next: ((result: IBaseResponse) => {
+                console.log(`RESPONSE ${result.data}`);
                 this.banners = result.data;
                 this.initSlider();
             })

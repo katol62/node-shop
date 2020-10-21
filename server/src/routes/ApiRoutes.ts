@@ -9,6 +9,8 @@ import {meRoutes} from "./ApiMeRoute";
 import {bannerRoutes} from "./ApiBannerRoute";
 import {categoryRoutes} from "./ApiCategoryRoute";
 import {instaRoutes} from "./ApiInstaRoute";
+import {productRoutes} from "./ApiProductRoute";
+import {firebaseRoutes} from "./ApiFirebaseNotificationRoute";
 
 class ApiRoutes {
 
@@ -38,6 +40,8 @@ class ApiRoutes {
         this.router.use('/me', checkJwt, meRoutes.router);
         this.router.use('/banners', bannerRoutes.router);
         this.router.use('/categories', categoryRoutes.router);
+        this.router.use('/products', productRoutes.router);
+        this.router.use('/notify', checkJwt, hasRole(['super', 'admin']), firebaseRoutes.router);
         this.router.use('/addresses', checkJwt, addressesRoutes.router);
         this.router.use('/users', checkJwt, hasRole(['super', 'admin']), usersRoutes.router);
     }

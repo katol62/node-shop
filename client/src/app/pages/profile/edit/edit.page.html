@@ -1,54 +1,54 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button text="" defaultHref="{{backLink}}"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Profile edit</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button text="" defaultHref="{{backLink}}"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Profile edit</ion-title>
+    </ion-toolbar>
 </ion-header>
-<ion-content>
-  <ion-card>
-    <ion-card-content>
-      <form [formGroup]="form">
-        <ion-item>
-          <ion-label>Phone</ion-label>
-          <ion-input type="tel" #phoneInput formControlName="phone" placeholder="+7 (xxx) xxx-xxxx"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Password</ion-label>
-          <ion-input type="password" formControlName="newPassword" placeholder="Password"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Confirm</ion-label>
-          <ion-input type="password" formControlName="confirmPassword" placeholder="Confirm Password"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>First Name</ion-label>
-          <ion-input type="text" formControlName="firstName" placeholder="First Name"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Last Name</ion-label>
-          <ion-input type="text" formControlName="lastName" placeholder="Last Name"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Email</ion-label>
-          <ion-input type="email" formControlName="email" placeholder="Email"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Role</ion-label>
-          <ion-select formControlName="role" placeholder="Select Role" (ionChange)="onRoleUpdate($event)">
-            <ion-select-option *ngFor="let role of roles" [value]="role">{{role}}</ion-select-option>
-          </ion-select>
-        </ion-item>
+<ion-content class="ion-align-items-center">
+    <ion-card>
+        <ion-card-content>
+            <form [formGroup]="form">
+                <ion-item>
+                    <ion-label>Phone</ion-label>
+                    <ion-input type="tel" #phoneInput formControlName="phone" placeholder="+7 (xxx) xxx-xxxx"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Password</ion-label>
+                    <ion-input type="password" formControlName="newPassword" placeholder="Password"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Confirm</ion-label>
+                    <ion-input type="password" formControlName="confirmPassword" placeholder="Confirm Password"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>First Name</ion-label>
+                    <ion-input type="text" formControlName="firstName" placeholder="First Name"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Last Name</ion-label>
+                    <ion-input type="text" formControlName="lastName" placeholder="Last Name"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Email</ion-label>
+                    <ion-input type="email" formControlName="email" placeholder="Email"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Role</ion-label>
+                    <ion-select formControlName="role" placeholder="Select Role" (ionChange)="onRoleUpdate($event)">
+                        <ion-select-option *ngFor="let role of roles" [value]="role">{{role}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
 
-      </form>
-      <div class="ion-text-center ion-margin-top">
-        <ion-button size="small" color="primary" (click)="update()" [disabled]="!form.valid">
-          Update
-        </ion-button>
-      </div>
+            </form>
+            <div class="ion-text-center ion-margin-top">
+                <ion-button size="small" color="primary" (click)="update()" [disabled]="!form.valid">
+                    Update
+                </ion-button>
+            </div>
 
-    </ion-card-content>
-  </ion-card>
+        </ion-card-content>
+    </ion-card>
 
 </ion-content>

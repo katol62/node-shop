@@ -26,29 +26,24 @@ class ApiAuthRoute {
             return res.status(405).json({ success: false, message: 'Method not allowed!!!' });
         });
         this.router.post('/', (req, res, next) => __awaiter(this, void 0, void 0, function* () {
-            if ((req.body.email && req.body.password) || (req.body.softcode && req.body.type && req.body.type === 'customer')) {
-                let email;
-                let password;
-                if (req.body.email && req.body.password) {
-                    email = req.body.email;
-                    password = req.body.password;
-                }
-                else {
-                    email = req.body.softcode;
-                    password = req.body.softcode;
-                }
+            if ((req.body.phone && req.body.password) || (req.body.phone && req.body.verified)) {
+                const phone = req.body.phone;
+                const password = req.body.password;
                 try {
-                    const users = yield this.User.find({ email });
+                    const users = yield this.User.find({ phone });
                     if (!users.length) {
                         return res.status(404).json({ success: false, message: 'User not found' });
                     }
-                    const hash = users[0].password;
-                    const doesMatch = yield bcrypt.compare(password, hash);
+                    let doesMatch = true;
+                    if (password) {
+                        const hash = users[0].password;
+                        doesMatch = yield bcrypt.compare(password, hash);
+                    }
                     if (doesMatch) {
                         const user = users[0];
                         const payload = {
                             id: user.id,
-                            email: user.email,
+                            phone: user.phone,
                             role: user.role
                         };
                         const token = jwt.sign(payload, config_1.default.secret, {

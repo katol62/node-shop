@@ -30,15 +30,16 @@ class User {
             }
         });
     }
-    create(user, cryptPwd) {
+    create(user) {
         return __awaiter(this, void 0, void 0, function* () {
-            const query = 'INSERT INTO users (firstName, lastName, phone, email, password, role) SELECT ?, ?, ?, ?, ?, ? FROM DUAL WHERE NOT EXISTS (SELECT * FROM users WHERE phone=?) LIMIT 1';
+            const query = 'INSERT INTO users (firstName, lastName, phone, email, password, verified, role) SELECT ?, ?, ?, ?, ?, ?, ? FROM DUAL WHERE NOT EXISTS (SELECT * FROM users WHERE phone=?) LIMIT 1';
             const params = [
                 user.firstName,
                 user.lastName,
                 user.phone,
                 user.email,
-                cryptPwd,
+                user.password,
+                user.verified,
                 user.role,
                 user.phone
             ];
@@ -76,7 +77,8 @@ class User {
     }
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const query = 'DELETE FROM users where id = ?';
+            // const query = 'DELETE u.*, a.* FROM users u LEFT JOIN address a ON a.userId=u.id where u.id = ?';
+            const query = 'DELETE from users where id = ?';
             const params = [id];
             try {
                 return yield this.asyncQuery(query, params);

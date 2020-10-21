@@ -3,6 +3,7 @@ export interface IUser {
     firstName?: string | null;
     lastName?: string | null;
     phone?: string;
+    deviceId?: string;
     email?: string | null;
     password?: string | null;
     newPassword?: string | null;
@@ -103,4 +104,19 @@ export interface IBannerListRequest extends IBaseRequest{
     description?: string;
     display?: boolean;
     all?: boolean;
+}
+
+export interface IProduct {
+    id?: number;
+    name?: string;
+    description?: string;
+    image1?: string;
+    image2?: string;
+    image3?: string;
+    image4?: string;
+    category?: any[]
+}
+
+export interface IProductRequest extends IBaseRequest {
+    category?: string;
 }

@@ -9,6 +9,8 @@ import {IMessageItem, NotificationMessageType, NotificationService} from "../../
 import {adminPath, detailsPath, listPath, profilePath, usersPath} from "../../../shared/misc/constants";
 import {IBaseRequest, IBaseResponse, IUser} from "../../../shared/misc/http-data";
 import {createTextMaskInputElement} from "text-mask-core";
+import {HelpService} from "../../../shared/services/help.service";
+import {Device} from "../register/register.page";
 
 @Component({
     selector: 'app-edit',
@@ -65,7 +67,8 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
             firstName: [''],
             lastName: [''],
             email: [''],
-            role: ['user'],
+            deviceId: [''],
+            role: [''],
             verified: [false],
         });
 
@@ -91,6 +94,9 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
                         lastName: value.data.lastName && value.data.lastName !== 'null'  ? value.data.lastName : ''
                     };
                     this.form.patchValue(user);
+                    this.form.get('phone').disable();
+                    this.form.get('role').disable();
+                    this.getDeviceInfo();
                 }
             }
         );
@@ -140,5 +146,19 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
     onRoleUpdate( $event: any ) {
         const role = $event.detail.value;
     }
+
+    private getDeviceInfo(): void {
+        Device.getInfo().then(
+            info => {
+                if (this.mobile) {
+                    this.form.patchValue({deviceId: info.uuid});
+                }
+            }
+        ).catch( e => {
+            debugger;
+            console.log(e);
+        })
+    }
+
 
 }

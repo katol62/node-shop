@@ -18,6 +18,7 @@ import {FcmComponent} from "./components/fcm/fcm.component";
 import {InstaComponent} from "./components/insta/insta.component";
 import {SliderComponent} from "./components/slider/slider.component";
 import {InstaModalComponent} from "./components/insta-modal/insta-modal.component";
+import {HelpService} from "./services/help.service";
 
 
 
@@ -63,7 +64,8 @@ export class SharedModule {
                 PlaceService,
                 RestService,
                 ValidationService,
-                VerificationService
+                VerificationService,
+                HelpService
             ]
         };
     }

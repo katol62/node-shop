@@ -13,3 +13,4 @@ export const categoriesPath = 'categories';
 export const productsPath = 'products';
 export const ordersPath = 'orders';
 export const bannersPath = 'banners';
+export const notificationsPath = 'notifications';

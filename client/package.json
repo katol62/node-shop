@@ -9,7 +9,7 @@
     "start:local": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "build:prod": "ng build --prod --output-path ../www/client/",
-    "run:ios": "ionic capacitor run ios --prod -l --external --port 3000",
+    "run:ios": "ionic capacitor run ios --configuration=mobile -l --external --consolelogs --port 3010",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

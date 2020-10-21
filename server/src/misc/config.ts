@@ -1,5 +1,7 @@
 import * as dotenv from 'dotenv';
+import {boolean} from 'dotenv-utils'
 import {Secret} from "jsonwebtoken";
+import * as path from 'path';
 
 interface IDataBase {
     host: string | undefined,
@@ -12,18 +14,23 @@ interface IConfig {
     env: string;
     host: string | undefined;
     port: string | undefined;
+    secure: boolean | undefined;
+    sslKey: string | undefined;
+    sslCert: string | undefined;
     db: IDataBase;
     secret: string | Secret | undefined;
     tokenExpireIn: number | undefined;
 }
 
-const ENV = 'dev'; // TODO change to process.env.NODE_ENV
-dotenv.config();
+dotenv.config({ path: path.join(__dirname, `../../.env.${process.env.NODE_ENV}`)});;
 
 export const config: IConfig = {
     env: process.env.NODE_ENV,
     host: process.env.SERVER_HOST,
     port: process.env.SERVER_PORT,
+    secure: boolean(process.env.SECURE),
+    sslKey: process.env.SSLKEY,
+    sslCert: process.env.SSLCERT,
     db: {
         host: process.env.DB_HOST,
         user: process.env.DB_USER,

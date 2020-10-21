@@ -6,7 +6,6 @@ import { IonicModule } from '@ionic/angular';
 import { UsersListPageRoutingModule } from './users-list-routing.module';
 
 import { UsersListPage } from './users-list.page';
-import {MenuHeaderComponent} from "../../../../shared/components/menu-header/menu-header.component";
 import {SharedModule} from "../../../../shared/shared.module";
 
 @NgModule({

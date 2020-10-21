@@ -90,7 +90,6 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
 
     private save(): void {
         const req: IBaseRequest = {data: {...this.form.value}};
-        debugger;
         if (this.id) {
             req.data = {...req.data, id: this.id};
             this.restService.put(`categories/${this.id}`, req).subscribe({

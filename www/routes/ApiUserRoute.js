@@ -13,34 +13,32 @@ exports.usersRoutes = void 0;
 const express = require("express");
 const User_1 = require("../models/User");
 const bcrypt = require("bcrypt");
+const MiddleWares_1 = require("../middleware/MiddleWares");
+const Address_1 = require("../models/Address");
 class ApiUserRoute {
     constructor() {
         this.router = express.Router();
         this.userModel = new User_1.User();
+        this.addressesModel = new Address_1.Address();
         this.config();
     }
     config() {
-        this.router.get('/', (req, res) => __awaiter(this, void 0, void 0, function* () {
+        this.router.get('/', MiddleWares_1.checkAuthorized, (req, res) => __awaiter(this, void 0, void 0, function* () {
             const user = req.body.decoded;
-            if (user) {
-                const filter = {};
-                try {
-                    const users = yield this.userModel.find(filter);
-                    return res.status(200).json({
-                        success: true,
-                        message: 'User list successfully received',
-                        data: users
-                    });
-                }
-                catch (e) {
-                    return res.status(500).json({ success: false, message: e.message });
-                }
+            const filter = {};
+            try {
+                const users = yield this.userModel.find(filter);
+                return res.status(200).json({
+                    success: true,
+                    message: 'User list successfully received',
+                    data: users
+                });
             }
-            else {
-                return res.status(401).json({ success: false, message: 'Not Authorized' });
+            catch (e) {
+                return res.status(500).json({ success: false, message: e.message });
             }
         }));
-        this.router.get('/:id', (req, res) => __awaiter(this, void 0, void 0, function* () {
+        this.router.get('/:id', MiddleWares_1.checkAuthorized, (req, res) => __awaiter(this, void 0, void 0, function* () {
             const user = req.body.decoded;
             console.log(user);
             const filter = { id: Number(req.params.id) };
@@ -60,18 +58,19 @@ class ApiUserRoute {
                 return res.status(500).json({ success: false, message: e.message });
             }
         }));
-        this.router.post('/create', (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const user = req.body.decoded;
-            const rUser = req.body.data;
+        this.router.post('/create', MiddleWares_1.checkAuthorized, (req, res) => __awaiter(this, void 0, void 0, function* () {
+            let rUser = req.body.data;
             console.log(`user: $rUser`);
             try {
                 const bcryptedPassword = yield bcrypt.hash(rUser.password, 5);
                 console.log('bcryptedPassword: ' + bcryptedPassword);
                 rUser.role = 'admin';
-                const result = yield this.userModel.create(rUser, bcryptedPassword);
+                rUser.password = bcryptedPassword;
+                const result = yield this.userModel.create(rUser);
                 if (result.affectedRows === 0) {
                     return res.status(204).json({ success: false, message: 'No Content' });
                 }
+                rUser = Object.assign(Object.assign({}, rUser), { id: result.insertId });
                 const updateResponse = {
                     success: true,
                     message: 'User created',
@@ -83,8 +82,7 @@ class ApiUserRoute {
                 return res.status(500).json({ success: false, message: e.message });
             }
         }));
-        this.router.put('/:id', (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const user = req.body.decoded;
+        this.router.put('/:id', MiddleWares_1.checkAuthorized, (req, res) => __awaiter(this, void 0, void 0, function* () {
             const rUser = req.body.data;
             try {
                 if (rUser.password) {
@@ -106,10 +104,10 @@ class ApiUserRoute {
                 return res.status(500).json({ success: false, message: e.message });
             }
         }));
-        this.router.delete('/:id', (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const user = req.body.decoded;
+        this.router.delete('/:id', MiddleWares_1.checkAuthorized, (req, res) => __awaiter(this, void 0, void 0, function* () {
             const id = Number(req.params.id);
             try {
+                const resultAddress = yield this.addressesModel.deleteByUser(id);
                 const result = yield this.userModel.delete(id);
                 if (!result.affectedRows) {
                     return res.status(204).json({ success: false, message: 'No content' });

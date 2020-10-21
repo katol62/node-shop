@@ -24,7 +24,8 @@ export class RestService {
 
   constructor( protected injector: Injector) {
     this.http = injector.get(HttpClient);
-    this.notificationService = injector.get(NotificationService)
+    this.notificationService = injector.get(NotificationService);
+    console.log(`API URL: ${this.url}`)
   }
   post<I extends IBaseRequest, O extends IBaseResponse>(url: string, data?: I): Observable<O> {
     return this.http.post<O>(`${this.url}/${url}`, data, {headers: JSON_HEADERS}).pipe(
