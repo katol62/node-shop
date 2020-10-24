@@ -2,7 +2,7 @@ import * as express from "express";
 import {IUser, User} from "../models/User";
 import {NextFunction} from "express";
 import {IBaseResponse} from "../misc/db";
-import * as bcrypt from "bcrypt";
+import * as bcrypt from "bcryptjs";
 
 export class ApiRegisterRoute {
     public router: express.Router = express.Router();

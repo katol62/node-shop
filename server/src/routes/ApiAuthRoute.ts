@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as jwt from 'jsonwebtoken';
 import {IUser, User} from '../models/User';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import config from '../misc/config';
 import {IBaseResponse} from "../misc/db";
 import {Secret} from "jsonwebtoken";
@@ -18,7 +18,7 @@ export class ApiAuthRoute {
             return res.status(405).json({ success: false, message: 'Method not allowed!!!' });
         });
 
-        this.router.post('/', async (req: express.Request, res: express.Response, next) => {
+        this.router.post('/', async (req: express.Request, res: express.Response) => {
             if ((req.body.phone && req.body.password) || (req.body.phone && req.body.verified) ) {
                 const phone: string = req.body.phone;
                 const password: string = req.body.password;
@@ -51,10 +51,6 @@ export class ApiAuthRoute {
                                 data
                             } as IBaseResponse);
                     }else{
-                        const errorResp: IBaseResponse = {
-                            success: false,
-                            message: 'Invalid Token',
-                        };
                         return res.status(401).json({success: false, message: 'Invalid Token', data: null} as IBaseResponse);
                     }
                 } catch (e) {

@@ -2,7 +2,7 @@ import * as express from "express";
 import {IUser, User} from "../models/User";
 import {checkAuthorized} from "../middleware/MiddleWares";
 import {IBaseResponse} from "../misc/db";
-import * as bcrypt from "bcrypt";
+import * as bcrypt from "bcryptjs";
 
 class ApiMeRoute {
     public router: express.Router = express.Router();
