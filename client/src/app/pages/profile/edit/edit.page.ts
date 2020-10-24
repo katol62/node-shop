@@ -67,7 +67,6 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
             firstName: [''],
             lastName: [''],
             email: [''],
-            deviceId: [''],
             role: [''],
             verified: [false],
         });
@@ -150,9 +149,7 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
     private getDeviceInfo(): void {
         Device.getInfo().then(
             info => {
-                if (this.mobile) {
-                    this.form.patchValue({deviceId: info.uuid});
-                }
+                console.log(info);
             }
         ).catch( e => {
             debugger;

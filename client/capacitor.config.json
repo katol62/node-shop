@@ -1,12 +1,15 @@
 {
   "appId": "com.herenotthere.app",
-  "appName": "client",
+  "appName": "HereNotThere",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "../www/client",
   "plugins": {
     "SplashScreen": {
       "launchShowDuration": 0
+    },
+    "PushNotifications": {
+      "presentationOptions": ["badge", "sound", "alert"]
     }
   },
   "cordova": {}

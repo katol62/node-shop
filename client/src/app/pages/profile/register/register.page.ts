@@ -13,6 +13,7 @@ import {RestService} from "../../../shared/services/rest.service";
 import {IMessageItem, NotificationMessageType, NotificationService} from "../../../shared/services/notification.service";
 import { Plugins } from '@capacitor/core';
 import {HelpService} from "../../../shared/services/help.service";
+import {FcmService} from "../../../shared/services/fcm.service";
 
 export const { Device } = Plugins;
 
@@ -51,6 +52,7 @@ export class RegisterPage implements OnInit {
                 private notificationService: NotificationService,
                 private authService: AuthService,
                 private helpService: HelpService,
+                private fcmService: FcmService,
                 private restService: RestService
     ) {
         this.registerForm = this.formBuilder.group({
@@ -60,7 +62,7 @@ export class RegisterPage implements OnInit {
             firstName: [''],
             lastName: [''],
             email: [''],
-            deviceId: [''],
+            deviceId: [null],
             verified: [false]
         })
     }
@@ -79,7 +81,7 @@ export class RegisterPage implements OnInit {
             firstName: '',
             lastName: '',
             email: '',
-            deviceId: [''],
+            deviceId: this.fcmService.token,
             verified: this.mobile ? true : false
         });
         this.registerForm.get('password').setErrors(null);
@@ -95,11 +97,7 @@ export class RegisterPage implements OnInit {
     private getDeviceInfo(): void {
         Device.getInfo().then(
             info => {
-                debugger;
                 console.log(info);
-                if (this.mobile) {
-                    this.registerForm.patchValue({deviceId: info.uuid});
-                }
             }
         ).catch( e => {
             debugger;

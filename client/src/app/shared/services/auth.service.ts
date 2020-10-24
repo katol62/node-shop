@@ -41,6 +41,10 @@ export class AuthService extends RestService  {
         const value: IAuthResponse = this.authData.value;
         return value == null ? null : value.user;
     }
+    public get deviceToken(): string {
+        const value: IAuthResponse = this.authData.value;
+        return value == null ? null : value.user.deviceId;
+    }
 
     public login(req: IAuthRequest): Observable<IAuthResponse> {
         return this.postForm('auth', req)
