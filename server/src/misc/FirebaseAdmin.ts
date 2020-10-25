@@ -1,5 +1,5 @@
 import * as firebase from 'firebase-admin'
-import * as serviceAccount from "../../firebase/herenotthere-e0128-firebase-adminsdk-1t90q-ecd4275bda.json";
+import * as serviceAccount from "../../firebase/herenotthere-e0128-75d62cc092b0.json";
 
 export interface INotification {
     title: string;
