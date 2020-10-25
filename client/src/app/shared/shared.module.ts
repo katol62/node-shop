@@ -14,7 +14,6 @@ import {ValidationService} from "./services/validation.service";
 import {VerificationService} from "./services/verification.service";
 import {IonicModule} from "@ionic/angular";
 import {RouterModule} from "@angular/router";
-import {FcmComponent} from "./components/fcm/fcm.component";
 import {InstaComponent} from "./components/insta/insta.component";
 import {SliderComponent} from "./components/slider/slider.component";
 import {InstaModalComponent} from "./components/insta-modal/insta-modal.component";
@@ -27,7 +26,6 @@ import {HelpService} from "./services/help.service";
         MenuComponent,
         MenuHeaderComponent,
         ToastComponent,
-        FcmComponent,
         InstaComponent,
         SliderComponent,
         InstaModalComponent
@@ -39,7 +37,6 @@ import {HelpService} from "./services/help.service";
         MenuComponent,
         MenuHeaderComponent,
         ToastComponent,
-        FcmComponent,
         InstaComponent,
         SliderComponent,
         InstaModalComponent
