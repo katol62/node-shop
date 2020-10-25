@@ -22,10 +22,9 @@ interface IConfig {
     tokenExpireIn: number | undefined;
 }
 
-const configPath = `../../.env.${process.env.NODE_ENV}`;
-console.log(configPath);
+const environment = process.env.NODE_ENV ? process.env.NODE_ENV : 'dev'
 
-dotenv.config({ path: path.join(__dirname, `../../.env.${process.env.NODE_ENV}`)});;
+dotenv.config({ path: path.join(__dirname, `../../.env.${environment}`)});;
 
 export const config: IConfig = {
     env: process.env.NODE_ENV,
