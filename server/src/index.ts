@@ -3,6 +3,8 @@ import app from './app';
 import * as https from 'https';
 import * as fs from 'fs';
 
+console.log(config);
+
 if (config.secure) {
     https.createServer({
         key: fs.readFileSync(config.sslKey),
