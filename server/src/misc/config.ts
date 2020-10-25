@@ -22,6 +22,9 @@ interface IConfig {
     tokenExpireIn: number | undefined;
 }
 
+const configPath = `../../.env.${process.env.NODE_ENV}`;
+console.log(configPath);
+
 dotenv.config({ path: path.join(__dirname, `../../.env.${process.env.NODE_ENV}`)});;
 
 export const config: IConfig = {
