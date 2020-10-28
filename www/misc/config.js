@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.config = void 0;
 const dotenv = require("dotenv");
-const ENV = 'dev'; // TODO change to process.env.NODE_ENV
+const ENV = 'stage'; // TODO change to process.env.NODE_ENV
 dotenv.config();
 exports.config = {
     env: process.env.NODE_ENV,
