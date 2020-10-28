@@ -7,8 +7,8 @@ console.log(config);
 
 if (config.secure) {
     https.createServer({
-        key: fs.readFileSync(config.sslKey),
-        cert: fs.readFileSync(config.sslCert),
+        key: fs.readFileSync(config.sslKey.replace(/\\n/gm, '\n'), 'utf8'),
+        cert: fs.readFileSync(config.sslCert.replace(/\\n/gm, '\n'), 'utf8'),
         requestCert: false,
         rejectUnauthorized: false,
     }, app).listen(config.port, () => {
