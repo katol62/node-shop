@@ -49,7 +49,6 @@ export class MenuComponent implements OnInit {
 
     onClick( item: IMenuItem ) {
         if (item.action.path) {
-            debugger;
             this.menuController.close().then(
                 () => {
                     this.router.navigate([item.action.path]);
@@ -63,6 +62,10 @@ export class MenuComponent implements OnInit {
                 this.router.navigate(['/', homePath]);
             }
         }
+    }
+
+    close(): void {
+        this.menuController.close();
     }
 
     signOut(): void {

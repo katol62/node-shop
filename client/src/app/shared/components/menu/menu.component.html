@@ -9,7 +9,7 @@
     </ion-header>
     <ion-content>
         <ion-list>
-            <ion-item *ngFor="let item of menu" (click)="onClick(item)">
+            <ion-item *ngFor="let item of menu" [routerLink]="item.action.path" (click)="close()">
                 <ion-icon name="{{item.icon}}" slot="start"></ion-icon>
                 <ion-label>{{item.label}}</ion-label>
             </ion-item>
