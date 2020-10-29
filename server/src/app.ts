@@ -26,7 +26,7 @@ class App {
         this.app.use(cors());
         this.app.use(helmet());
         this.app.use(methodOverride());
-        if (config.env === 'prod') {
+        if (config.env === 'prod' || config.env === 'stage') {
             this.app.use(expressCspHeader({
                 directives: {
                     'default-src': [SELF],
