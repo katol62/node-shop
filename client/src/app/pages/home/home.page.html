@@ -1,7 +1,11 @@
+<app-menu [menu]="homeMenu" [showLogout]="false" [menuContent]="menuId" [menuId]="menuId"></app-menu>
 <ion-header>
     <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button (click)="openMenu()"></ion-menu-button>
+        </ion-buttons>
         <ion-title>
-            Here Not There
+            {{('GLOBAL.title' | translate).toUpperCase()}}
         </ion-title>
         <ion-buttons slot="end">
             <ion-button id="admin" [routerLink]="['/', profilePath]" routerDirection="forward">
@@ -11,7 +15,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content id="home">
     <ion-grid>
         <ion-row>
             <ion-col size="12">
@@ -28,7 +32,7 @@
 <ion-footer>
     <ion-toolbar>
         <ion-text slot="start" class="ion-padding-start small">
-            &copy; Here Not There 2020
+            &copy; {{'GLOBAL.title' | translate}}, 2020
         </ion-text>
         <ion-buttons slot="end">
 <!--            <ion-button id="changeText" onClick="toggleText()">-->

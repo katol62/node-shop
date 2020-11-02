@@ -5,6 +5,7 @@ import {IBaseResponse, IUser} from "../../../../shared/misc/http-data";
 import {AuthorizedComponent} from "../../../../shared/components/authorized/authorized.component";
 import {RestService} from "../../../../shared/services/rest.service";
 import {AlertService} from "../../../../shared/services/alert.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-users-list',
@@ -13,7 +14,7 @@ import {AlertService} from "../../../../shared/services/alert.service";
 })
 export class UsersListPage extends AuthorizedComponent implements OnInit, OnDestroy {
 
-    public title: string = 'Users List';
+    public title: string = '';
 
     public users: IUser[] = [];
     public hostId: number;
@@ -22,6 +23,7 @@ export class UsersListPage extends AuthorizedComponent implements OnInit, OnDest
         protected injector: Injector,
         private restService: RestService,
         private alertService: AlertService,
+        private translate: TranslateService,
         private menu: MenuController)
     {
         super(injector);
@@ -29,6 +31,11 @@ export class UsersListPage extends AuthorizedComponent implements OnInit, OnDest
 
     ngOnInit() {
         super.ngOnInit();
+        this.translate.get('ADMIN.users.title').subscribe({
+            next: (value: string) => {
+                this.title = value;
+            }
+        })
     }
 
     protected afterInit(): void {

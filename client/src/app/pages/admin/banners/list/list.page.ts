@@ -3,9 +3,9 @@ import {adminPath, bannersPath, createPath} from "../../../../shared/misc/consta
 import {AuthorizedComponent} from "../../../../shared/components/authorized/authorized.component";
 import {RestService} from "../../../../shared/services/rest.service";
 import {AlertService} from "../../../../shared/services/alert.service";
-import {MenuController} from "@ionic/angular";
-import {IBanner, IBannerListRequest, IBannerRequest, IBaseRequest, IBaseResponse} from "../../../../shared/misc/http-data";
+import {IBanner, IBannerListRequest, IBaseResponse} from "../../../../shared/misc/http-data";
 import {DomSanitizer} from "@angular/platform-browser";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-list',
@@ -14,7 +14,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 })
 export class ListPage extends AuthorizedComponent implements OnInit, OnDestroy {
 
-    public title: string = 'Banners List';
+    public title: string = '';
     public link: string = '/' + adminPath + '/' + bannersPath + '/' + createPath;
 
     public banners: IBanner[] = [];
@@ -23,6 +23,7 @@ export class ListPage extends AuthorizedComponent implements OnInit, OnDestroy {
         protected injector: Injector,
         private restService: RestService,
         private sanitizer : DomSanitizer,
+        private translate: TranslateService,
         private alertService: AlertService
     )
     {
@@ -31,6 +32,11 @@ export class ListPage extends AuthorizedComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         super.ngOnInit();
+        this.translate.get('ADMIN.banners.title').subscribe({
+            next: (value: string) => {
+                this.title = value;
+            }
+        })
     }
 
     ngOnDestroy() {

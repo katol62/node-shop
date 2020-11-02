@@ -7,6 +7,7 @@ import {ActivatedRoute} from "@angular/router";
 import {AlertService} from "../../../../shared/services/alert.service";
 import {IMessageItem, NotificationMessageType, NotificationService} from "../../../../shared/services/notification.service";
 import {IBaseRequest, IBaseResponse} from "../../../../shared/misc/http-data";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-edit',
@@ -29,6 +30,7 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
         private restService: RestService,
         private activatedRoute: ActivatedRoute,
         private alertService: AlertService,
+        private translate: TranslateService,
         private notificationService: NotificationService
     ) {
         super(injector)
@@ -46,7 +48,6 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
             display: [false]
         });
         const id = +this.activatedRoute.snapshot.paramMap.get('id');
-        debugger;
         if (id === 0) {
             this.form.get('image').setValidators([Validators.required, Validators.minLength(3)]);
         } else {

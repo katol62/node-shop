@@ -5,6 +5,7 @@ import {RestService} from "../../../shared/services/rest.service";
 import {AlertService} from "../../../shared/services/alert.service";
 import {MenuController} from "@ionic/angular";
 import {IBaseResponse, IUser} from "../../../shared/misc/http-data";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-notifications',
@@ -13,13 +14,14 @@ import {IBaseResponse, IUser} from "../../../shared/misc/http-data";
 })
 export class NotificationsPage extends AuthorizedComponent implements OnInit, OnDestroy {
 
-    public title: string = 'Send notification';
+    public title: string = '';
     public users: IUser[] = [];
 
     constructor(
         protected injector: Injector,
         private restService: RestService,
         private alertService: AlertService,
+        private translate: TranslateService,
         private menu: MenuController)
     {
         super(injector);
@@ -27,6 +29,11 @@ export class NotificationsPage extends AuthorizedComponent implements OnInit, On
 
     ngOnInit() {
         super.ngOnInit();
+        this.translate.get('ADMIN.notifications.title').subscribe({
+            next: (value: string) => {
+                this.title = value;
+            }
+        })
     }
 
     protected afterInit(): void {

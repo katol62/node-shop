@@ -2,11 +2,11 @@
     <ion-toolbar>
         <ion-buttons slot="start">
             <ion-button id="home" [routerLink]="['/']" routerDirection="back">
-                <ion-icon size="large" slot="start" name="home-outline"></ion-icon>
+                <ion-icon slot="start" name="home-outline"></ion-icon>
             </ion-button>
         </ion-buttons>
         <ion-title>
-            Register
+            {{'PROFILE.register.title' | translate}}
         </ion-title>
     </ion-toolbar>
 </ion-header>
@@ -16,45 +16,57 @@
         <ion-card-content>
             <form [formGroup]="registerForm">
                 <ion-item *ngIf="!mobile || (mobile && state === 'phone')">
-                    <ion-label>Phone</ion-label>
+                    <div tabindex="0"></div>
+                    <ion-label>{{'GLOBAL.labels.phone' | translate}}</ion-label>
                     <ion-input type="tel" #phoneInput formControlName="phone" placeholder="+7 (xxx) xxx-xxxx"></ion-input>
                 </ion-item>
                 <ion-item *ngIf="!mobile">
-                    <ion-label>Password</ion-label>
-                    <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
+                    <div tabindex="0"></div>
+                    <ion-label>{{'GLOBAL.labels.password' | translate}}</ion-label>
+                    <ion-input type="password" formControlName="password" placeholder="{{'GLOBAL.labels.password' | translate}}"></ion-input>
                 </ion-item>
                 <ion-item *ngIf="!mobile">
-                    <ion-label>Confirm</ion-label>
-                    <ion-input type="password" formControlName="confirmPassword" placeholder="Confirm Password"></ion-input>
+                    <div tabindex="0"></div>
+                    <ion-label>{{'GLOBAL.labels.confirm' | translate}}</ion-label>
+                    <ion-input type="password" formControlName="confirmPassword" placeholder="{{'GLOBAL.labels.confirm' | translate}} {{'GLOBAL.labels.password' | translate}}"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label>First Name</ion-label>
-                    <ion-input type="text" formControlName="firstName" placeholder="First Name"></ion-input>
+                    <div tabindex="0"></div>
+                    <ion-label>{{'GLOBAL.labels.firstName' | translate}}</ion-label>
+                    <ion-input type="text" formControlName="firstName" placeholder="{{'GLOBAL.labels.firstName' | translate}}"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Last Name</ion-label>
-                    <ion-input type="text" formControlName="lastName" placeholder="Last Name"></ion-input>
+                    <div tabindex="0"></div>
+                    <ion-label>{{'GLOBAL.labels.lastName' | translate}}</ion-label>
+                    <ion-input type="text" formControlName="lastName" placeholder="{{'GLOBAL.labels.lastName' | translate}}"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Email</ion-label>
-                    <ion-input type="email" formControlName="email" placeholder="Email"></ion-input>
+                    <div tabindex="0"></div>
+                    <ion-label>{{'GLOBAL.labels.email' | translate}}</ion-label>
+                    <ion-input type="email" formControlName="email" placeholder="{{'GLOBAL.labels.email' | translate}}"></ion-input>
                 </ion-item>
             </form>
             <ng-container *ngIf="mobile && state === 'code'">
                 <div class="ion-text-center ion-padding">
-                    <ion-text>Check the code we sent to your phone</ion-text>
+                    <ion-text>{{'GLOBAL.labels.checkCode' | translate}}</ion-text>
                 </div>
                 <ion-item>
-                    <ion-label>Code</ion-label>
-                    <ion-input type="number" [(ngModel)]="code" (ngModelChange)="processCode($event)" placeholder="Enter code"></ion-input>
+                    <div tabindex="0"></div>
+                    <ion-label>{{'GLOBAL.labels.code' | translate}}</ion-label>
+                    <ion-input type="number" [(ngModel)]="code" (ngModelChange)="processCode($event)" placeholder="{{'GLOBAL.labels.enter' | translate}} {{'GLOBAL.labels.code' | translate}}"></ion-input>
                 </ion-item>
             </ng-container>
             <div class="ion-text-center ion-margin-top">
                 <ion-button size="small" color="primary" (click)="signUp()" [disabled]="!registerForm.valid">
-                    {{ !mobile || (mobile && state === 'phone') ? 'Sign Up' : 'Next' }}
+                    {{ !mobile || (mobile && state === 'phone') ? ('GLOBAL.labels.register' | translate) : ('GLOBAL.labels.next' | translate) }}
                 </ion-button>
             </div>
-
         </ion-card-content>
     </ion-card>
+    <div class="ion-justify-content-center ion-text-center">
+        <ion-button  class="ion-justify-content-center" id="reg" [routerLink]="['/', profilePath, loginPath]" routerDirection="back">
+            {{'GLOBAL.labels.signIn' | translate}}
+        </ion-button>
+    </div>
+
 </ion-content>

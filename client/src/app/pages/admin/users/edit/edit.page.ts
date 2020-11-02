@@ -9,6 +9,7 @@ import {createTextMaskInputElement} from "text-mask-core";
 import {IBaseRequest, IBaseResponse, IUser} from "../../../../shared/misc/http-data";
 import {adminPath, listPath, usersPath} from "../../../../shared/misc/constants";
 import {AlertService} from "../../../../shared/services/alert.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-edit',
@@ -48,7 +49,7 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
         private formBuilder: FormBuilder,
         private alertService: AlertService,
         private notificationService: NotificationService,
-
+        private translate: TranslateService,
     ) {
         super(injector);
     }

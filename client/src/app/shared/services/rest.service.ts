@@ -34,7 +34,6 @@ export class RestService {
   }
 
   postUpload<I extends IBaseRequest, O extends IBaseResponse>(url: string, data?: I): Observable<O> {
-    debugger;
     return this.http.post<O>(`${this.url}/${url}`, data, {headers: FORM_HEADERS}).pipe(
         catchError((response: HttpErrorResponse) => this.handleError(data))
     );

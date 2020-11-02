@@ -152,7 +152,6 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
                 console.log(info);
             }
         ).catch( e => {
-            debugger;
             console.log(e);
         })
     }

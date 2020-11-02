@@ -2,7 +2,7 @@
     <ion-toolbar>
         <ion-title>{{mediaData ? modalTitle() : ''}}</ion-title>
         <ion-buttons slot="end">
-            <ion-button (click)="closeModal()">Close</ion-button>
+            <ion-button (click)="closeModal()">{{'GLOBAL.labels.close' | translate}}</ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
@@ -20,7 +20,7 @@
                     {{mediaData.caption}}
                 </ion-text>
                 <div class="ion-padding-top">
-                    <ion-button size="small" fill="clear" (click)="goto(mediaData)">Details...</ion-button>
+                    <ion-button size="small" fill="clear" (click)="goto(mediaData)">{{'HOME.insta.link' | translate}}...</ion-button>
                 </div>
             </ion-col>
         </ion-row>

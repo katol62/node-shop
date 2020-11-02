@@ -6,7 +6,7 @@
             </ion-button>
         </ion-buttons>
         <ion-title>
-            {{id ? 'Edit' : 'Create'}} Address
+            {{id ? ('GLOBAL.labels.edit' | translate) : ('GLOBAL.labels.add' | translate)}} {{('PROFILE.addresses.single' | translate).toLowerCase()}}
         </ion-title>
     </ion-toolbar>
 </ion-header>
@@ -14,46 +14,52 @@
 <ion-content>
     <ion-card>
         <ion-card-header class="ion-text-center">
-            <ion-card-subtitle>Enter credentials</ion-card-subtitle>
-            <ion-card-title>Address</ion-card-title>
+            <ion-card-title>{{'PROFILE.addresses.single' | translate}}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
             <form [formGroup]="form" (ngSubmit)="save()">
                 <ion-item>
-                    <ion-label>City</ion-label>
-                    <ion-select formControlName="city" placeholder="Select City" (ionChange)="onCitySelect($event)">
+                    <div tabindex="0"></div>
+                    <ion-label>{{'GLOBAL.labels.city' | translate}}</ion-label>
+                    <ion-select formControlName="city" placeholder="{{'GLOBAL.labels.select' | translate}} {{('GLOBAL.labels.city' | translate).toLowerCase()}}" (ionChange)="onCitySelect($event)">
                         <ion-select-option *ngFor="let city of cities" [value]="city">{{city}}</ion-select-option>
                     </ion-select>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Street</ion-label>
-                    <ion-select formControlName="street" placeholder="Select Street">
+                    <div tabindex="0"></div>
+                    <ion-label>{{'GLOBAL.labels.street' | translate}}</ion-label>
+                    <ion-select formControlName="street" placeholder="{{'GLOBAL.labels.select' | translate}} {{('GLOBAL.labels.street' | translate).toLowerCase()}}">
                         <ion-select-option *ngFor="let street of streets" [value]="street">{{street}}</ion-select-option>
                     </ion-select>
                 </ion-item>
                 <ion-item>
-                    <ion-label>House</ion-label>
-                    <ion-input type="text" formControlName="house" placeholder="House"></ion-input>
+                    <div tabindex="0"></div>
+                    <ion-label>{{'GLOBAL.labels.house' | translate}}</ion-label>
+                    <ion-input type="text" formControlName="house" placeholder="{{'GLOBAL.labels.house' | translate}}"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label>App</ion-label>
-                    <ion-input type="number" formControlName="app" placeholder="App"></ion-input>
+                    <div tabindex="0"></div>
+                    <ion-label>{{'GLOBAL.labels.app' | translate}}</ion-label>
+                    <ion-input type="number" formControlName="app" placeholder="{{'GLOBAL.labels.app' | translate}}"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Entrance</ion-label>
-                    <ion-input type="number" formControlName="entrance" placeholder="Entrance"></ion-input>
+                    <div tabindex="0"></div>
+                    <ion-label>{{'GLOBAL.labels.entrance' | translate}}</ion-label>
+                    <ion-input type="number" formControlName="entrance" placeholder="{{'GLOBAL.labels.entrance' | translate}}"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Floor</ion-label>
-                    <ion-input type="number" formControlName="floor" placeholder="Floor"></ion-input>
+                    <div tabindex="0"></div>
+                    <ion-label>{{'GLOBAL.labels.floor' | translate}}</ion-label>
+                    <ion-input type="number" formControlName="floor" placeholder="{{'GLOBAL.labels.floor' | translate}}"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Code</ion-label>
-                    <ion-input type="number" formControlName="code" placeholder="Code"></ion-input>
+                    <div tabindex="0"></div>
+                    <ion-label>{{'GLOBAL.labels.code' | translate}}</ion-label>
+                    <ion-input type="number" formControlName="code" placeholder="{{'GLOBAL.labels.code' | translate}}"></ion-input>
                 </ion-item>
                 <div class="ion-text-center ion-margin-top">
                     <ion-button size="small" color="primary" type="submit" [disabled]="!form.valid">
-                        Save
+                        {{'GLOBAL.labels.add' | translate}}
                     </ion-button>
                 </div>
             </form>

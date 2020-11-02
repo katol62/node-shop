@@ -6,6 +6,7 @@
     <ng-container *ngIf="categories.length">
         <ion-list>
             <ion-item *ngFor="let category of categories; let i=index">
+                <div tabindex="0"></div>
                 <ion-thumbnail slot="start">
                     <img [src]="getSrc(category)">
                 </ion-thumbnail>
@@ -15,8 +16,8 @@
                     <p>displayed: {{category.display ? 'Yes' : 'No'}}</p>
                 </ion-label>
                 <div item-right>
-                    <ion-button (click)="delete(category);$event.stopPropagation();" color="danger">Delete</ion-button>
-                    <ion-button (click)="edit(category);$event.stopPropagation();" color="primary">Edit</ion-button>
+                    <ion-button (click)="delete(category);$event.stopPropagation();" color="danger">{{'GLOBAL.labels.delete' | translate}}</ion-button>
+                    <ion-button (click)="edit(category);$event.stopPropagation();" color="primary">{{'GLOBAL.labels.edit' | translate}}</ion-button>
                 </div>
             </ion-item>
         </ion-list>

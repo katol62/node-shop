@@ -3,7 +3,7 @@
         <ion-buttons slot="start">
             <ion-back-button text="" defaultHref="{{backLink}}"></ion-back-button>
         </ion-buttons>
-        <ion-title>{{id ? 'Edit' : 'Create'}} category</ion-title>
+        <ion-title>{{'ADMIN.categories.single' | translate}}: {{(id ? 'GLOBAL.labels.edit' : 'GLOBAL.labels.create') | translate}}</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -12,29 +12,33 @@
         <ion-card-content>
             <form [formGroup]="form">
                 <ion-item>
-                    <ion-label>{{fileInputLabel || 'Choose File'}}</ion-label>
+                    <div tabindex="0"></div>
+                    <ion-label>{{fileInputLabel || ('GLOBAL.labels.chooseFile' | translate)}}</ion-label>
                     <ion-input type="file" (change)="onFileSelect($event)" #UploadFileInput></ion-input>
                     <input type="hidden" formControlName="image">
                 </ion-item>
                 <ion-item>
-                    <ion-label>Title</ion-label>
-                    <ion-input type="text" formControlName="name" placeholder="Title"></ion-input>
+                    <div tabindex="0"></div>
+                    <ion-label>{{'GLOBAL.labels.name' | translate}}</ion-label>
+                    <ion-input type="text" formControlName="name" placeholder="{{'GLOBAL.labels.name' | translate}}"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Description</ion-label>
-                    <ion-textarea formControlName="description" placeholder="Enter more information here..."></ion-textarea>
+                    <div tabindex="0"></div>
+                    <ion-label>{{'GLOBAL.labels.description' | translate}}</ion-label>
+                    <ion-textarea formControlName="description" placeholder="{{'GLOBAL.labels.description' | translate}}..."></ion-textarea>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Display</ion-label>
+                    <div tabindex="0"></div>
+                    <ion-label>{{'GLOBAL.labels.display' | translate}}</ion-label>
                     <ion-select formControlName="display" (ionChange)="onDisplayUpdate($event)">
-                        <ion-select-option [value]="true">Yes</ion-select-option>
-                        <ion-select-option [value]="false">No</ion-select-option>
+                        <ion-select-option [value]="true">{{'GLOBAL.labels.yes' | translate}}</ion-select-option>
+                        <ion-select-option [value]="false">{{'GLOBAL.labels.no' | translate}}</ion-select-option>
                     </ion-select>
                 </ion-item>
             </form>
             <div class="ion-text-center ion-margin-top">
                 <ion-button size="small" color="primary" (click)="onFormSubmit()" [disabled]="!form.valid">
-                    {{id ? 'Update' : 'Create'}}
+                    {{(id ? 'GLOBAL.labels.update' : 'GLOBAL.labels.create') | translate}}
                 </ion-button>
             </div>
 

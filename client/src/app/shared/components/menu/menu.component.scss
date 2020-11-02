@@ -5,4 +5,12 @@
     bottom: 10px;
     right: 0;
   }
+  ion-item {
+    &.cursor-pointer {
+      cursor: pointer;
+      &:hover {
+        background: black;
+      }
+    }
+  }
 }

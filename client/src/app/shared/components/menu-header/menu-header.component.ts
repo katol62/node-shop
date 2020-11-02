@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MenuController} from "@ionic/angular";
-import {MENU_ID} from "../menu/menu.component";
+import {MENU_ADMIN_ID} from "../menu/menu.component";
 import {Router} from "@angular/router";
 
 @Component({
@@ -14,6 +14,8 @@ export class MenuHeaderComponent implements OnInit {
     public title: string = '';
     @Input()
     public link: string;
+    @Input()
+    public menuId: string = MENU_ADMIN_ID;
 
     constructor(
         private menu: MenuController,
@@ -23,7 +25,11 @@ export class MenuHeaderComponent implements OnInit {
     ngOnInit() {}
 
     openMenu() {
-        this.menu.open(MENU_ID);
+        this.menu.enable(true, this.menuId).then(
+            res => {
+                this.menu.open(this.menuId);
+            }
+        );
     }
 
     rightButtonClick() {

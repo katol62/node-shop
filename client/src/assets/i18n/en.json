@@ -1,0 +1,102 @@
+{
+    "GLOBAL": {
+        "title": "Here not there",
+        "labels": {
+            "close": "Close",
+            "edit": "Edit",
+            "delete": "Delete",
+            "update": "Update",
+            "create": "Create",
+            "add": "Add",
+            "select": "Select",
+            "name": "Name",
+            "description": "Description",
+            "display": "Display",
+            "chooseFile": "Choose File",
+            "yes": "Yes",
+            "no": "No",
+            "phone": "Phone",
+            "password": "Password",
+            "confirm": "Confirm",
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "email": "Email",
+            "role": "Role",
+            "checkCode": "Check the code we sent to your phone",
+            "code": "Code",
+            "enter": "Enter",
+            "register": "Register",
+            "next": "Next",
+            "signIn": "Sign In",
+            "signOut": "Sign Out",
+            "city": "City",
+            "street": "Street",
+            "house": "House",
+            "app": "App",
+            "entrance": "Entrance",
+            "floor": "Floor",
+        },
+        "alert": {
+            "deleteAddress": "Delete address?",
+            "cancel": "Cancel",
+            "ok": "Ok"
+        }
+    },
+    "HOME": {
+        "title": "Here not there",
+        "insta": {
+            "details": "Details",
+            "loading": "Loading data",
+            "link": "View in Instagram"
+        }
+    },
+    "ADMIN": {
+        "menu": {
+            "home": "Home",
+            "categories": "Categories",
+            "products": "Products",
+            "users": "Users",
+            "banners": "Banners",
+            "notifications": "Notifications",
+            "orders": "Orders"
+        },
+        "categories": {
+            "title": "Categories",
+            "single": "Category"
+        },
+        "products": {
+            "title": "Products",
+            "single": "Product"
+        },
+        "users": {
+            "title": "Users",
+            "single": "User"
+        },
+        "banners": {
+            "title": "Banners",
+            "single": "Banner"
+        },
+        "notifications": {
+            "title": "Notifications",
+            "single": "Notification"
+        }
+    },
+    "PROFILE": {
+        "login": {
+            "title": "Login"
+        },
+        "register": {
+            "title": "Register"
+        },
+        "details": {
+            "title": "Profile"
+        },
+        "addresses": {
+            "title": "Addresses",
+            "single": "Address"
+        },
+        "edit": {
+            "title": "Edit"
+        },
+    }
+}

@@ -18,6 +18,7 @@ import {InstaComponent} from "./components/insta/insta.component";
 import {SliderComponent} from "./components/slider/slider.component";
 import {InstaModalComponent} from "./components/insta-modal/insta-modal.component";
 import {HelpService} from "./services/help.service";
+import {TranslateModule} from "@ngx-translate/core";
 
 
 
@@ -34,6 +35,7 @@ import {HelpService} from "./services/help.service";
         FormsModule,
         RouterModule,
         ReactiveFormsModule,
+        TranslateModule,
         MenuComponent,
         MenuHeaderComponent,
         ToastComponent,
@@ -46,6 +48,7 @@ import {HelpService} from "./services/help.service";
         FormsModule,
         RouterModule,
         ReactiveFormsModule,
+        TranslateModule,
         IonicModule
     ]
 })

@@ -1,9 +1,10 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 import {RestService} from "../../services/rest.service";
 import {IBanner, IBaseResponse, IInstaMedia} from "../../misc/http-data";
 import {IonInfiniteScroll, ModalController} from "@ionic/angular";
 import {InstaModalComponent} from "../insta-modal/insta-modal.component";
 import {DomSanitizer} from "@angular/platform-browser";
+import {TranslateService} from "@ngx-translate/core";
 
 export type InstaType = 'list' | 'grid';
 
@@ -12,7 +13,7 @@ export type InstaType = 'list' | 'grid';
     templateUrl: './insta.component.html',
     styleUrls: ['./insta.component.scss'],
 })
-export class InstaComponent implements OnInit {
+export class InstaComponent implements OnInit, AfterViewInit {
 
     public type: InstaType = 'grid';
 
@@ -26,11 +27,11 @@ export class InstaComponent implements OnInit {
     constructor(
         private restService: RestService,
         private sanitizer : DomSanitizer,
+        private translate: TranslateService,
         private modalController: ModalController
     ) { }
 
     ngOnInit() {
-        this.getItems();
     }
 
     ngAfterViewInit(): void {

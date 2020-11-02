@@ -4,6 +4,7 @@ import {ModalController} from "@ionic/angular";
 import {IBaseResponse, IInstaMedia} from "../../misc/http-data";
 import * as moment from 'moment';
 import {DomSanitizer} from "@angular/platform-browser";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-insta-modal',
@@ -22,9 +23,13 @@ export class InstaModalComponent implements OnInit {
     constructor(
         private restService: RestService,
         private sanitizer : DomSanitizer,
+        private translate: TranslateService,
         private modalController: ModalController) { }
 
-    ngOnInit() {}
+    ngOnInit() {
+        const locale = this.translate.getDefaultLang();
+        moment.locale(locale);
+    }
 
     private getMediaDetails(id: string): void {
         this.restService.get(`insta/${id}`).subscribe({
@@ -39,7 +44,7 @@ export class InstaModalComponent implements OnInit {
     }
 
     modalTitle(): string {
-        return `Post of ${this.mediaData.username} of ${moment(this.mediaData.timestamp).format('L')}`
+        return `${moment(this.mediaData.timestamp).format('LLLL')}`
     }
 
     public getSrc(url: string): any {

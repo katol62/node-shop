@@ -1,0 +1,105 @@
+{
+    "GLOBAL": {
+        "title": "Тут вам не там",
+        "labels": {
+            "close": "Закрыть",
+            "edit": "Редактировать",
+            "delete": "Удалить",
+            "update": "Изменить",
+            "create": "Создать",
+            "add": "Добавить",
+            "select": "Выбрать",
+            "name": "Имя",
+            "description": "Описание",
+            "display": "Показывать",
+            "chooseFile": "Выберите файл",
+            "yes": "Да",
+            "no": "Нет",
+            "phone": "Телефон",
+            "password": "Пароль",
+            "confirm": "Подтвердить",
+            "firstName": "Имя",
+            "lastName": "Фамилия",
+            "email": "Email",
+            "role": "Роль",
+            "checkCode": "Проверьте смс код",
+            "code": "Код",
+            "enter": "Введите",
+            "register": "Зарегистрироваться",
+            "next": "Дальше",
+            "signIn": "Войти",
+            "signOut": "Выйти",
+            "city": "Город",
+            "street": "Улица",
+            "house": "Дом",
+            "app": "Квартира",
+            "entrance": "Подъезд",
+            "floor": "Этаж"
+        },
+        "alert": {
+            "deleteAddress": "Удалить адрес?",
+            "cancel": "Отменить",
+            "ok": "Да"
+        }
+    },
+    "HOME": {
+        "title": "Тут вам не там",
+        "insta": {
+            "details": "Еще",
+            "loading": "Подгрузка",
+            "link": "Открыть в Instagram"
+        },
+        "menu": {
+            "home": "Главная"
+        }
+    },
+    "ADMIN": {
+        "menu": {
+            "home": "Главная",
+            "categories": "Категории",
+            "products": "Продукты",
+            "users": "Пользователи",
+            "banners": "Банеры",
+            "notifications": "Нотификации",
+            "orders": "Заказы"
+        },
+        "categories": {
+            "title": "Категории",
+            "single": "Категория"
+        },
+        "products": {
+            "title": "Продукты",
+            "single": "Продукт"
+        },
+        "users": {
+            "title": "Пользователи",
+            "single": "Пользователь"
+        },
+        "banners": {
+            "title": "Банеры",
+            "single": "Банер"
+        },
+        "notifications": {
+            "title": "Нотификации",
+            "single": "Нотификация"
+        }
+    },
+    "PROFILE": {
+        "login": {
+            "title": "Войти"
+        },
+        "register": {
+            "title": "Зарегистрироваться"
+        },
+        "details": {
+            "title": "Профиль"
+        },
+        "addresses": {
+            "title": "Адреса",
+            "single": "Адрес"
+        },
+        "edit": {
+            "title": "Редактировать"
+        }
+    }
+}

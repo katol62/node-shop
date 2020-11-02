@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {RestService} from "./rest.service";
 import {IVerificationRequest, IVerificationResponse} from "../misc/http-data";
 import {environment} from "../../../environments/environment";
@@ -33,47 +33,53 @@ export const Codes: ICode[] = [
 })
 export class VerificationService {
 
-    private phoneSubject: Subject<ICode> = new Subject();
-    private codeSubject: Subject<boolean> = new Subject();
-
     private code: number;
 
     constructor(private restService: RestService) {}
 
     public verifyPhone(phone: string): Observable<ICode> {
 
-        // this.code = Math.floor(1000 + Math.random() * 9000);
-        this.code = 1234;
+        const observable: Observable<ICode> = new Observable<ICode>( observer => {
+            // this.code = Math.floor(1000 + Math.random() * 9000);
+            this.code = 1234;
 
-        const req: IVerificationRequest = {
-            cellphone: phone,
-            code: this.code.toString(),
-            email: environment.verification.email,
-            password: environment.verification.password,
-            id: 'sendsms',
-            format: 'json'
-        }
-        const dataStr = Object.keys(req).map(key => `${key}=${req[key]}`).join('&');
-        const url = `verify?${dataStr}`;
-        this.restService.get(url, req).subscribe({
-            next: (res: IVerificationResponse) => {
-                const code = this.getCode(res);
-                this.phoneSubject.next(code);
-            },
-            error: (err => {
-                this.phoneSubject.next(null);
+            const req: IVerificationRequest = {
+                cellphone: phone,
+                code: this.code.toString(),
+                email: environment.verification.email,
+                password: environment.verification.password,
+                id: 'sendsms',
+                format: 'json'
+            }
+            const dataStr = Object.keys(req).map(key => `${key}=${req[key]}`).join('&');
+            const url = `verify?${dataStr}`;
+            this.restService.get(url, req).subscribe({
+                next: (res: IVerificationResponse) => {
+                    const code = this.getCode(res);
+                    observer.next(code);
+                    observer.complete();
+                },
+                error: (err => {
+                    observer.next(null);
+                    observer.complete();
+                })
             })
         })
-        return this.phoneSubject.asObservable();
+        return observable;
     }
 
     public verifyCode(value: string): Observable<boolean> {
-        setTimeout(() => {
-            const res = value === this.code.toString() ? true : false;
-            this.code = null;
-            this.codeSubject.next(res);
-        }, 200);
-        return this.codeSubject.asObservable();
+
+        const observable: Observable<boolean> = new Observable<boolean>( observer => {
+            setTimeout(() => {
+                const res = value === this.code.toString() ? true : false;
+                this.code = null;
+                observer.next(res);
+                observer.complete();
+            }, 200);
+        })
+
+        return observable;
     }
 
     private getCode(res: IVerificationResponse): ICode {

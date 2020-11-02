@@ -1,35 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import {adminPath, bannersPath, categoriesPath, homePath, listPath, notificationsPath, productsPath, usersPath} from "../../misc/constants";
+import {Component, Input, OnInit} from '@angular/core';
+import {homePath} from "../../misc/constants";
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
 import {MenuController} from "@ionic/angular";
+import {EAction, IMenuItem, menu} from "./menu.constants";
+import {TranslateService} from "@ngx-translate/core";
 
-export enum EAction {
-    LOGOUT = 'logout'
-}
-
-export interface IMenuAction {
-    path?: string;
-    action?: EAction
-}
-
-export interface IMenuItem {
-    id: number;
-    label: string;
-    icon: string;
-    action: IMenuAction
-}
-
-export const menu: IMenuItem[] = [
-    {id: 0, label: 'Home', icon: 'home-outline', action: {path: '/' + homePath}},
-    {id: 1, label: 'Categories', icon: 'list-outline', action: {path: '/' + adminPath + '/' + categoriesPath + '/' + listPath}},
-    {id: 2, label: 'Products', icon: 'layers-outline', action: {path: '/' + adminPath + '/' + productsPath + '/' + listPath}},
-    // {id: 3, label: 'Orders', icon: 'cart-outline', action: {path: '/' + adminPath + '/' + categoriesPath + '/' + listPath}},
-    {id: 4, label: 'Users', icon: 'people-outline', action: {path: '/' + adminPath + '/' + usersPath + '/' + listPath}},
-    {id: 5, label: 'Banners', icon: 'image-outline', action: {path: '/' + adminPath + '/' + bannersPath + '/' + listPath}},
-    {id: 6, label: 'Notifications', icon: 'chatbubble-ellipses-outline', action: {path: '/' + adminPath + '/' + notificationsPath}},
-]
-export const MENU_ID: string = 'left';
+export const MENU_ADMIN_ID: string = 'admin';
+export const MENU_HOME_ID: string = 'home';
 
 @Component({
     selector: 'app-menu',
@@ -38,25 +16,35 @@ export const MENU_ID: string = 'left';
 })
 export class MenuComponent implements OnInit {
 
-    public menuId = MENU_ID;
+    @Input()
     public menu: IMenuItem[] = menu;
+
+    @Input()
+    public showLogout: boolean = true;
+
+    @Input()
+    public menuContent: string = MENU_ADMIN_ID;
+
+    @Input()
+    public menuId: string = MENU_ADMIN_ID;
 
     constructor(private router: Router,
                 private menuController: MenuController,
+                private translate: TranslateService,
                 private authService: AuthService) { }
 
     ngOnInit() {}
 
     onClick( item: IMenuItem ) {
         if (item.action.path) {
-            this.menuController.close().then(
+            this.menuController.close(this.menuId).then(
                 () => {
                     this.router.navigate([item.action.path]);
                 }
             );
         }
         if (item.action.action) {
-            this.menuController.close();
+            this.menuController.close(this.menuId);
             if (item.action.action === EAction.LOGOUT) {
                 this.authService.onLogout();
                 this.router.navigate(['/', homePath]);
@@ -65,7 +53,7 @@ export class MenuComponent implements OnInit {
     }
 
     close(): void {
-        this.menuController.close();
+        this.menuController.close(this.menuId);
     }
 
     signOut(): void {

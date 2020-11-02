@@ -6,6 +6,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {AlertService} from "../../../../shared/services/alert.service";
 import {IBaseRequest, IBaseResponse, IProduct, IProductRequest} from "../../../../shared/misc/http-data";
 import {ICategory} from "../../../../../../../server/src/models/Category";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-list',
@@ -14,7 +15,7 @@ import {ICategory} from "../../../../../../../server/src/models/Category";
 })
 export class ListPage extends AuthorizedComponent implements OnInit, OnDestroy {
 
-    public title: string = 'Products List';
+    public title: string = '';
     public link: string = '/' + adminPath + '/' + productsPath + '/' + createPath;
 
     public products: IProduct[] = [];
@@ -25,6 +26,7 @@ export class ListPage extends AuthorizedComponent implements OnInit, OnDestroy {
         protected injector: Injector,
         private restService: RestService,
         private sanitizer : DomSanitizer,
+        private translate: TranslateService,
         private alertService: AlertService
     )
     {
@@ -33,6 +35,11 @@ export class ListPage extends AuthorizedComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         super.ngOnInit();
+        this.translate.get('ADMIN.products.title').subscribe({
+            next: (value: string) => {
+                this.title = value;
+            }
+        })
     }
 
     ngOnDestroy() {

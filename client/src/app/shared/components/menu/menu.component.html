@@ -1,21 +1,23 @@
-<ion-menu side="start" menuId="{{menuId}}" contentId="admin">
+<ion-menu side="start" menuId="{{menuId}}" contentId="{{menuContent}}">
     <ion-header>
         <ion-toolbar color="primary">
             <ion-buttons slot="start">
                 <ion-menu-button></ion-menu-button>
             </ion-buttons>
-            <ion-title>Start Menu</ion-title>
+            <ion-title></ion-title>
         </ion-toolbar>
     </ion-header>
     <ion-content>
         <ion-list>
-            <ion-item *ngFor="let item of menu" [routerLink]="item.action.path" (click)="close()">
+            <ion-item class="cursor-pointer" *ngFor="let item of menu" (click)="onClick(item)">
+                <div tabindex="0"></div>
                 <ion-icon name="{{item.icon}}" slot="start"></ion-icon>
-                <ion-label>{{item.label}}</ion-label>
+                <ion-label>{{item.key | translate}}</ion-label>
             </ion-item>
         </ion-list>
-        <div class="bottom">
+        <div class="bottom" *ngIf="showLogout">
             <ion-item class="ion-text-end" (click)="signOut()">
+                <div tabindex="0"></div>
                 <ion-icon slot="end" size="large" name="log-out-outline"></ion-icon>
                 <ion-label>Sign Out</ion-label>
             </ion-item>

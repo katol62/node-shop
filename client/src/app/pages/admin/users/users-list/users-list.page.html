@@ -2,14 +2,15 @@
 <ion-content>
     <ion-list *ngIf="users && users.length">
         <ion-item *ngFor="let user of users">
+            <div tabindex="0"></div>
             <ion-label>
                 <h2>{{user.firstName ? user.firstName : 'Unknown'}} {{user.lastName}} {{hostId === user.id ? '(You)' : ''}}</h2>
                 <h3>{{user.phone}}</h3>
                 <p>Role: {{user.role}}</p>
             </ion-label>
             <div item-right>
-                <ion-button *ngIf="hostId !== user.id" (click)="delete(user);$event.stopPropagation();" color="danger">Delete</ion-button>
-                <ion-button (click)="edit(user);$event.stopPropagation();" color="primary">Edit</ion-button>
+                <ion-button *ngIf="hostId !== user.id" (click)="delete(user);$event.stopPropagation();" color="danger">{{'GLOBAL.labels.delete' | translate}}</ion-button>
+                <ion-button (click)="edit(user);$event.stopPropagation();" color="primary">{{'GLOBAL.labels.edit' | translate}}</ion-button>
             </div>
         </ion-item>
     </ion-list>

@@ -6,7 +6,7 @@
             </ion-button>
         </ion-buttons>
         <ion-title>
-            Details
+            {{'PROFILE.details.title' | translate}}
         </ion-title>
         <ion-buttons slot="end" *ngIf="!mobile">
             <ion-button id="end" [routerLink]="['/', adminPath]" routerDirection="forward">
@@ -24,7 +24,7 @@
                     <div class="ion-text-end">
                         <ion-button size="small" (click)="edit()" routerDirection="forward">
                             <ion-icon name="pencil-outline" slot="start"></ion-icon>
-                            Edit Profile
+                            {{'GLOBAL.labels.edit' | translate}} {{'PROFILE.details.title' | translate}}
                         </ion-button>
                     </div>
                 </ion-col>
@@ -32,7 +32,7 @@
                     <div class="ion-text-start">
                         <ion-button size="small" color="danger" (click)="logout()" routerDirection="back">
                             <ion-icon name="log-out-outline" slot="start"></ion-icon>
-                            Logout
+                            {{'GLOBAL.labels.signOut' | translate}}
                         </ion-button>
                     </div>
                 </ion-col>
@@ -45,13 +45,16 @@
     <ng-container *ngIf="details">
         <ion-list>
             <ion-item>
-                <ion-label>Hello {{details && details.firstName ? details.firstName : ''}}</ion-label>
+                <div tabindex="0"></div>
+                <ion-label>{{'GLOBAL.labels.firstName' | translate}}: {{details && details.firstName ? details.firstName : ''}}</ion-label>
             </ion-item>
             <ion-item>
-                <ion-label>Your phone: +{{details.phone}}</ion-label>
+                <div tabindex="0"></div>
+                <ion-label>{{'GLOBAL.labels.phone' | translate}}: +{{details.phone}}</ion-label>
             </ion-item>
             <ion-item>
-                <ion-label>Addresses</ion-label>
+                <div tabindex="0"></div>
+                <ion-label>{{'PROFILE.addresses.title' | translate}}</ion-label>
                 <ion-button class="ion-text-right" fill="clear" [routerLink]="['/', profilePath, addressesPath]" routerDirection="forward">
                     <ion-icon name="chevron-forward-outline"></ion-icon>
                 </ion-button>

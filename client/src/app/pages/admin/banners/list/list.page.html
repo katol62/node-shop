@@ -6,6 +6,7 @@
     <ng-container *ngIf="banners.length">
         <ion-list>
             <ion-item *ngFor="let banner of banners; let i=index">
+                <div tabindex="0"></div>
                 <ion-thumbnail slot="start">
                     <img [src]="getSrc(banner)">
                 </ion-thumbnail>
@@ -15,8 +16,9 @@
                     <p>displayed: {{banner.display ? 'Yes' : 'No'}}</p>
                 </ion-label>
                 <div item-right>
-                    <ion-button (click)="delete(banner);$event.stopPropagation();" color="danger">Delete</ion-button>
-                    <ion-button (click)="edit(banner);$event.stopPropagation();" color="primary">Edit</ion-button>
+                    <div tabindex="0"></div>
+                    <ion-button (click)="delete(banner);$event.stopPropagation();" color="danger">{{'GLOBAL.labels.delete' | translate}}</ion-button>
+                    <ion-button (click)="edit(banner);$event.stopPropagation();" color="primary">{{'GLOBAL.labels.edit' | translate}}</ion-button>
                 </div>
             </ion-item>
         </ion-list>

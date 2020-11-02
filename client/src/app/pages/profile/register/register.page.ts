@@ -6,7 +6,7 @@ import {AuthService} from "../../../shared/services/auth.service";
 import {ValidationService} from "../../../shared/services/validation.service";
 import {IBaseResponse, IRegRequest} from "../../../shared/misc/http-data";
 import {VerificationState} from "../login/login.page";
-import {detailsPath, profilePath} from "../../../shared/misc/constants";
+import {detailsPath, loginPath, profilePath} from "../../../shared/misc/constants";
 import {createTextMaskInputElement} from "text-mask-core";
 import {Router} from "@angular/router";
 import {RestService} from "../../../shared/services/rest.service";
@@ -27,6 +27,9 @@ export class RegisterPage implements OnInit {
     public mobile: boolean;
     public state: VerificationState = VerificationState.phone;
     public code: string = '';
+
+    public profilePath = profilePath;
+    public loginPath = loginPath;
 
     @ViewChild('phoneInput')
     public set phoneInput(value: IonInput) {
@@ -100,7 +103,6 @@ export class RegisterPage implements OnInit {
                 console.log(info);
             }
         ).catch( e => {
-            debugger;
             console.log(e);
         })
     }

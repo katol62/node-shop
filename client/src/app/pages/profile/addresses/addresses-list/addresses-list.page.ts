@@ -30,6 +30,7 @@ export class AddressesListPage implements OnInit {
 
     ngOnInit() {
     }
+
     ionViewWillEnter(): void {
         this.getAddresses();
     }
@@ -69,7 +70,7 @@ export class AddressesListPage implements OnInit {
 
 
     delete( address: IAddress ) {
-         this.alertService.confirm('Confirm', 'Delete address?', {data: address}).then(res => {
+         this.alertService.confirm('GLOBAL.labels.confirm', `GLOBAL.alert.deleteAddress`, {data: address}).then(res => {
              if (res) {
                  this.deleteAddress(res.data.id);
              }

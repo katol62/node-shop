@@ -8,6 +8,7 @@ import { LoginPageRoutingModule } from './login-routing.module';
 
 import { LoginPage } from './login.page';
 import {TextMaskModule} from "angular2-text-mask";
+import {SharedModule} from "../../../shared/shared.module";
 
 @NgModule({
     imports: [
@@ -15,6 +16,7 @@ import {TextMaskModule} from "angular2-text-mask";
         FormsModule,
         IonicModule,
         LoginPageRoutingModule,
+        SharedModule,
         ReactiveFormsModule,
         TextMaskModule
     ],

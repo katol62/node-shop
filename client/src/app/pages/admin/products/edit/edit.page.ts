@@ -8,6 +8,7 @@ import {AlertService} from "../../../../shared/services/alert.service";
 import {IMessageItem, NotificationMessageType, NotificationService} from "../../../../shared/services/notification.service";
 import {IBaseRequest, IBaseResponse} from "../../../../shared/misc/http-data";
 import {ICategory} from "../../../../../../../server/src/models/Category";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-edit',
@@ -38,6 +39,7 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
         private restService: RestService,
         private activatedRoute: ActivatedRoute,
         private alertService: AlertService,
+        private translate: TranslateService,
         private notificationService: NotificationService
     ) {
         super(injector)
