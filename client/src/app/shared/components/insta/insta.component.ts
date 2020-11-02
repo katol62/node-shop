@@ -32,6 +32,7 @@ export class InstaComponent implements OnInit, AfterViewInit {
     ) { }
 
     ngOnInit() {
+        this.getItems();
     }
 
     ngAfterViewInit(): void {

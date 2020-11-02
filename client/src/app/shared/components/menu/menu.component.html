@@ -16,10 +16,10 @@
             </ion-item>
         </ion-list>
         <div class="bottom" *ngIf="showLogout">
-            <ion-item class="ion-text-end" (click)="signOut()">
+            <ion-item class="ion-text-end cursor-pointer" (click)="signOut()">
                 <div tabindex="0"></div>
                 <ion-icon slot="end" size="large" name="log-out-outline"></ion-icon>
-                <ion-label>Sign Out</ion-label>
+                <ion-label>{{'GLOBAL.labels.signOut' | translate}}</ion-label>
             </ion-item>
         </div>
     </ion-content>

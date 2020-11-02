@@ -37,9 +37,22 @@
             "floor": "Floor",
         },
         "alert": {
-            "deleteAddress": "Delete address?",
             "cancel": "Cancel",
-            "ok": "Ok"
+            "ok": "Ok",
+            "success": "Success",
+            "error": "Error",
+            "warning": "Warning",
+            "confirm": "Confirm",
+            "deleteAddress": "Delete address?",
+            "deleteAddressConfirm": "Address deleted",
+            "deleteCategory": "Delete category?",
+            "deleteCategoryConfirm": "Category deleted",
+            "deleteProduct": "Delete product?",
+            "deleteProductConfirm": "Product deleted",
+            "deleteBanner": "Delete banner?",
+            "deleteBannerConfirm": "Banner deleted",
+            "deleteUser": "Delete user?",
+            "deleteUserConfirm": "User deleted"
         }
     },
     "HOME": {

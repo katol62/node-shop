@@ -50,7 +50,7 @@ export class AddressesListPage implements OnInit {
     protected deleteAddress(id: number): void {
         this.restService.delete(`addresses/${id}`).subscribe({
             next: (value: IBaseResponse ) => {
-                this.alertService.alert('Success', 'Address deleted').then(
+                this.alertService.alert('GLOBAL.alert.success', 'GLOBAL.alert.deleteAddressConfirm').then(
                     result => {
                         this.getAddresses();
                     }

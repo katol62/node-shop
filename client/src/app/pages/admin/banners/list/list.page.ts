@@ -67,7 +67,7 @@ export class ListPage extends AuthorizedComponent implements OnInit, OnDestroy {
     private deleteBanner( id: number ) {
         this.restService.delete(`banners/${id}`).subscribe({
             next: (value: IBaseResponse ) => {
-                this.alertService.alert('Success', 'Banner deleted').then(
+                this.alertService.alert('GLOBAL.alert.success', 'GLOBAL.alert.deleteBannerConfirm').then(
                     result => {
                         this.getBanners();
                     }
@@ -81,7 +81,7 @@ export class ListPage extends AuthorizedComponent implements OnInit, OnDestroy {
      */
 
     public delete( banner: IBanner ) {
-        this.alertService.confirm('Confirm', 'Delete banner?', {data: banner}).then(res => {
+        this.alertService.confirm('GLOBAL.alert.confirm', 'GLOBAL.alert.deleteBanner', {data: banner}).then(res => {
             if (res) {
                 this.deleteBanner(res.data.id);
             }

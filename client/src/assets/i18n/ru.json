@@ -37,9 +37,22 @@
             "floor": "Этаж"
         },
         "alert": {
-            "deleteAddress": "Удалить адрес?",
             "cancel": "Отменить",
-            "ok": "Да"
+            "ok": "Да",
+            "success": "Поздравляем",
+            "error": "Ошибка",
+            "warning": "Внимание",
+            "confirm": "Подтвердить",
+            "deleteAddress": "Удалить адрес?",
+            "deleteAddressConfirm": "Адрес удален",
+            "deleteCategory": "Удалить категорию?",
+            "deleteCategoryConfirm": "Категория удалена",
+            "deleteProduct": "Удалить продукт?",
+            "deleteProductConfirm": "Продукт удален",
+            "deleteBanner": "Удалить банер?",
+            "deleteBannerConfirm": "Банер удален",
+            "deleteUser": "Удалить пользователя?",
+            "deleteUserConfirm": "Пользователь удален"
         }
     },
     "HOME": {

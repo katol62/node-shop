@@ -68,7 +68,7 @@ export class UsersListPage extends AuthorizedComponent implements OnInit, OnDest
     private deleteUser( id: number ) {
         this.restService.delete(`users/${id}`).subscribe({
             next: (value: IBaseResponse ) => {
-                this.alertService.alert('Success', 'User deleted').then(
+                this.alertService.alert('GLOBAL.alert.success', 'GLOBAL.alert.deleteUserConfirm').then(
                     result => {
                         this.getUsers();
                     }
@@ -82,7 +82,7 @@ export class UsersListPage extends AuthorizedComponent implements OnInit, OnDest
      */
 
     delete( user: IUser ) {
-        this.alertService.confirm('Confirm', 'Delete user?', {data: user}).then(res => {
+        this.alertService.confirm('GLOBAL.alert.confirm', 'GLOBAL.alert.deleteUser', {data: user}).then(res => {
             if (res) {
                 this.deleteUser(res.data.id);
             }

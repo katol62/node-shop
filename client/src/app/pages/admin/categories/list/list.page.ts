@@ -67,7 +67,7 @@ export class ListPage extends AuthorizedComponent implements OnInit, OnDestroy {
     private deleteCategory( id: number ) {
         this.restService.delete(`categories/${id}`).subscribe({
             next: (value: IBaseResponse ) => {
-                this.alertService.alert('Success', 'Category deleted').then(
+                this.alertService.alert('GLOBAL.alert.success', 'GLOBAL.alert.deleteCategoryConfirm').then(
                     result => {
                         this.getCategories();
                     }
@@ -81,7 +81,7 @@ export class ListPage extends AuthorizedComponent implements OnInit, OnDestroy {
      */
 
     public delete( category: ICategory ) {
-        this.alertService.confirm('Confirm', 'Delete category?', {data: category}).then(res => {
+        this.alertService.confirm('GLOBAL.alert.confirm', 'GLOBAL.alert.deleteCategory', {data: category}).then(res => {
             if (res) {
                 this.deleteCategory(res.data.id);
             }

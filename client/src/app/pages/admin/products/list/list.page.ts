@@ -79,7 +79,7 @@ export class ListPage extends AuthorizedComponent implements OnInit, OnDestroy {
     private deleteProduct( id: number ) {
         this.restService.delete(`products/${id}`).subscribe({
             next: (value: IBaseResponse ) => {
-                this.alertService.alert('Success', value.message).then(
+                this.alertService.alert('GLOBAL.alert.success', 'GLOBAL.alert.deleteProductConfirm').then(
                     result => {
                         this.getProducts();
                     }
@@ -93,7 +93,7 @@ export class ListPage extends AuthorizedComponent implements OnInit, OnDestroy {
      */
 
     delete( product: IProduct ) {
-        this.alertService.confirm('Confirm', 'Delete product?', {data: product}).then(res => {
+        this.alertService.confirm('GLOBAL.alert.confirm', 'GLOBAL.alert.deleteProduct', {data: product}).then(res => {
             if (res) {
                 this.deleteProduct(res.data.id);
             }

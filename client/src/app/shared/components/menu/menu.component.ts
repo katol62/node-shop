@@ -58,6 +58,10 @@ export class MenuComponent implements OnInit {
 
     signOut(): void {
         this.authService.onLogout();
-        this.router.navigate(['/', homePath]);
+        this.menuController.close(this.menuId).then(
+            () => {
+                this.router.navigate(['/', homePath]);
+            }
+        );
     }
 }
