@@ -22,7 +22,7 @@ interface IConfig {
     tokenExpireIn: number | undefined;
 }
 
-const environment = process.env.NODE_ENV ? process.env.NODE_ENV : 'prod'
+const environment = process.env.NODE_ENV ? process.env.NODE_ENV : 'stage'
 
 dotenv.config({ path: path.join(__dirname, `../../.env.${environment}`)});;
 console.log(process.env);
