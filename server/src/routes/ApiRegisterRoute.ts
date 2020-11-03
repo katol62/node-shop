@@ -3,6 +3,7 @@ import {IUser, User} from "../models/User";
 import {NextFunction} from "express";
 import {IBaseResponse} from "../misc/db";
 import * as bcrypt from "bcryptjs";
+import {CODES} from "../misc/codes";
 
 export class ApiRegisterRoute {
     public router: express.Router = express.Router();
@@ -14,10 +15,10 @@ export class ApiRegisterRoute {
 
     private config() {
         this.router.get('/', (req: express.Request, res: express.Response) => {
-            return res.status(405).json({ success: false, message: 'Method not allowed!!!' });
+            return res.status(405).json({ success: false, message: 'Method not allowed!!!', code: CODES.methodNotAllowed });
         });
         this.router.put('/', (req: express.Request, res: express.Response) => {
-            return res.status(405).json({ success: false, message: 'Method not allowed!!!' });
+            return res.status(405).json({ success: false, message: 'Method not allowed!!!', code: CODES.methodNotAllowed });
         });
         this.router.post('/', async (req: express.Request, res: express.Response, next: NextFunction) => {
             if ((req.body.phone && req.body.password) || (req.body.phone && req.body.verified) ) {
@@ -29,7 +30,7 @@ export class ApiRegisterRoute {
                 try {
                     const users = await this.User.find({phone: phone});
                     if (users.length) {
-                        return res.status(409).json({ success: false, message: 'Account already exists'});
+                        return res.status(409).json({ success: false, message: 'Account already exists', code: CODES.exists});
                     }
                     let rUser: IUser = {phone: phone, role: 'user', firstName: firstName, lastName: lastName, email: email};
                     if (password) {
@@ -43,19 +44,20 @@ export class ApiRegisterRoute {
                     }
                     const result = await this.User.create(rUser);
                     if (!result.insertId) {
-                        return res.status(204).json({ success: false, message: 'No Content'});
+                        return res.status(204).json({ success: false, message: 'No Content', code: CODES.noContent});
                     }
                     rUser.id = result.insertId;
                     const updateResponse: IBaseResponse = {
                         success: true,
                         message: 'User created',
+                        code: CODES.created,
                         data: rUser};
                     return res.status(200).json(updateResponse);
                 } catch (e) {
-                    return res.status(500).json({ success: false, message: e.message} as IBaseResponse);
+                    return res.status(500).json({ success: false, message: e.message, code: CODES.serverError} as IBaseResponse);
                 }
             } else {
-                return res.status(422).json({success: false, message: 'Missing parameters', data: null} as IBaseResponse);
+                return res.status(422).json({success: false, message: 'Missing parameters', code: CODES.missingParameters} as IBaseResponse);
             }
         })
     }

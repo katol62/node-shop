@@ -3,6 +3,7 @@ import {IUser, User} from "../models/User";
 import {checkAuthorized} from "../middleware/MiddleWares";
 import {IBaseResponse} from "../misc/db";
 import * as bcrypt from "bcryptjs";
+import {CODES} from "../misc/codes";
 
 class ApiMeRoute {
     public router: express.Router = express.Router();
@@ -14,12 +15,12 @@ class ApiMeRoute {
 
     private config() {
         this.router.post('/', (req: express.Request, res: express.Response) => {
-                return res.status(405).json({ success: false, message: 'Not allowed'});
+                return res.status(405).json({ success: false, message: 'Not allowed', code: CODES.methodNotAllowed});
             }
         );
 
         this.router.delete('/', (req: express.Request, res: express.Response) => {
-                return res.status(405).json({ success: false, message: 'Not allowed'});
+                return res.status(405).json({ success: false, message: 'Not allowed', code: CODES.methodNotAllowed});
             }
         );
 
@@ -30,7 +31,7 @@ class ApiMeRoute {
             try {
                 const result = await this.userModel.find(filter);
                 if (!result.length) {
-                    return res.status(404).json({ success: false, message: 'Not found'} as IBaseResponse);
+                    return res.status(404).json({ success: false, message: 'Not found', code: CODES.notFound} as IBaseResponse);
                 }
                 const rUser = result[0];
                 return res.status(200).json({
@@ -40,7 +41,7 @@ class ApiMeRoute {
                 } as IBaseResponse);
 
             } catch (e) {
-                return res.status(500).json({ success: false, message: e.message} as IBaseResponse);
+                return res.status(500).json({ success: false, message: e.message, code: CODES.serverError} as IBaseResponse);
             }
         });
 
@@ -53,15 +54,16 @@ class ApiMeRoute {
                 }
                 const result = await this.userModel.update(rUser);
                 if (result.affectedRows === 0) {
-                    return res.status(204).json({ success: false, message: 'No Content'} as IBaseResponse);
+                    return res.status(204).json({ success: false, message: 'No Content', code: CODES.noContent} as IBaseResponse);
                 }
                 const updateResponse: IBaseResponse = {
                     success: true,
                     message: 'Me updated',
+                    code: CODES.updated,
                     data: rUser};
                 return res.status(200).json(updateResponse);
             } catch (e) {
-                return res.status(500).json({ success: false, message: e.message} as IBaseResponse);
+                return res.status(500).json({ success: false, message: e.message, code: CODES.serverError} as IBaseResponse);
             }
         });
 

@@ -1,6 +1,7 @@
 import * as express from 'express';
 import {InstaBasicDisplay} from "../misc/InstaBasicDisplay";
 import {IBaseResponse} from "../misc/db";
+import {CODES} from "../misc/codes";
 
 export const InstaConfig = {
     appId: '624517498225281',
@@ -49,22 +50,21 @@ class ApiInstaRoute {
                     message: 'OK',
                     data: data};
                 return res.status(200).json(instaResponse);
-                console.log('get');
             } catch (e) {
                 console.log(e);
                 return res.status(500).json({ success: false, message: e.message} as IBaseResponse);
             }
         });
         this.router.put('/', (req: express.Request, res: express.Response) => {
-                return res.status(405).json({ success: false, message: 'Method not allowed'});
+                return res.status(405).json({ success: false, message: 'Method not allowed', code: CODES.methodNotAllowed});
             }
         );
         this.router.post('/', (req: express.Request, res: express.Response) => {
-                return res.status(405).json({ success: false, message: 'Not allowed' });
+                return res.status(405).json({ success: false, message: 'Not allowed', code: CODES.methodNotAllowed });
             }
         );
         this.router.delete('/', (req: express.Request, res: express.Response) => {
-                return res.status(405).json({ success: false, message: 'Not allowed' });
+                return res.status(405).json({ success: false, message: 'Not allowed', code: CODES.methodNotAllowed });
             }
         );
     }

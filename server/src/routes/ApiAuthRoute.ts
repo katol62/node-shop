@@ -5,6 +5,7 @@ import * as bcrypt from 'bcryptjs';
 import config from '../misc/config';
 import {IBaseResponse} from "../misc/db";
 import {Secret} from "jsonwebtoken";
+import {CODES} from "../misc/codes";
 
 export class ApiAuthRoute {
     public router: express.Router = express.Router();
@@ -15,7 +16,7 @@ export class ApiAuthRoute {
     }
     private config(): void {
         this.router.get('/', (req: express.Request, res: express.Response) => {
-            return res.status(405).json({ success: false, message: 'Method not allowed!!!' });
+            return res.status(405).json({ success: false, message: 'Method not allowed!!!', code: CODES.methodNotAllowed });
         });
 
         this.router.post('/', async (req: express.Request, res: express.Response) => {
@@ -25,7 +26,7 @@ export class ApiAuthRoute {
                 try {
                     const users = await this.User.find({phone});
                     if (!users.length) {
-                        return res.status(404).json({ success: false, message: 'User not found' } as IBaseResponse);
+                        return res.status(404).json({ success: false, message: 'User not found', code: CODES.notFound } as IBaseResponse);
                     }
                     let doesMatch = true;
                     if (password) {
@@ -47,17 +48,16 @@ export class ApiAuthRoute {
                             {
                                 success: true,
                                 message: 'Valid Token',
-                                token,
                                 data
                             } as IBaseResponse);
                     }else{
-                        return res.status(401).json({success: false, message: 'Invalid Token', data: null} as IBaseResponse);
+                        return res.status(404).json({success: false, message: 'Not found', code: CODES.notFound} as IBaseResponse);
                     }
                 } catch (e) {
-                    return res.status(500).json({ success: false, message: e.message, data: null} as IBaseResponse);
+                    return res.status(500).json({ success: false, message: e.message, code: CODES.serverError} as IBaseResponse);
                 }
             } else {
-                return res.status(400).json({success: false, message: 'Missing parameters', data: null} as IBaseResponse);
+                return res.status(400).json({success: false, message: 'Missing parameters', code: CODES.missingParameters} as IBaseResponse);
             }
         });
     }

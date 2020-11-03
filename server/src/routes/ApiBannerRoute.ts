@@ -2,6 +2,7 @@ import * as express from "express";
 import {Banner, IBanner} from "../models/Banner";
 import {IBaseResponse} from "../misc/db";
 import {checkJwt} from "../middleware/MiddleWares";
+import {CODES} from "../misc/codes";
 
 class ApiBannerRoute {
     public router: express.Router = express.Router();
@@ -28,7 +29,7 @@ class ApiBannerRoute {
                     data: banners
                 } as IBaseResponse);
             } catch (e) {
-                return res.status(500).json({ success: false, message: e.message} as IBaseResponse);
+                return res.status(500).json({ success: false, message: e.message, code: CODES.serverError} as IBaseResponse);
             }
         });
         this.router.get('/:id', checkJwt,  async (req: express.Request, res: express.Response) => {
@@ -36,7 +37,7 @@ class ApiBannerRoute {
             try {
                 const result = await this.bannerModel.find(filter);
                 if (!result.length) {
-                    return res.status(404).json({ success: false, message: 'Not found'} as IBaseResponse);
+                    return res.status(404).json({ success: false, message: 'Not found', code: CODES.notFound} as IBaseResponse);
                 }
                 const rBanner = result[0];
                 const parsedImage = rBanner.image.toString('utf-8');
@@ -52,15 +53,16 @@ class ApiBannerRoute {
         });
         this.router.post('/', checkJwt, async (req: express.Request, res: express.Response) => {
             try {
-                let banner: IBanner = {name: req.body.data.name, image: req.body.data.image, description: req.body.data.description, display: req.body.data.display === 'true' ? true : false}
+                let banner: IBanner = {name: req.body.data.name, image: req.body.data.image, description: req.body.data.description, display: req.body.data.display}
                 const result = await this.bannerModel.create(banner);
                 if (result.affectedRows === 0) {
-                    return res.status(204).json({ success: false, message: 'No Content'});
+                    return res.status(204).json({ success: false, message: 'No Content', code: CODES.noContent});
                 }
                 banner = {...banner, id: result.insertId};
                 const updateResponse: IBaseResponse = {
                     success: true,
                     message: 'Banner created',
+                    code: CODES.created,
                     data: banner};
                 return res.status(200).json(updateResponse);
             } catch (e) {
@@ -69,14 +71,15 @@ class ApiBannerRoute {
         });
         this.router.put('/:id', checkJwt, async (req: express.Request, res: express.Response) => {
             try {
-                let rBanner: IBanner = {id: Number(req.params.id), name: req.body.data.name, image: req.body.data.image ? req.body.data.image : null, description: req.body.data.description, display: req.body.data.display === 'true'}
+                let rBanner: IBanner = {id: Number(req.params.id), name: req.body.data.name, image: req.body.data.image ? req.body.data.image : null, description: req.body.data.description, display: req.body.data.display}
                 const result = await this.bannerModel.update(rBanner);
                 if (result.affectedRows === 0) {
-                    return res.status(204).json({ success: false, message: 'No Content'} as IBaseResponse);
+                    return res.status(204).json({ success: false, message: 'No Content', code: CODES.noContent} as IBaseResponse);
                 }
                 const updateResponse: IBaseResponse = {
                     success: true,
                     message: 'Banner updated',
+                    code: CODES.updated,
                     data: rBanner};
                 return res.status(200).json(updateResponse);
             } catch (e) {
@@ -89,9 +92,9 @@ class ApiBannerRoute {
             try {
                 const result = await this.bannerModel.delete(id);
                 if (!result.affectedRows) {
-                    return res.status(204).json({ success: false, message: 'No content'} as IBaseResponse);
+                    return res.status(204).json({ success: false, message: 'No content', code: CODES.noContent} as IBaseResponse);
                 }
-                return res.status(200).json({ success: true, message: 'Banner deleted'} as IBaseResponse);
+                return res.status(200).json({ success: true, message: 'Banner deleted', code: CODES.deleted} as IBaseResponse);
             } catch (e) {
                 return res.status(500).json({ success: false, message: e.message} as IBaseResponse);
             }

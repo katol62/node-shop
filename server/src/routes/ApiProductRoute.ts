@@ -2,6 +2,7 @@ import * as express from "express";
 import {IProductExt, Product} from "../models/Product";
 import {IBaseResponse} from "../misc/db";
 import {checkJwt, hasRole} from "../middleware/MiddleWares";
+import {CODES} from "../misc/codes";
 
 class ApiProductRoute {
     public router: express.Router = express.Router();
@@ -31,7 +32,7 @@ class ApiProductRoute {
                     data: resultProducts
                 } as IBaseResponse);
             } catch (e) {
-                return res.status(500).json({ success: false, message: e.message} as IBaseResponse);
+                return res.status(500).json({ success: false, message: e.message, code: CODES.serverError} as IBaseResponse);
             }
         });
 
@@ -41,7 +42,7 @@ class ApiProductRoute {
                 const filter: IProductExt = {id: productId};
                 const result = await this.productModel.find(filter);
                 if (!result.length) {
-                    return res.status(404).json({ success: false, message: 'Not found'} as IBaseResponse);
+                    return res.status(404).json({ success: false, message: 'Not found', code: CODES.notFound} as IBaseResponse);
                 }
                 const categories = await this.productModel.getCategories(productId);
                 let resultCategories = [];
@@ -60,7 +61,7 @@ class ApiProductRoute {
                     data: updProduct
                 } as IBaseResponse);
             } catch (e) {
-                return res.status(500).json({ success: false, message: e.message} as IBaseResponse);
+                return res.status(500).json({ success: false, message: e.message, code: CODES.serverError} as IBaseResponse);
             }
         });
 
@@ -69,7 +70,7 @@ class ApiProductRoute {
                 let rProduct: IProductExt  = req.body.data;
                 const result = await this.productModel.create(rProduct);
                 if (result.affectedRows === 0) {
-                    return res.status(204).json({ success: false, message: 'No Content'});
+                    return res.status(204).json({ success: false, message: 'No Content', code: CODES.noContent});
                 }
                 rProduct = {...rProduct, id: result.insertId};
                 for (let i = 0; i < rProduct.category.length; i++) {
@@ -78,10 +79,11 @@ class ApiProductRoute {
                 const updateResponse: IBaseResponse = {
                     success: true,
                     message: 'Product created',
+                    code: CODES.created,
                     data: rProduct};
                 return res.status(200).json(updateResponse);
             } catch (e) {
-                return res.status(500).json({ success: false, message: e.message} as IBaseResponse);
+                return res.status(500).json({ success: false, message: e.message, code: CODES.serverError} as IBaseResponse);
             }
         });
 
@@ -90,7 +92,7 @@ class ApiProductRoute {
             try {
                 const result = await this.productModel.update(rProduct);
                 if (result.affectedRows === 0) {
-                    return res.status(204).json({ success: false, message: 'No Content'} as IBaseResponse);
+                    return res.status(204).json({ success: false, message: 'No Content', code: CODES.noContent} as IBaseResponse);
                 }
                 await this.productModel.clearReference(rProduct.id)
                 for (let i = 0; i < rProduct.category.length; i++) {
@@ -99,10 +101,11 @@ class ApiProductRoute {
                 const updateResponse: IBaseResponse = {
                     success: true,
                     message: 'Product updated',
+                    code: CODES.updated,
                     data: rProduct};
                 return res.status(200).json(updateResponse);
             } catch (e) {
-                return res.status(500).json({ success: false, message: e.message} as IBaseResponse);
+                return res.status(500).json({ success: false, message: e.message, code: CODES.serverError} as IBaseResponse);
             }
         });
 
@@ -112,11 +115,11 @@ class ApiProductRoute {
                 await this.productModel.clearReference(id);
                 const result = await this.productModel.delete(id);
                 if (!result.affectedRows) {
-                    return res.status(204).json({ success: false, message: 'No content'} as IBaseResponse);
+                    return res.status(204).json({ success: false, message: 'No content', code: CODES.noContent} as IBaseResponse);
                 }
-                return res.status(200).json({ success: true, message: 'Product deleted'} as IBaseResponse);
+                return res.status(200).json({ success: true, message: 'Product deleted', code: CODES.deleted} as IBaseResponse);
             } catch (e) {
-                return res.status(500).json({ success: false, message: e.message} as IBaseResponse);
+                return res.status(500).json({ success: false, message: e.message, code: CODES.serverError} as IBaseResponse);
             }
         });
 

@@ -19,6 +19,7 @@ import {SliderComponent} from "./components/slider/slider.component";
 import {InstaModalComponent} from "./components/insta-modal/insta-modal.component";
 import {HelpService} from "./services/help.service";
 import {TranslateModule} from "@ngx-translate/core";
+import {LoaderService} from "./services/loader.service";
 
 
 
@@ -65,7 +66,8 @@ export class SharedModule {
                 RestService,
                 ValidationService,
                 VerificationService,
-                HelpService
+                HelpService,
+                LoaderService
             ]
         };
     }

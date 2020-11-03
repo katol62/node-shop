@@ -13,6 +13,7 @@ import {AuthInterceptor} from "./shared/guards/auth.interceptor";
 import {SharedModule} from "./shared/shared.module";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {LoaderInterceptor} from "./shared/guards/loader.interceptor";
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -40,7 +41,16 @@ export function createTranslateLoader(http: HttpClient) {
         StatusBar,
         SplashScreen,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
-        {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: LoaderInterceptor,
+            multi: true
+        },
     ],
     bootstrap: [AppComponent]
 })

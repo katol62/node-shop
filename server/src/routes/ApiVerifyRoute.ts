@@ -1,6 +1,7 @@
 import * as express from "express";
 import axios, {AxiosInstance, AxiosResponse, AxiosError} from 'axios';
 import {IBaseResponse} from "../misc/db";
+import {CODES} from "../misc/codes";
 
 class ApiVerifyRoute {
     public router: express.Router = express.Router();
@@ -38,15 +39,15 @@ class ApiVerifyRoute {
             // })
         });
         this.router.put('/', (req: express.Request, res: express.Response) => {
-                return res.status(405).json({ success: false, message: 'Not allowed'});
+                return res.status(405).json({ success: false, message: 'Not allowed', code: CODES.methodNotAllowed});
             }
         );
         this.router.post('/', (req: express.Request, res: express.Response) => {
-                return res.status(405).json({ success: false, message: 'Not allowed' });
+                return res.status(405).json({ success: false, message: 'Not allowed', code: CODES.methodNotAllowed });
             }
         );
         this.router.delete('/', (req: express.Request, res: express.Response) => {
-                return res.status(405).json({ success: false, message: 'Not allowed' });
+                return res.status(405).json({ success: false, message: 'Not allowed', code: CODES.methodNotAllowed });
             }
         );
     }

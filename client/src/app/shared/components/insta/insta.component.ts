@@ -5,6 +5,7 @@ import {IonInfiniteScroll, ModalController} from "@ionic/angular";
 import {InstaModalComponent} from "../insta-modal/insta-modal.component";
 import {DomSanitizer} from "@angular/platform-browser";
 import {TranslateService} from "@ngx-translate/core";
+import {HelpService} from "../../services/help.service";
 
 export type InstaType = 'list' | 'grid';
 
@@ -16,6 +17,7 @@ export type InstaType = 'list' | 'grid';
 export class InstaComponent implements OnInit, AfterViewInit {
 
     public type: InstaType = 'grid';
+    public mobile: boolean;
 
     @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
@@ -28,10 +30,13 @@ export class InstaComponent implements OnInit, AfterViewInit {
         private restService: RestService,
         private sanitizer : DomSanitizer,
         private translate: TranslateService,
-        private modalController: ModalController
+        private modalController: ModalController,
+        private helpService: HelpService
     ) { }
 
     ngOnInit() {
+        this.mobile = this.helpService.isMobile();
+        this.delta = this.mobile ? 3 : 6;
         this.getItems();
     }
 

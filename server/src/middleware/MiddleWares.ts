@@ -4,6 +4,7 @@ import config from "../misc/config";
 import {Secret} from "jsonwebtoken";
 import {IBaseResponse} from "../misc/db";
 import {IUser} from "../models/User";
+import {CODES} from "../misc/codes";
 
 export const checkJwt: RequestHandler = (req: Request, res: Response, next: NextFunction) => {
     // Get the jwt token from the head
@@ -15,7 +16,7 @@ export const checkJwt: RequestHandler = (req: Request, res: Response, next: Next
         req.body.decoded = jwtPayload;
     } catch (error) {
         // If token is not valid, respond with 401 (unauthorized)
-        res.status(401).send({success: false, message: 'Invalid token'} as IBaseResponse);
+        res.status(401).send({success: false, message: 'Invalid token', code: CODES.invalidToken} as IBaseResponse);
         return;
     }
     next();

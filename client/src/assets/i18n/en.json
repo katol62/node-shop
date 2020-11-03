@@ -35,6 +35,7 @@
             "app": "App",
             "entrance": "Entrance",
             "floor": "Floor",
+            "pleaseWait": "Please wait"
         },
         "alert": {
             "cancel": "Cancel",
@@ -42,6 +43,7 @@
             "success": "Success",
             "error": "Error",
             "warning": "Warning",
+            "info": "Info",
             "confirm": "Confirm",
             "deleteAddress": "Delete address?",
             "deleteAddressConfirm": "Address deleted",
@@ -110,6 +112,18 @@
         },
         "edit": {
             "title": "Edit"
-        },
+        }
+    },
+    "CODE": {
+        "serverError": "Internal Server Error",
+        "methodNotAllowed": "Method not allowed",
+        "notFound": "Not found",
+        "invalidToken": "Invalid token",
+        "missingParameters": "Missing parameters",
+        "noContent": "No content",
+        "updated": "Record updated",
+        "created": "Record created",
+        "deleted": "Record deleted",
+        "exists": "Record already exists"
     }
 }

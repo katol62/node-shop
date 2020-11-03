@@ -34,7 +34,8 @@
             "house": "Дом",
             "app": "Квартира",
             "entrance": "Подъезд",
-            "floor": "Этаж"
+            "floor": "Этаж",
+            "pleaseWait": "Подождите"
         },
         "alert": {
             "cancel": "Отменить",
@@ -42,6 +43,7 @@
             "success": "Поздравляем",
             "error": "Ошибка",
             "warning": "Внимание",
+            "info": "Инфо",
             "confirm": "Подтвердить",
             "deleteAddress": "Удалить адрес?",
             "deleteAddressConfirm": "Адрес удален",
@@ -114,5 +116,17 @@
         "edit": {
             "title": "Редактировать"
         }
+    },
+    "CODE": {
+        "serverError": "Internal Server Error",
+        "methodNotAllowed": "Метод не разрешен",
+        "notFound": "Запись не найдена",
+        "invalidToken": "Неверный токен",
+        "missingParameters": "Не хватает параметров",
+        "noContent": "Нет записи",
+        "updated": "Запись изменена",
+        "created": "Запись добавлена",
+        "deleted": "Запись удалена",
+        "exists": "Запись существует"
     }
 }

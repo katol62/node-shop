@@ -4,6 +4,7 @@ import {IBaseResponse} from "../misc/db";
 import * as bcrypt from 'bcryptjs';
 import {checkAuthorized} from "../middleware/MiddleWares";
 import {Address} from "../models/Address";
+import {CODES} from "../misc/codes";
 
 class ApiUserRoute {
     public router: express.Router = express.Router();
@@ -26,7 +27,7 @@ class ApiUserRoute {
                     data: users
                 } as IBaseResponse);
             } catch (e) {
-                return res.status(500).json({ success: false, message: e.message} as IBaseResponse);
+                return res.status(500).json({ success: false, message: e.message, code: CODES.serverError} as IBaseResponse);
             }
         });
 
@@ -37,17 +38,17 @@ class ApiUserRoute {
             try {
                 const result = await this.userModel.find(filter);
                 if (!result.length) {
-                    return res.status(404).json({ success: false, message: 'Not found'} as IBaseResponse);
+                    return res.status(404).json({ success: false, message: 'Not found', code: CODES.notFound} as IBaseResponse);
                 }
                 const rUser = result[0];
                 return res.status(200).json({
                     success: true,
-                    message: 'Admin successfully received',
+                    message: 'User successfully received',
                     data: rUser
                 } as IBaseResponse);
 
             } catch (e) {
-                return res.status(500).json({ success: false, message: e.message} as IBaseResponse);
+                return res.status(500).json({ success: false, message: e.message, code: CODES.serverError} as IBaseResponse);
             }
         });
         this.router.post('/create', checkAuthorized, async (req: express.Request, res: express.Response) => {

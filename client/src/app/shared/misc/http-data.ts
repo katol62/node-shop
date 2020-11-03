@@ -53,6 +53,7 @@ export interface IBaseResponse {
     success?: boolean;
     message?: string;
     data?: any;
+    code?: string;
 }
 export interface IAuthRequest extends IBaseRequest{
     phone?: string;

@@ -2,6 +2,7 @@ import * as express from "express";
 import {FirebaseAdmin, IMessage} from '../misc/FirebaseAdmin';
 import {IBaseResponse} from "../misc/db";
 import * as admin from "firebase-admin";
+import {CODES} from "../misc/codes";
 
 export const notification_options = {
     priority: "high",
@@ -19,15 +20,15 @@ class ApiFirebaseNotificationRoute {
 
     private config() {
         this.router.put('/', (req: express.Request, res: express.Response) => {
-                return res.status(405).json({ success: false, message: 'Method not allowed'});
+                return res.status(405).json({ success: false, message: 'Method not allowed', code: CODES.methodNotAllowed});
             }
         );
         this.router.get('/', (req: express.Request, res: express.Response) => {
-                return res.status(405).json({ success: false, message: 'Not allowed' });
+                return res.status(405).json({ success: false, message: 'Not allowed', code: CODES.methodNotAllowed });
             }
         );
         this.router.delete('/', (req: express.Request, res: express.Response) => {
-                return res.status(405).json({ success: false, message: 'Not allowed' });
+                return res.status(405).json({ success: false, message: 'Not allowed', code: CODES.methodNotAllowed });
             }
         );
         this.router.post('/', async (req: express.Request, res: express.Response) => {

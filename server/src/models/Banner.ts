@@ -51,7 +51,7 @@ export class Banner {
             banner.name ? banner.name : null,
             banner.description ? banner.description : null,
             banner.image ? banner.image : null,
-            banner.display ? banner.display : null,
+            banner.display ? banner.display : false,
             banner.id
         ]
         try {
