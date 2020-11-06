@@ -30,12 +30,12 @@ export class MenuHeaderComponent implements OnInit {
     ngOnInit() {}
 
     openMenu() {
-        this.menu.open(this.menuId);
-        // this.menu.enable(false, this.menuId).then(
-        //     res => {
-        //         this.menu.open(this.menuId);
-        //     }
-        // );
+        // this.menu.open(this.menuId);
+        this.menu.enable(true, this.menuId).then(
+            res => {
+                this.menu.open(this.menuId);
+            }
+        );
     }
 
     rightButtonClick() {

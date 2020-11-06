@@ -26,7 +26,9 @@ export class DashboardPage implements OnInit {
     }
 
     private addCategories(categories: ICategory[]): void {
-        let menu = homeMenu;
+        this.menuDashboard = [];
+        let menu = [];
+        menu = [...homeMenu]
         if (categories.length) {
             const item: IMenuItem = {
                 id: 1,
@@ -37,15 +39,15 @@ export class DashboardPage implements OnInit {
             };
             menu.push(item);
         }
-        categories.forEach( (category: ICategory) => {
-            const item: IMenuItem = {
-                id: 1,
-                label: category.name,
-                icon: 'image-outline',
-                action: {path: `/${dashboardPath}/${productsPath}`, data: {id: category.id}}
-            };
-            menu.push(item);
-        })
+        // categories.forEach( (category: ICategory) => {
+        //     const item: IMenuItem = {
+        //         id: 1,
+        //         label: category.name,
+        //         icon: 'image-outline',
+        //         action: {path: `/${dashboardPath}/${productsPath}`, data: {id: category.id}}
+        //     };
+        //     menu.push(item);
+        // })
         this.menuDashboard = [...menu];
     }
 
