@@ -29,16 +29,16 @@ export class DashboardPage implements OnInit {
         this.menuDashboard = [];
         let menu = [];
         menu = [...homeMenu]
-        if (categories.length) {
-            const item: IMenuItem = {
-                id: 1,
-                label: 'All products',
-                key: 'PRODUCTS.title',
-                icon: 'images-outline',
-                action: {path: `/${dashboardPath}/${productsPath}`}
-            };
-            menu.push(item);
-        }
+        // if (categories.length) {
+        //     const item: IMenuItem = {
+        //         id: 1,
+        //         label: 'All products',
+        //         key: 'PRODUCTS.title',
+        //         icon: 'images-outline',
+        //         action: {path: `/${dashboardPath}/${productsPath}`}
+        //     };
+        //     menu.push(item);
+        // }
         // categories.forEach( (category: ICategory) => {
         //     const item: IMenuItem = {
         //         id: 1,

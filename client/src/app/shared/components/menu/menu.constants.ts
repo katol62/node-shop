@@ -30,5 +30,6 @@ export const menu: IMenuItem[] = [
 
 export const homeMenu: IMenuItem[] = [
     {id: 0, label: 'Home', key: 'ADMIN.menu.home', icon: 'home-outline', action: {path: `/${dashboardPath}`}},
+    {id: 1, label: 'All products', key: 'PRODUCTS.title', icon: 'images-outline', action: {path: `/${dashboardPath}/${productsPath}`}},
     {id: 1, label: 'Home', key: 'ABOUT.title', icon: 'help-circle-outline', action: {path: `/${dashboardPath}/${aboutPath}`}},
 ]
