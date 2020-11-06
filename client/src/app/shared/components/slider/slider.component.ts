@@ -1,18 +1,26 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {IonSlides} from "@ionic/angular";
+import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
+import {IonSlides, ModalController} from "@ionic/angular";
 import {IBanner, IBaseResponse} from "../../misc/http-data";
 import {DomSanitizer} from "@angular/platform-browser";
 import {RestService} from "../../services/rest.service";
+import {InstaModalComponent} from "../insta-modal/insta-modal.component";
+import {BannerModalComponent} from "../banner-modal/banner-modal.component";
+
+export interface ISlider {
+    isBeginningSlide: boolean;
+    isEndSlide: boolean;
+    slidesItems: any[]
+}
 
 @Component({
     selector: 'app-slider',
     templateUrl: './slider.component.html',
     styleUrls: ['./slider.component.scss'],
 })
-export class SliderComponent implements OnInit {
+export class SliderComponent implements OnInit, AfterViewInit {
 
     @ViewChild('slideWithNav', { static: false }) slideWithNav: IonSlides;
-    public slider: any;
+    public slider: ISlider;
 
     public slideOpts = {
         initialSlide: 0,
@@ -26,17 +34,18 @@ export class SliderComponent implements OnInit {
     public banners: IBanner[] = [];
 
     constructor(
+        private modalController: ModalController,
         private sanitizer : DomSanitizer,
         private restService: RestService
     ) {
     }
 
     ngAfterViewInit(): void {
+        console.log('GET BANNERS');
         this.getBanners();
     }
 
     ngOnInit() {
-        console.log('GET BANNERS');
         this.getBanners();
     }
 
@@ -109,5 +118,21 @@ export class SliderComponent implements OnInit {
 
     public getSrc(item: IBanner): any {
         return this.sanitizer.bypassSecurityTrustResourceUrl(item.src);
+    }
+
+    showDetails( item: IBanner ) {
+        this.presentModal(item)
+    }
+
+    private async presentModal( item: IBanner ) {
+        const modal = await this.modalController.create({
+            component: BannerModalComponent,
+            cssClass: 'my-custom-class',
+            componentProps: {
+                'banner': item
+            }
+        });
+        return await modal.present();
+
     }
 }

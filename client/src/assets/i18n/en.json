@@ -35,7 +35,8 @@
             "app": "App",
             "entrance": "Entrance",
             "floor": "Floor",
-            "pleaseWait": "Please wait"
+            "pleaseWait": "Please wait",
+            "nothingChanged": "Nothing changed"
         },
         "alert": {
             "cancel": "Cancel",
@@ -65,6 +66,12 @@
             "link": "View in Instagram"
         }
     },
+    "ABOUT": {
+        "title": "About"
+    },
+    "PRODUCTS": {
+        "title": "Products"
+    },
     "ADMIN": {
         "menu": {
             "home": "Home",
@@ -73,7 +80,7 @@
             "users": "Users",
             "banners": "Banners",
             "notifications": "Notifications",
-            "orders": "Orders"
+            "orders": "Orders",
         },
         "categories": {
             "title": "Categories",

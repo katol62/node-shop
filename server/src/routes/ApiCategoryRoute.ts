@@ -32,7 +32,7 @@ class ApiCategoryRoute {
                 return res.status(500).json({ success: false, message: e.message, code: CODES.serverError} as IBaseResponse);
             }
         });
-        this.router.get('/:id', checkJwt,  async (req: express.Request, res: express.Response) => {
+        this.router.get('/:id', async (req: express.Request, res: express.Response) => {
             const filter: ICategory = {id: Number(req.params.id)};
             try {
                 const result = await this.categoryModel.find(filter);

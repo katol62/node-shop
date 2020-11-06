@@ -92,7 +92,7 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
             return;
         }
         if (!this.form.touched) {
-            this.notificationService.show({message: 'Nothing changed',
+            this.notificationService.show({message: 'GLOBAL.labels.nothingChanged',
                 type: NotificationMessageType.warning});
             return;
         }
@@ -118,10 +118,7 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
         this.restService.put(`users/${String(user.id)}`, adminRequest)
             .subscribe({
                 next: (value: IBaseResponse) => {
-                    const mess: IMessageItem = {
-                        message: value.message,
-                        type: NotificationMessageType.success};
-                    this.notificationService.show(mess);
+                    this.showMessage(value);
                 }
             });
     }
@@ -145,4 +142,11 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
     onRoleUpdate( $event: any ) {
         const role = $event.detail.value;
     }
+
+    private showMessage(value: IBaseResponse): void {
+        const text: string = value.code ? value.code : (value.message ? value.message : 'Unknown');
+        const message: IMessageItem = {message: text, messageCode: 'Success', type: NotificationMessageType.success};
+        this.notificationService.show(message);
+    }
+
 }

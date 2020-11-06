@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MenuController} from "@ionic/angular";
 import {MENU_ADMIN_ID} from "../menu/menu.component";
 import {Router} from "@angular/router";
@@ -16,6 +16,11 @@ export class MenuHeaderComponent implements OnInit {
     public link: string;
     @Input()
     public menuId: string = MENU_ADMIN_ID;
+    @Input()
+    public icon: string = 'add-outline';
+
+    @Output()
+    public onMenu: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     constructor(
         private menu: MenuController,
@@ -25,11 +30,12 @@ export class MenuHeaderComponent implements OnInit {
     ngOnInit() {}
 
     openMenu() {
-        this.menu.enable(true, this.menuId).then(
-            res => {
-                this.menu.open(this.menuId);
-            }
-        );
+        this.menu.open(this.menuId);
+        // this.menu.enable(false, this.menuId).then(
+        //     res => {
+        //         this.menu.open(this.menuId);
+        //     }
+        // );
     }
 
     rightButtonClick() {

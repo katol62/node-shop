@@ -120,7 +120,7 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
             return;
         }
         if (!this.form.touched) {
-            this.notificationService.show({message: 'Nothing changed',
+            this.notificationService.show({message: 'GLOBAL.labels.nothingChanged',
                 type: NotificationMessageType.warning});
             return;
         }

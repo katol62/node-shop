@@ -39,21 +39,21 @@ export class MenuComponent implements OnInit {
         if (item.action.path) {
             this.menuController.close(this.menuId).then(
                 () => {
-                    this.router.navigate([item.action.path]);
+                    const data = item.action.data ? {state: item.action.data} : {};
+                    this.router.navigate([item.action.path], data);
                 }
             );
         }
         if (item.action.action) {
-            this.menuController.close(this.menuId);
-            if (item.action.action === EAction.LOGOUT) {
-                this.authService.onLogout();
-                this.router.navigate(['/', homePath]);
-            }
+            this.menuController.close(this.menuId).then(
+                () => {
+                    if (item.action.action === EAction.LOGOUT) {
+                        this.authService.onLogout();
+                        this.router.navigate(['/', homePath]);
+                    }
+                }
+            );
         }
-    }
-
-    close(): void {
-        this.menuController.close(this.menuId);
     }
 
     signOut(): void {

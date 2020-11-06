@@ -1,0 +1,40 @@
+<app-menu-header [menuId]="menuId" [title]="title"></app-menu-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <div tabindex="0"></div>
+          <ion-label>{{'ADMIN.categories.single' | translate}}</ion-label>
+          <ion-select class="ion-justify-content-start" multiple [(ngModel)]="selectedCategories" (ngModelChange)="updateFilter($event)" placeholder="{{'ADMIN.categories.single' | translate}}">
+            <ion-select-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ng-container *ngIf="products.length">
+          <ion-row>
+            <ion-col *ngFor="let product of products; let i=index" size="12" size-xl="3" size-lg="4" size-md="4" size-sm="6">
+              <ion-card>
+                <ion-card-content>
+                  <img [src]="getSrc(product)">
+                  <div class="ion-padding-top">
+                    <ion-text class="ion-text-start">
+                      {{product.name}}
+                    </ion-text>
+                  </div>
+                  <div class="ion-padding-top">
+                    <ion-button size="small" fill="clear" (click)="showDetails(product)">{{'HOME.insta.details' | translate}}...</ion-button>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ng-container>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

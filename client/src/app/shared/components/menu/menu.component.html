@@ -12,7 +12,7 @@
             <ion-item class="cursor-pointer" *ngFor="let item of menu" (click)="onClick(item)">
                 <div tabindex="0"></div>
                 <ion-icon name="{{item.icon}}" slot="start"></ion-icon>
-                <ion-label>{{item.key | translate}}</ion-label>
+                <ion-label>{{item.key ? (item.key | translate) : item.label}}</ion-label>
             </ion-item>
         </ion-list>
         <div class="bottom" *ngIf="showLogout">

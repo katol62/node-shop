@@ -35,7 +35,8 @@
             "app": "Квартира",
             "entrance": "Подъезд",
             "floor": "Этаж",
-            "pleaseWait": "Подождите"
+            "pleaseWait": "Подождите",
+            "nothingChanged": "Нет изменений"
         },
         "alert": {
             "cancel": "Отменить",
@@ -67,6 +68,12 @@
         "menu": {
             "home": "Главная"
         }
+    },
+    "ABOUT": {
+        "title": "О нас"
+    },
+    "PRODUCTS": {
+        "title": "Продукты"
     },
     "ADMIN": {
         "menu": {

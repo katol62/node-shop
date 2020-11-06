@@ -1,13 +1,14 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button (click)="openMenu()"></ion-menu-button>
-    </ion-buttons>
-    <ion-title>{{title}}</ion-title>
-    <ion-buttons slot="end" *ngIf="link">
-      <ion-button (click)="rightButtonClick()">
-        <ion-icon name="add-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button (click)="openMenu()"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>{{title}}</ion-title>
+        <ion-buttons slot="end" *ngIf="link">
+            <ion-button (click)="rightButtonClick()">
+                <ion-icon *ngIf="icon" name="{{icon}}"></ion-icon>
+                <span *ngIf="!icon">Go</span>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>

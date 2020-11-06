@@ -1,0 +1,29 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>{{product ? product.name : ''}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">{{'GLOBAL.labels.close' | translate}}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-grid>
+    <ion-row *ngIf="product">
+      <ion-col size="12">
+        <ion-slides pager="true" [options]="slideOpts" #slideWithNav
+                    (ionSlideDidChange)="SlideDidChange(slider, slideWithNav)">
+          <ion-slide *ngFor="let s of slider.slidesItems">
+            <img [src]="getSrc(s)">
+            <span class="slide-text">{{s.name}}</span>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+      <ion-col size="12">
+        <ion-text class="ion-text-start">
+          {{product.description}}
+        </ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

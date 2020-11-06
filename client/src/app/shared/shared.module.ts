@@ -20,8 +20,9 @@ import {InstaModalComponent} from "./components/insta-modal/insta-modal.componen
 import {HelpService} from "./services/help.service";
 import {TranslateModule} from "@ngx-translate/core";
 import {LoaderService} from "./services/loader.service";
-
-
+import {BannerModalComponent} from "./components/banner-modal/banner-modal.component";
+import {HomeFooterComponent} from "./components/home-footer/home-footer.component";
+import {ProductModalComponent} from "./components/product-modal/product-modal.component";
 
 @NgModule({
     declarations: [
@@ -30,7 +31,10 @@ import {LoaderService} from "./services/loader.service";
         ToastComponent,
         InstaComponent,
         SliderComponent,
-        InstaModalComponent
+        InstaModalComponent,
+        BannerModalComponent,
+        HomeFooterComponent,
+        ProductModalComponent
     ],
     exports: [
         FormsModule,
@@ -42,7 +46,10 @@ import {LoaderService} from "./services/loader.service";
         ToastComponent,
         InstaComponent,
         SliderComponent,
-        InstaModalComponent
+        InstaModalComponent,
+        BannerModalComponent,
+        HomeFooterComponent,
+        ProductModalComponent
     ],
     imports: [
         CommonModule,
