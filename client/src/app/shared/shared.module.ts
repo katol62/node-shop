@@ -23,6 +23,7 @@ import {LoaderService} from "./services/loader.service";
 import {BannerModalComponent} from "./components/banner-modal/banner-modal.component";
 import {HomeFooterComponent} from "./components/home-footer/home-footer.component";
 import {ProductModalComponent} from "./components/product-modal/product-modal.component";
+import {YmapsModalComponent} from "./components/ymaps-modal/ymaps-modal.component";
 
 @NgModule({
     declarations: [
@@ -34,7 +35,8 @@ import {ProductModalComponent} from "./components/product-modal/product-modal.co
         InstaModalComponent,
         BannerModalComponent,
         HomeFooterComponent,
-        ProductModalComponent
+        ProductModalComponent,
+        YmapsModalComponent
     ],
     exports: [
         FormsModule,
@@ -49,7 +51,8 @@ import {ProductModalComponent} from "./components/product-modal/product-modal.co
         InstaModalComponent,
         BannerModalComponent,
         HomeFooterComponent,
-        ProductModalComponent
+        ProductModalComponent,
+        YmapsModalComponent
     ],
     imports: [
         CommonModule,
