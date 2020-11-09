@@ -36,7 +36,8 @@
             "entrance": "Entrance",
             "floor": "Floor",
             "pleaseWait": "Please wait",
-            "nothingChanged": "Nothing changed"
+            "nothingChanged": "Nothing changed",
+            "findUs": "How to find us"
         },
         "alert": {
             "cancel": "Cancel",

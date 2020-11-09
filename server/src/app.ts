@@ -30,7 +30,7 @@ class App {
             this.app.use(expressCspHeader({
                 directives: {
                     'default-src': [SELF],
-                    'script-src': [SELF, INLINE],
+                    'script-src': [SELF, INLINE, '*.yandex.ru'],
                     'style-src': [SELF, 'https:', INLINE],
                     'font-src': [SELF, 'https:', 'data:'],
                     'img-src': [SELF, 'data:', '*.cdninstagram.com'],

@@ -36,7 +36,8 @@
             "entrance": "Подъезд",
             "floor": "Этаж",
             "pleaseWait": "Подождите",
-            "nothingChanged": "Нет изменений"
+            "nothingChanged": "Нет изменений",
+            "findUs": "Как нас найти"
         },
         "alert": {
             "cancel": "Отменить",
