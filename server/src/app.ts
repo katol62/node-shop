@@ -30,6 +30,7 @@ class App {
             this.app.use(expressCspHeader({
                 directives: {
                     'default-src': [SELF],
+                    'connect-src': [SELF, '*.yandex.ru', '*.yandex.net'],
                     'script-src': [SELF, INLINE, '*.yandex.ru', 'yastatic.net', '*.yandex.net'],
                     'style-src': [SELF, 'https:', INLINE],
                     'font-src': [SELF, 'https:', 'data:'],
