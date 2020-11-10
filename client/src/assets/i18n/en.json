@@ -20,6 +20,7 @@
             "confirm": "Confirm",
             "firstName": "First Name",
             "lastName": "Last Name",
+            "dob": "Date of birth",
             "email": "Email",
             "role": "Role",
             "checkCode": "Check the code we sent to your phone",

@@ -69,6 +69,7 @@ export interface IRegRequest extends IBaseRequest{
     password?: string;
     firstName?: string;
     lastName?: string;
+    dob?: string;
 }
 
 export interface IAuthResponse extends IBaseResponse{

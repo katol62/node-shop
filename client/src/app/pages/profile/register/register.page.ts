@@ -64,6 +64,7 @@ export class RegisterPage implements OnInit {
             confirmPassword: [''],
             firstName: [''],
             lastName: [''],
+            dob: [''],
             email: [''],
             deviceId: [null],
             verified: [false]
@@ -84,6 +85,7 @@ export class RegisterPage implements OnInit {
             firstName: '',
             lastName: '',
             email: '',
+            dob: '',
             deviceId: this.fcmService.token,
             verified: this.mobile ? true : false
         });

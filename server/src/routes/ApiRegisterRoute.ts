@@ -24,15 +24,16 @@ export class ApiRegisterRoute {
             if ((req.body.phone && req.body.password) || (req.body.phone && req.body.verified) ) {
                 const phone: string = req.body.phone;
                 const password: string = req.body.password ? req.body.password : null;
-                const firstName: string = req.body.firstName ? req.body.firstName : '';
-                const lastName: string = req.body.lastName ? req.body.lastName : '';
-                const email: string = req.body.email ? req.body.email : '';
+                const firstName: string = req.body.firstName ? req.body.firstName : null;
+                const lastName: string = req.body.lastName ? req.body.lastName : null;
+                const email: string = req.body.email ? req.body.email : null;
+                const dob: string = req.body.dob ? req.body.dob : null;
                 try {
                     const users = await this.User.find({phone: phone});
                     if (users.length) {
                         return res.status(409).json({ success: false, message: 'Account already exists', code: CODES.exists});
                     }
-                    let rUser: IUser = {phone: phone, role: 'user', firstName: firstName, lastName: lastName, email: email};
+                    let rUser: IUser = {phone: phone, role: 'user', firstName: firstName, lastName: lastName, email: email, dob: dob};
                     if (password) {
                         const bcryptedPassword = await bcrypt.hash(password, 5);
                         rUser.password = bcryptedPassword;

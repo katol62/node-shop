@@ -35,6 +35,10 @@ export class DetailsPage extends AuthorizedComponent implements OnInit, OnDestro
         this.getProfile();
     }
 
+    ionViewWillEnter(): void {
+        this.getProfile();
+    }
+
     ngOnDestroy(): void {
         super.ngOnDestroy();
     }

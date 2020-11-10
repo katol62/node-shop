@@ -67,6 +67,7 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
             firstName: [''],
             lastName: [''],
             email: [''],
+            dob: [''],
             role: [''],
             verified: [false],
         });
@@ -84,11 +85,13 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
     private getMe(): void {
         this.restService.get('me').subscribe({
                 next: (value: IBaseResponse) => {
+
                     const user = {
                         ...value.data,
                         confirmPassword: '',
                         newPassword: '',
                         email: value.data.email && value.data.email !== 'null'  ? value.data.email : '',
+                        dob: value.data.dob && value.data.dob !== 'null'  ? value.data.dob : '',
                         firstName: value.data.firstName && value.data.firstName !== 'null' ? value.data.firstName : '',
                         lastName: value.data.lastName && value.data.lastName !== 'null'  ? value.data.lastName : ''
                     };
@@ -107,10 +110,7 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
         this.restService.put('me', profileRequest)
             .subscribe({
                 next: (value: IBaseResponse) => {
-                    const mess: IMessageItem = {
-                        message: value.message,
-                        type: NotificationMessageType.success};
-                    this.notificationService.show(mess);
+                    this.showMessage(value);
                 }
             });
     }
@@ -156,5 +156,10 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
         })
     }
 
+    private showMessage(value: IBaseResponse): void {
+        const text: string = value.code ? value.code : (value.message ? value.message : 'Unknown');
+        const message: IMessageItem = {message: text, messageCode: 'Success', type: NotificationMessageType.success};
+        this.notificationService.show(message);
+    }
 
 }

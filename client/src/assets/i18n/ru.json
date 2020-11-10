@@ -20,6 +20,7 @@
             "confirm": "Подтвердить",
             "firstName": "Имя",
             "lastName": "Фамилия",
+            "dob": "Дата рождения",
             "email": "Email",
             "role": "Роль",
             "checkCode": "Проверьте смс код",

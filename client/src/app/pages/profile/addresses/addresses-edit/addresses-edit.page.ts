@@ -116,7 +116,8 @@ export class AddressesEditPage extends AuthorizedComponent implements OnInit, On
     }
 
     private showMessage(value: IBaseResponse): void {
-        const message: IMessageItem = {message: value.message, messageCode: 'Success', type: NotificationMessageType.success};
+        const text: string = value.code ? value.code : (value.message ? value.message : 'Unknown');
+        const message: IMessageItem = {message: text, messageCode: 'Success', type: NotificationMessageType.success};
         this.notificationService.show(message);
     }
 
