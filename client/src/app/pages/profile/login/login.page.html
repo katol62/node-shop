@@ -12,46 +12,52 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-card>
-        <ion-card-header>
-            <ion-card-subtitle>{{!mobile || (mobile && state === 'phone') ? 'Enter credentials' : 'Enter code'}}</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-            <form [formGroup]="loginForm">
-                <ion-item *ngIf="!mobile || (mobile && state === 'phone')">
-                    <div tabindex="0"></div>
-                    <ion-label>{{'GLOBAL.labels.phone' | translate}}</ion-label>
-                    <ion-input type="tel" #phoneInput formControlName="phone" placeholder="+7 (xxx) xxx-xxxx"></ion-input>
-                </ion-item>
-                <ion-item *ngIf="!mobile">
-                    <div tabindex="0"></div>
-                    <ion-label>{{'GLOBAL.labels.password' | translate}}</ion-label>
-                    <ion-input type="password" formControlName="password" placeholder="{{'GLOBAL.labels.password' | translate}}"></ion-input>
-                </ion-item>
-                <ng-container *ngIf="mobile">
-                    <ion-input type="hidden" formControlName="verified"></ion-input>
-                </ng-container>
-            </form>
-            <ng-container *ngIf="mobile && state === 'code'">
-                <div class="ion-text-center ion-padding">
-                    <ion-text>{{'GLOBAL.labels.checkCode' | translate}}</ion-text>
+    <ion-grid>
+        <ion-row class="ion-justify-content-center">
+            <ion-col size="12" size-xl="4" size-lg="5" size-md="6" size-sm="6">
+                <ion-card>
+                    <ion-card-header>
+                        <ion-card-subtitle>{{!mobile || (mobile && state === 'phone') ? '' : 'Enter code'}}</ion-card-subtitle>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <form [formGroup]="loginForm">
+                            <ion-item *ngIf="!mobile || (mobile && state === 'phone')">
+                                <div tabindex="0"></div>
+                                <ion-label>{{'GLOBAL.labels.phone' | translate}}</ion-label>
+                                <ion-input type="tel" #phoneInput formControlName="phone" placeholder="+7 (xxx) xxx-xxxx"></ion-input>
+                            </ion-item>
+                            <ion-item *ngIf="!mobile">
+                                <div tabindex="0"></div>
+                                <ion-label>{{'GLOBAL.labels.password' | translate}}</ion-label>
+                                <ion-input type="password" formControlName="password" placeholder="{{'GLOBAL.labels.password' | translate}}"></ion-input>
+                            </ion-item>
+                            <ng-container *ngIf="mobile">
+                                <ion-input type="hidden" formControlName="verified"></ion-input>
+                            </ng-container>
+                        </form>
+                        <ng-container *ngIf="mobile && state === 'code'">
+                            <div class="ion-text-center ion-padding">
+                                <ion-text>{{'GLOBAL.labels.checkCode' | translate}}</ion-text>
+                            </div>
+                            <ion-item>
+                                <div tabindex="0"></div>
+                                <ion-label>{{'GLOBAL.labels.code' | translate}}</ion-label>
+                                <ion-input type="number" [(ngModel)]="code" (ngModelChange)="processCode($event)" placeholder="{{'GLOBAL.labels.enter' | translate}} {{'GLOBAL.labels.code' | translate}}"></ion-input>
+                            </ion-item>
+                        </ng-container>
+                        <div class="ion-text-center ion-margin-top">
+                            <ion-button size="small" color="primary" (click)="logIn()" [disabled]="!loginForm.valid">
+                                {{ !mobile || (mobile && state === 'phone') ? ('GLOBAL.labels.signIn' | translate) : ('GLOBAL.labels.next' | translate) }}
+                            </ion-button>
+                        </div>
+                    </ion-card-content>
+                </ion-card>
+                <div class="ion-justify-content-center ion-text-center">
+                    <ion-button  class="ion-justify-content-center" id="reg" [routerLink]="['/', profilePath, registerPath]" routerDirection="back">
+                        {{'GLOBAL.labels.register' | translate}}
+                    </ion-button>
                 </div>
-                <ion-item>
-                    <div tabindex="0"></div>
-                    <ion-label>{{'GLOBAL.labels.code' | translate}}</ion-label>
-                    <ion-input type="number" [(ngModel)]="code" (ngModelChange)="processCode($event)" placeholder="{{'GLOBAL.labels.enter' | translate}} {{'GLOBAL.labels.code' | translate}}"></ion-input>
-                </ion-item>
-            </ng-container>
-            <div class="ion-text-center ion-margin-top">
-                <ion-button size="small" color="primary" (click)="logIn()" [disabled]="!loginForm.valid">
-                    {{ !mobile || (mobile && state === 'phone') ? ('GLOBAL.labels.signIn' | translate) : ('GLOBAL.labels.next' | translate) }}
-                </ion-button>
-            </div>
-        </ion-card-content>
-    </ion-card>
-    <div class="ion-justify-content-center ion-text-center">
-        <ion-button  class="ion-justify-content-center" id="reg" [routerLink]="['/', profilePath, registerPath]" routerDirection="back">
-            {{'GLOBAL.labels.register' | translate}}
-        </ion-button>
-    </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

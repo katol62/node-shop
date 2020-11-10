@@ -7,6 +7,7 @@ import {pluck} from "rxjs/operators";
 import {from, of} from "rxjs";
 import {Router} from "@angular/router";
 import {AlertService, ConfirmData} from "../../../../shared/services/alert.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-addresses-list',
@@ -25,6 +26,7 @@ export class AddressesListPage implements OnInit {
     constructor(
         private restService: RestService,
         private alertService: AlertService,
+        private translate: TranslateService,
         private router: Router
     ) { }
 
@@ -64,7 +66,7 @@ export class AddressesListPage implements OnInit {
      * Misc
      */
      getAddress(address: IAddress): string {
-         const adr = Object.keys(address).filter(key => (key === 'street' || key ==='house' || key ==='app') && address[key]).map(key => (key === 'app' ? 'app.' + address[key]: address[key]));
+         const adr = Object.keys(address).filter(key => (key === 'street' || key ==='house' || key ==='app') && address[key]).map(key => (key === 'app' ? 'кв.' + address[key]: address[key]));
          return adr.join(', ');
     }
 

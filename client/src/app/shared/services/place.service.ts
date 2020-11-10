@@ -31,9 +31,9 @@ export class PlaceService {
         })
     }
 
-    public strrets(city: string): Promise<any> {
+    public streets(city: string): Promise<any> {
         return new Promise((resolve) => {
-            const streets = this.places.find( place => place.name === city)['streets'];;
+            const streets = this.places.find( place => place.name === city)['streets'];
             resolve(streets);
         })
     }

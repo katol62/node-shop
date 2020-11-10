@@ -28,8 +28,8 @@
                     <p>{{getAddress(address)}}, {{address.city}}</p>
                 </ion-label>
                 <div item-right>
-                    <ion-button (click)="delete(address);$event.stopPropagation();" color="danger">{{'GLOBAL.labels.delete' | translate}}</ion-button>
-                    <ion-button (click)="edit(address);$event.stopPropagation();" color="primary">{{'GLOBAL.labels.edit' | translate}}</ion-button>
+                    <ion-button (click)="delete(address);$event.stopPropagation();" color="danger" title="{{'GLOBAL.labels.delete' | translate}}"><ion-icon name="trash-outline"></ion-icon></ion-button>
+                    <ion-button (click)="edit(address);$event.stopPropagation();" color="primary" title="{{'GLOBAL.labels.edit' | translate}}"><ion-icon name="create-outline"></ion-icon></ion-button>
                 </div>
             </ion-item>
         </ion-list>

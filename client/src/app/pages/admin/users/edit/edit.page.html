@@ -7,54 +7,58 @@
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-card>
-        <ion-card-content>
-            <form [formGroup]="form">
-                <ion-item>
-                    <div tabindex="0"></div>
-                    <ion-label>{{'GLOBAL.labels.phone' | translate}}</ion-label>
-                    <ion-input type="tel" #phoneInput formControlName="phone" placeholder="+7 (xxx) xxx-xxxx"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <div tabindex="0"></div>
-                    <ion-label>{{'GLOBAL.labels.password' | translate}}</ion-label>
-                    <ion-input type="password" formControlName="newPassword" placeholder="{{'GLOBAL.labels.password' | translate}}"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <div tabindex="0"></div>
-                    <ion-label>{{'GLOBAL.labels.confirm' | translate}}</ion-label>
-                    <ion-input type="password" formControlName="confirmPassword" placeholder="{{'GLOBAL.labels.confirm' | translate}} {{'GLOBAL.labels.password' | translate}}"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <div tabindex="0"></div>
-                    <ion-label>{{'GLOBAL.labels.firstName' | translate}}</ion-label>
-                    <ion-input type="text" formControlName="firstName" placeholder="{{'GLOBAL.labels.firstName' | translate}}"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <div tabindex="0"></div>
-                    <ion-label>{{'GLOBAL.labels.lastName' | translate}}</ion-label>
-                    <ion-input type="text" formControlName="lastName" placeholder="{{'GLOBAL.labels.lastName' | translate}}"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <div tabindex="0"></div>
-                    <ion-label>{{'GLOBAL.labels.email' | translate}}</ion-label>
-                    <ion-input type="email" formControlName="email" placeholder="{{'GLOBAL.labels.email' | translate}}"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <div tabindex="0"></div>
-                    <ion-label>{{'GLOBAL.labels.role' | translate}}</ion-label>
-                    <ion-select formControlName="role" placeholder="{{'GLOBAL.labels.select' | translate}} {{'GLOBAL.labels.role' | translate}}" (ionChange)="onRoleUpdate($event)">
-                        <ion-select-option *ngFor="let role of roles" [value]="role">{{role}}</ion-select-option>
-                    </ion-select>
-                </ion-item>
-            </form>
-            <div class="ion-text-center ion-margin-top">
-                <ion-button size="small" color="primary" (click)="update()" [disabled]="!form.valid">
-                    {{'GLOBAL.labels.update' | translate}}
-                </ion-button>
-            </div>
-
-        </ion-card-content>
-    </ion-card>
-
+    <ion-grid>
+        <ion-row class="ion-justify-content-center">
+            <ion-col size="12" size-xl="4" size-lg="5" size-md="6" size-sm="6">
+                <ion-card>
+                    <ion-card-content>
+                        <form [formGroup]="form">
+                            <ion-item>
+                                <div tabindex="0"></div>
+                                <ion-label>{{'GLOBAL.labels.phone' | translate}}</ion-label>
+                                <ion-input type="tel" #phoneInput formControlName="phone" placeholder="+7 (xxx) xxx-xxxx"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <div tabindex="0"></div>
+                                <ion-label>{{'GLOBAL.labels.password' | translate}}</ion-label>
+                                <ion-input type="password" formControlName="newPassword" placeholder="{{'GLOBAL.labels.password' | translate}}"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <div tabindex="0"></div>
+                                <ion-label>{{'GLOBAL.labels.confirm' | translate}}</ion-label>
+                                <ion-input type="password" formControlName="confirmPassword" placeholder="{{'GLOBAL.labels.confirm' | translate}} {{'GLOBAL.labels.password' | translate}}"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <div tabindex="0"></div>
+                                <ion-label>{{'GLOBAL.labels.firstName' | translate}}</ion-label>
+                                <ion-input type="text" formControlName="firstName" placeholder="{{'GLOBAL.labels.firstName' | translate}}"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <div tabindex="0"></div>
+                                <ion-label>{{'GLOBAL.labels.lastName' | translate}}</ion-label>
+                                <ion-input type="text" formControlName="lastName" placeholder="{{'GLOBAL.labels.lastName' | translate}}"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <div tabindex="0"></div>
+                                <ion-label>{{'GLOBAL.labels.email' | translate}}</ion-label>
+                                <ion-input type="email" formControlName="email" placeholder="{{'GLOBAL.labels.email' | translate}}"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <div tabindex="0"></div>
+                                <ion-label>{{'GLOBAL.labels.role' | translate}}</ion-label>
+                                <ion-select formControlName="role" placeholder="{{'GLOBAL.labels.select' | translate}} {{'GLOBAL.labels.role' | translate}}" (ionChange)="onRoleUpdate($event)">
+                                    <ion-select-option *ngFor="let role of roles" [value]="role">{{role}}</ion-select-option>
+                                </ion-select>
+                            </ion-item>
+                        </form>
+                        <div class="ion-text-center ion-margin-top">
+                            <ion-button size="small" color="primary" (click)="update()" [disabled]="!form.valid">
+                                {{'GLOBAL.labels.update' | translate}}
+                            </ion-button>
+                        </div>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

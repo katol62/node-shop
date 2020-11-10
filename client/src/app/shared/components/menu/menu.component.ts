@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {homePath} from "../../misc/constants";
+import {dashboardPath, homePath} from "../../misc/constants";
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
 import {MenuController} from "@ionic/angular";
@@ -49,7 +49,7 @@ export class MenuComponent implements OnInit {
                 () => {
                     if (item.action.action === EAction.LOGOUT) {
                         this.authService.onLogout();
-                        this.router.navigate(['/', homePath]);
+                        this.router.navigate(['/', dashboardPath]);
                     }
                 }
             );
@@ -60,7 +60,7 @@ export class MenuComponent implements OnInit {
         this.authService.onLogout();
         this.menuController.close(this.menuId).then(
             () => {
-                this.router.navigate(['/', homePath]);
+                this.router.navigate(['/', dashboardPath]);
             }
         );
     }

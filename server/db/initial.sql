@@ -26,12 +26,14 @@ CREATE TABLE `address` (
                            `entrance` varchar(16) COLLATE utf8_bin DEFAULT NULL,
                            `floor` varchar(16) COLLATE utf8_bin DEFAULT NULL,
                            `code` varchar(16) COLLATE utf8_bin DEFAULT NULL,
-                           PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+                           `userId` int(11),
+                           PRIMARY KEY (`id`),
+                           FOREIGN KEY (userId) REFERENCES users(id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 CREATE TABLE `user_address` (
                                 `user` int(11) NOT NULL,
-                                `address` int(11) NOT NULL
+                                `address` int(11) NOT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 ALTER TABLE `user_address`

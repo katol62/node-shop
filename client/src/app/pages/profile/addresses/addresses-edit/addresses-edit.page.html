@@ -26,11 +26,14 @@
                     </ion-select>
                 </ion-item>
                 <ion-item>
-                    <div tabindex="0"></div>
                     <ion-label>{{'GLOBAL.labels.street' | translate}}</ion-label>
-                    <ion-select formControlName="street" placeholder="{{'GLOBAL.labels.select' | translate}} {{('GLOBAL.labels.street' | translate).toLowerCase()}}">
-                        <ion-select-option *ngFor="let street of streets" [value]="street">{{street}}</ion-select-option>
-                    </ion-select>
+                    <ionic-selectable
+                        placeholder="{{'GLOBAL.labels.select' | translate}}"
+                        formControlName="street"
+                        [items]="streets"
+                        [canSearch]="true"
+                        (onChange)="streetChange($event)">
+                    </ionic-selectable>
                 </ion-item>
                 <ion-item>
                     <div tabindex="0"></div>

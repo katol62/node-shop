@@ -24,6 +24,7 @@ import {BannerModalComponent} from "./components/banner-modal/banner-modal.compo
 import {HomeFooterComponent} from "./components/home-footer/home-footer.component";
 import {ProductModalComponent} from "./components/product-modal/product-modal.component";
 import {YmapsModalComponent} from "./components/ymaps-modal/ymaps-modal.component";
+import {IonicSelectableModule} from "ionic-selectable";
 
 @NgModule({
     declarations: [
@@ -43,6 +44,7 @@ import {YmapsModalComponent} from "./components/ymaps-modal/ymaps-modal.componen
         RouterModule,
         ReactiveFormsModule,
         TranslateModule,
+        IonicSelectableModule,
         MenuComponent,
         MenuHeaderComponent,
         ToastComponent,
@@ -60,6 +62,7 @@ import {YmapsModalComponent} from "./components/ymaps-modal/ymaps-modal.componen
         RouterModule,
         ReactiveFormsModule,
         TranslateModule,
+        IonicSelectableModule,
         IonicModule
     ]
 })

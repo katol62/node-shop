@@ -8,6 +8,7 @@ import {addressesPath, profilePath} from "../../../../shared/misc/constants";
 import {PlaceService} from "../../../../shared/services/place.service";
 import {IAddress} from "../../../../../../../server/src/models/Address";
 import {IMessageItem, NotificationMessageType, NotificationService} from "../../../../shared/services/notification.service";
+import {IonicSelectableComponent} from "ionic-selectable";
 
 @Component({
     selector: 'app-addresses-edit',
@@ -76,10 +77,11 @@ export class AddressesEditPage extends AuthorizedComponent implements OnInit, On
         this.restService.get(`/addresses/${id}` ).subscribe({
             next: (value: IBaseResponse) => {
                 const data = value.data;
-                this.placeService.strrets(data.city).then(
+                this.placeService.streets(data.city).then(
                     result => {
-                        this.streets = result;
+                        this.streets = result.map(item => item);
                         this.form.patchValue(data);
+                        debugger;
                     }
                 )
             },
@@ -89,7 +91,8 @@ export class AddressesEditPage extends AuthorizedComponent implements OnInit, On
     }
 
     onCitySelect( $event: any ) {
-        this.streets = this.placeService.getStreets($event.detail.value);
+        this.streets = this.placeService.getStreets($event.detail.value).map(item => item);
+        debugger;
     }
 
     save() {
@@ -117,5 +120,9 @@ export class AddressesEditPage extends AuthorizedComponent implements OnInit, On
     private showMessage(value: IBaseResponse): void {
         const message: IMessageItem = {message: value.message, messageCode: 'Success', type: NotificationMessageType.success};
         this.notificationService.show(message);
+    }
+
+    streetChange( $event: { component: IonicSelectableComponent; value: any } ) {
+        console.log($event.value);
     }
 }
