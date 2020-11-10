@@ -52,6 +52,10 @@ export class DetailsPage extends AuthorizedComponent implements OnInit, OnDestro
         this.router.navigate(['/']);
     }
 
+    isAdmin(): boolean {
+        return (this.authInfo.user.role === 'super' || this.authInfo.user.role === 'admin');
+    }
+
     /**
      * Rest
      */

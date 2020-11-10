@@ -8,7 +8,7 @@
         <ion-title>
             {{'PROFILE.details.title' | translate}}
         </ion-title>
-        <ion-buttons slot="end" *ngIf="!mobile">
+        <ion-buttons slot="end" *ngIf="!mobile && isAdmin()">
             <ion-button id="end" [routerLink]="['/', adminPath]" routerDirection="forward">
                 <ion-icon slot="start" name="person-outline"></ion-icon>
             </ion-button>
