@@ -15,7 +15,7 @@
                         <form [formGroup]="form">
                             <ion-item>
                                 <div tabindex="0"></div>
-                                <ion-label>{{'GLOBAL.labels.select' | translate}} {{('ADMIN.categories.title' | translate).toLowerCase()}}</ion-label>
+                                <ion-label position="floating">{{'GLOBAL.labels.select' | translate}} {{('ADMIN.categories.title' | translate).toLowerCase()}}</ion-label>
                                 <ion-select multiple formControlName="category" *ngIf="categories && categories.length" placeholder="{{'GLOBAL.labels.select' | translate}} {{('ADMIN.categories.title' | translate).toLowerCase()}}" (ionChange)="reset()">
                                     <ion-select-option *ngFor="let category of categories" [value]="category.id">
                                         {{category.name}}
@@ -48,12 +48,12 @@
                             </ion-item>
                             <ion-item>
                                 <div tabindex="0"></div>
-                                <ion-label>{{'GLOBAL.labels.name' | translate}}</ion-label>
+                                <ion-label position="floating">{{'GLOBAL.labels.name' | translate}}</ion-label>
                                 <ion-input type="text" formControlName="name" placeholder="{{'GLOBAL.labels.name' | translate}}"></ion-input>
                             </ion-item>
                             <ion-item>
                                 <div tabindex="0"></div>
-                                <ion-label>{{'GLOBAL.labels.description' | translate}}</ion-label>
+                                <ion-label position="floating">{{'GLOBAL.labels.description' | translate}}</ion-label>
                                 <ion-textarea formControlName="description" placeholder="{{'GLOBAL.labels.description' | translate}}..."></ion-textarea>
                             </ion-item>
                         </form>

@@ -15,37 +15,41 @@
                         <form [formGroup]="form">
                             <ion-item>
                                 <div tabindex="0"></div>
-                                <ion-label>{{'GLOBAL.labels.phone' | translate}}</ion-label>
+                                <ion-label position="floating">{{'GLOBAL.labels.phone' | translate}}</ion-label>
                                 <ion-input type="tel" #phoneInput formControlName="phone" placeholder="+7 (xxx) xxx-xxxx"></ion-input>
                             </ion-item>
                             <ion-item>
                                 <div tabindex="0"></div>
-                                <ion-label>{{'GLOBAL.labels.password' | translate}}</ion-label>
+                                <ion-label position="floating">{{'GLOBAL.labels.password' | translate}}</ion-label>
                                 <ion-input type="password" formControlName="newPassword" placeholder="{{'GLOBAL.labels.password' | translate}}"></ion-input>
                             </ion-item>
                             <ion-item>
                                 <div tabindex="0"></div>
-                                <ion-label>{{'GLOBAL.labels.confirm' | translate}}</ion-label>
+                                <ion-label position="floating">{{'GLOBAL.labels.confirm' | translate}}</ion-label>
                                 <ion-input type="password" formControlName="confirmPassword" placeholder="{{'GLOBAL.labels.confirm' | translate}} {{'GLOBAL.labels.password' | translate}}"></ion-input>
                             </ion-item>
                             <ion-item>
                                 <div tabindex="0"></div>
-                                <ion-label>{{'GLOBAL.labels.firstName' | translate}}</ion-label>
+                                <ion-label position="floating">{{'GLOBAL.labels.firstName' | translate}}</ion-label>
                                 <ion-input type="text" formControlName="firstName" placeholder="{{'GLOBAL.labels.firstName' | translate}}"></ion-input>
                             </ion-item>
                             <ion-item>
                                 <div tabindex="0"></div>
-                                <ion-label>{{'GLOBAL.labels.lastName' | translate}}</ion-label>
+                                <ion-label position="floating">{{'GLOBAL.labels.lastName' | translate}}</ion-label>
                                 <ion-input type="text" formControlName="lastName" placeholder="{{'GLOBAL.labels.lastName' | translate}}"></ion-input>
                             </ion-item>
                             <ion-item>
                                 <div tabindex="0"></div>
-                                <ion-label>{{'GLOBAL.labels.email' | translate}}</ion-label>
+                                <ion-label position="floating">{{'GLOBAL.labels.email' | translate}}</ion-label>
                                 <ion-input type="email" formControlName="email" placeholder="{{'GLOBAL.labels.email' | translate}}"></ion-input>
                             </ion-item>
                             <ion-item>
+                                <ion-label position="floating">{{'GLOBAL.labels.dob' | translate}}</ion-label>
+                                <ion-datetime displayFormat="DD/MM/YYYY" min="1930-01-01" max="2010-01-01" formControlName="dob" placeholder="{{'GLOBAL.labels.dob' | translate}}"></ion-datetime>
+                            </ion-item>
+                            <ion-item>
                                 <div tabindex="0"></div>
-                                <ion-label>{{'GLOBAL.labels.role' | translate}}</ion-label>
+                                <ion-label position="floating">{{'GLOBAL.labels.role' | translate}}</ion-label>
                                 <ion-select formControlName="role" placeholder="{{'GLOBAL.labels.select' | translate}} {{'GLOBAL.labels.role' | translate}}" (ionChange)="onRoleUpdate($event)">
                                     <ion-select-option *ngFor="let role of roles" [value]="role">{{role}}</ion-select-option>
                                 </ion-select>

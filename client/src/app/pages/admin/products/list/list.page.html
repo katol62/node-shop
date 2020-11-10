@@ -5,7 +5,7 @@
             <ion-col size="12">
                 <ion-item>
                     <div tabindex="0"></div>
-                    <ion-label>{{'ADMIN.categories.single' | translate}}</ion-label>
+                    <ion-label position="floating">{{'ADMIN.categories.single' | translate}}</ion-label>
                     <ion-select class="ion-justify-content-start" multiple [(ngModel)]="selectedCategories" (ngModelChange)="updateFilter($event)" placeholder="{{'ADMIN.categories.single' | translate}}">
                         <ion-select-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</ion-select-option>
                     </ion-select>

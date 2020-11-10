@@ -67,6 +67,7 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
             firstName: [''],
             lastName: [''],
             email: [''],
+            dob: [''],
             role: ['user'],
             verified: [false],
         });

@@ -22,17 +22,17 @@
                             </ion-item>
                             <ion-item>
                                 <div tabindex="0"></div>
-                                <ion-label>{{'GLOBAL.labels.name' | translate}}</ion-label>
+                                <ion-label position="floating">{{'GLOBAL.labels.name' | translate}}</ion-label>
                                 <ion-input type="text" formControlName="name" placeholder="{{'GLOBAL.labels.name' | translate}}"></ion-input>
                             </ion-item>
                             <ion-item>
                                 <div tabindex="0"></div>
-                                <ion-label>{{'GLOBAL.labels.description' | translate}}</ion-label>
+                                <ion-label position="floating">{{'GLOBAL.labels.description' | translate}}</ion-label>
                                 <ion-textarea formControlName="description" placeholder="{{'GLOBAL.labels.description' | translate}}..."></ion-textarea>
                             </ion-item>
                             <ion-item>
                                 <div tabindex="0"></div>
-                                <ion-label>{{'GLOBAL.labels.display' | translate}}</ion-label>
+                                <ion-label position="floating">{{'GLOBAL.labels.display' | translate}}</ion-label>
                                 <ion-select formControlName="display" (ionChange)="onDisplayUpdate($event)">
                                     <ion-select-option [value]="true">{{'GLOBAL.labels.yes' | translate}}</ion-select-option>
                                     <ion-select-option [value]="false">{{'GLOBAL.labels.no' | translate}}</ion-select-option>

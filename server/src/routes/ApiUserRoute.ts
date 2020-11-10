@@ -61,16 +61,17 @@ class ApiUserRoute {
                 rUser.password = bcryptedPassword;
                 const result = await this.userModel.create(rUser);
                 if (result.affectedRows === 0) {
-                    return res.status(204).json({ success: false, message: 'No Content'});
+                    return res.status(204).json({ success: false, message: 'No Content', code: CODES.noContent});
                 }
                 rUser = {...rUser, id: result.insertId};
                 const updateResponse: IBaseResponse = {
                     success: true,
                     message: 'User created',
+                    code: CODES.created,
                     data: rUser};
                 return res.status(200).json(updateResponse);
             } catch (e) {
-                return res.status(500).json({ success: false, message: e.message} as IBaseResponse);
+                return res.status(500).json({ success: false, message: e.message, code: CODES.serverError} as IBaseResponse);
             }
         });
         this.router.put('/:id', checkAuthorized, async (req: express.Request, res: express.Response) => {
@@ -82,15 +83,16 @@ class ApiUserRoute {
                 }
                 const result = await this.userModel.update(rUser);
                 if (result.affectedRows === 0) {
-                    return res.status(204).json({ success: false, message: 'No Content'} as IBaseResponse);
+                    return res.status(204).json({ success: false, message: 'No Content', code: CODES.noContent} as IBaseResponse);
                 }
                 const updateResponse: IBaseResponse = {
                     success: true,
                     message: 'User updated',
+                    code: CODES.updated,
                     data: rUser};
                 return res.status(200).json(updateResponse);
             } catch (e) {
-                return res.status(500).json({ success: false, message: e.message} as IBaseResponse);
+                return res.status(500).json({ success: false, message: e.message, code: CODES.serverError} as IBaseResponse);
             }
         });
         this.router.delete('/:id', checkAuthorized, async (req: express.Request, res: express.Response) => {
@@ -99,11 +101,11 @@ class ApiUserRoute {
                 const resultAddress = await this.addressesModel.deleteByUser(id);
                 const result = await this.userModel.delete(id);
                 if (!result.affectedRows) {
-                    return res.status(204).json({ success: false, message: 'No content'} as IBaseResponse);
+                    return res.status(204).json({ success: false, message: 'No content', code: CODES.noContent} as IBaseResponse);
                 }
-                return res.status(200).json({ success: true, message: 'Admin deleted'} as IBaseResponse);
+                return res.status(200).json({ success: true, message: 'Admin deleted', code: CODES.deleted} as IBaseResponse);
             } catch (e) {
-                return res.status(500).json({ success: false, message: e.message} as IBaseResponse);
+                return res.status(500).json({ success: false, message: e.message, code: CODES.serverError} as IBaseResponse);
             }
         });
     }
