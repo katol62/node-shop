@@ -9,8 +9,8 @@ import {IMessageItem, NotificationMessageType, NotificationService} from "../../
 import {adminPath, detailsPath, listPath, profilePath, usersPath} from "../../../shared/misc/constants";
 import {IBaseRequest, IBaseResponse, IUser} from "../../../shared/misc/http-data";
 import {createTextMaskInputElement} from "text-mask-core";
-import {HelpService} from "../../../shared/services/help.service";
 import {Device} from "../register/register.page";
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-edit',
@@ -105,7 +105,8 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
     }
 
     private save(user: IUser): void {
-        const rUser = {...user, password: user.newPassword}
+        const date = user.dob ? moment(user.dob).format('YYYY-MM-DD') : null;
+        const rUser = {...user, password: user.newPassword, dob: date};
         const profileRequest: IBaseRequest = {data: rUser};
         this.restService.put('me', profileRequest)
             .subscribe({

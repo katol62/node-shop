@@ -7,6 +7,7 @@ export interface IUser {
     email?: string | null;
     password?: string | null;
     newPassword?: string | null;
+    dob?: string | null;
     role?: 'super' | 'admin' | 'user';
 }
 
