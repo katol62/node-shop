@@ -81,7 +81,6 @@ export class AddressesEditPage extends AuthorizedComponent implements OnInit, On
                     result => {
                         this.streets = result.map(item => item);
                         this.form.patchValue(data);
-                        debugger;
                     }
                 )
             },
@@ -92,7 +91,6 @@ export class AddressesEditPage extends AuthorizedComponent implements OnInit, On
 
     onCitySelect( $event: any ) {
         this.streets = this.placeService.getStreets($event.detail.value).map(item => item);
-        debugger;
     }
 
     save() {

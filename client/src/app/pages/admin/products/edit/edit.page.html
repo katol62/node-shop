@@ -7,59 +7,64 @@
     </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-    <ion-card>
-        <ion-card-content>
-            <form [formGroup]="form">
-                <ion-item>
-                    <div tabindex="0"></div>
-                    <ion-label>{{'GLOBAL.labels.select' | translate}} {{('ADMIN.categories.title' | translate).toLowerCase()}}</ion-label>
-                    <ion-select multiple formControlName="category" *ngIf="categories && categories.length" placeholder="{{'GLOBAL.labels.select' | translate}} {{('ADMIN.categories.title' | translate).toLowerCase()}}" (ionChange)="reset()">
-                        <ion-select-option *ngFor="let category of categories" [value]="category.id">
-                            {{category.name}}
-                        </ion-select-option>
-                    </ion-select>
-                </ion-item>
-                <ion-item>
-                    <div tabindex="0"></div>
-                    <ion-label>{{fileInputLabel1 || ('GLOBAL.labels.chooseFile' | translate)}}</ion-label>
-                    <ion-input type="file" (change)="onFileSelect($event)" #UploadFileInput1 id="1"></ion-input>
-                    <input type="hidden" formControlName="image1">
-                </ion-item>
-                <ion-item>
-                    <div tabindex="0"></div>
-                    <ion-label>{{fileInputLabel2 || ('GLOBAL.labels.chooseFile' | translate)}}</ion-label>
-                    <ion-input type="file" (change)="onFileSelect($event)" #UploadFileInput2 id="2"></ion-input>
-                    <input type="hidden" formControlName="image2">
-                </ion-item>
-                <ion-item>
-                    <div tabindex="0"></div>
-                    <ion-label>{{fileInputLabel3 || ('GLOBAL.labels.chooseFile' | translate)}}</ion-label>
-                    <ion-input type="file" (change)="onFileSelect($event)" #UploadFileInput3 id="3"></ion-input>
-                    <input type="hidden" formControlName="image3">
-                </ion-item>
-                <ion-item>
-                    <div tabindex="0"></div>
-                    <ion-label>{{fileInputLabel4 || ('GLOBAL.labels.chooseFile' | translate)}}</ion-label>
-                    <ion-input type="file" (change)="onFileSelect($event)" #UploadFileInput4 id="4"></ion-input>
-                    <input type="hidden" formControlName="image4">
-                </ion-item>
-                <ion-item>
-                    <div tabindex="0"></div>
-                    <ion-label>{{'GLOBAL.labels.name' | translate}}</ion-label>
-                    <ion-input type="text" formControlName="name" placeholder="{{'GLOBAL.labels.name' | translate}}"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <div tabindex="0"></div>
-                    <ion-label>{{'GLOBAL.labels.description' | translate}}</ion-label>
-                    <ion-textarea formControlName="description" placeholder="{{'GLOBAL.labels.description' | translate}}..."></ion-textarea>
-                </ion-item>
-            </form>
-            <div class="ion-text-center ion-margin-top">
-                <ion-button size="small" color="primary" (click)="onFormSubmit()" [disabled]="!form.valid">
-                    {{(id ? 'GLOBAL.labels.update' : 'GLOBAL.labels.create') | translate}}
-                </ion-button>
-            </div>
-
-        </ion-card-content>
-    </ion-card>
+    <ion-grid>
+        <ion-row class="ion-justify-content-center">
+            <ion-col size="12" size-xl="5" size-lg="6" size-md="7" size-sm="8">
+                <ion-card>
+                    <ion-card-content>
+                        <form [formGroup]="form">
+                            <ion-item>
+                                <div tabindex="0"></div>
+                                <ion-label>{{'GLOBAL.labels.select' | translate}} {{('ADMIN.categories.title' | translate).toLowerCase()}}</ion-label>
+                                <ion-select multiple formControlName="category" *ngIf="categories && categories.length" placeholder="{{'GLOBAL.labels.select' | translate}} {{('ADMIN.categories.title' | translate).toLowerCase()}}" (ionChange)="reset()">
+                                    <ion-select-option *ngFor="let category of categories" [value]="category.id">
+                                        {{category.name}}
+                                    </ion-select-option>
+                                </ion-select>
+                            </ion-item>
+                            <ion-item>
+                                <div tabindex="0"></div>
+                                <ion-label>{{fileInputLabel1 || ('GLOBAL.labels.chooseFile' | translate)}}</ion-label>
+                                <ion-input type="file" (change)="onFileSelect($event)" #UploadFileInput1 id="1"></ion-input>
+                                <input type="hidden" formControlName="image1">
+                            </ion-item>
+                            <ion-item>
+                                <div tabindex="0"></div>
+                                <ion-label>{{fileInputLabel2 || ('GLOBAL.labels.chooseFile' | translate)}}</ion-label>
+                                <ion-input type="file" (change)="onFileSelect($event)" #UploadFileInput2 id="2"></ion-input>
+                                <input type="hidden" formControlName="image2">
+                            </ion-item>
+                            <ion-item>
+                                <div tabindex="0"></div>
+                                <ion-label>{{fileInputLabel3 || ('GLOBAL.labels.chooseFile' | translate)}}</ion-label>
+                                <ion-input type="file" (change)="onFileSelect($event)" #UploadFileInput3 id="3"></ion-input>
+                                <input type="hidden" formControlName="image3">
+                            </ion-item>
+                            <ion-item>
+                                <div tabindex="0"></div>
+                                <ion-label>{{fileInputLabel4 || ('GLOBAL.labels.chooseFile' | translate)}}</ion-label>
+                                <ion-input type="file" (change)="onFileSelect($event)" #UploadFileInput4 id="4"></ion-input>
+                                <input type="hidden" formControlName="image4">
+                            </ion-item>
+                            <ion-item>
+                                <div tabindex="0"></div>
+                                <ion-label>{{'GLOBAL.labels.name' | translate}}</ion-label>
+                                <ion-input type="text" formControlName="name" placeholder="{{'GLOBAL.labels.name' | translate}}"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <div tabindex="0"></div>
+                                <ion-label>{{'GLOBAL.labels.description' | translate}}</ion-label>
+                                <ion-textarea formControlName="description" placeholder="{{'GLOBAL.labels.description' | translate}}..."></ion-textarea>
+                            </ion-item>
+                        </form>
+                        <div class="ion-text-center ion-margin-top">
+                            <ion-button size="small" color="primary" (click)="onFormSubmit()" [disabled]="!form.valid">
+                                {{(id ? 'GLOBAL.labels.update' : 'GLOBAL.labels.create') | translate}}
+                            </ion-button>
+                        </div>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

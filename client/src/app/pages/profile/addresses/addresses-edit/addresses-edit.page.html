@@ -12,61 +12,66 @@
 </ion-header>
 
 <ion-content>
-    <ion-card>
-        <ion-card-header class="ion-text-center">
-            <ion-card-title>{{'PROFILE.addresses.single' | translate}}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-            <form [formGroup]="form" (ngSubmit)="save()">
-                <ion-item>
-                    <div tabindex="0"></div>
-                    <ion-label>{{'GLOBAL.labels.city' | translate}}</ion-label>
-                    <ion-select formControlName="city" placeholder="{{'GLOBAL.labels.select' | translate}} {{('GLOBAL.labels.city' | translate).toLowerCase()}}" (ionChange)="onCitySelect($event)">
-                        <ion-select-option *ngFor="let city of cities" [value]="city">{{city}}</ion-select-option>
-                    </ion-select>
-                </ion-item>
-                <ion-item>
-                    <ion-label>{{'GLOBAL.labels.street' | translate}}</ion-label>
-                    <ionic-selectable
-                        placeholder="{{'GLOBAL.labels.select' | translate}}"
-                        formControlName="street"
-                        [items]="streets"
-                        [canSearch]="true"
-                        (onChange)="streetChange($event)">
-                    </ionic-selectable>
-                </ion-item>
-                <ion-item>
-                    <div tabindex="0"></div>
-                    <ion-label>{{'GLOBAL.labels.house' | translate}}</ion-label>
-                    <ion-input type="text" formControlName="house" placeholder="{{'GLOBAL.labels.house' | translate}}"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <div tabindex="0"></div>
-                    <ion-label>{{'GLOBAL.labels.app' | translate}}</ion-label>
-                    <ion-input type="number" formControlName="app" placeholder="{{'GLOBAL.labels.app' | translate}}"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <div tabindex="0"></div>
-                    <ion-label>{{'GLOBAL.labels.entrance' | translate}}</ion-label>
-                    <ion-input type="number" formControlName="entrance" placeholder="{{'GLOBAL.labels.entrance' | translate}}"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <div tabindex="0"></div>
-                    <ion-label>{{'GLOBAL.labels.floor' | translate}}</ion-label>
-                    <ion-input type="number" formControlName="floor" placeholder="{{'GLOBAL.labels.floor' | translate}}"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <div tabindex="0"></div>
-                    <ion-label>{{'GLOBAL.labels.code' | translate}}</ion-label>
-                    <ion-input type="number" formControlName="code" placeholder="{{'GLOBAL.labels.code' | translate}}"></ion-input>
-                </ion-item>
-                <div class="ion-text-center ion-margin-top">
-                    <ion-button size="small" color="primary" type="submit" [disabled]="!form.valid">
-                        {{'GLOBAL.labels.add' | translate}}
-                    </ion-button>
-                </div>
-            </form>
-        </ion-card-content>
-    </ion-card>
-
+    <ion-grid>
+        <ion-row class="ion-justify-content-center">
+            <ion-col size="12" size-xl="5" size-lg="6" size-md="7" size-sm="8">
+                <ion-card>
+                    <ion-card-header class="ion-text-center">
+                        <ion-card-title>{{'PROFILE.addresses.single' | translate}}</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <form [formGroup]="form" (ngSubmit)="save()">
+                            <ion-item>
+                                <div tabindex="0"></div>
+                                <ion-label>{{'GLOBAL.labels.city' | translate}}</ion-label>
+                                <ion-select formControlName="city" placeholder="{{'GLOBAL.labels.select' | translate}} {{('GLOBAL.labels.city' | translate).toLowerCase()}}" (ionChange)="onCitySelect($event)">
+                                    <ion-select-option *ngFor="let city of cities" [value]="city">{{city}}</ion-select-option>
+                                </ion-select>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>{{'GLOBAL.labels.street' | translate}}</ion-label>
+                                <ionic-selectable
+                                        placeholder="{{'GLOBAL.labels.select' | translate}}"
+                                        formControlName="street"
+                                        [items]="streets"
+                                        [canSearch]="true"
+                                        (onChange)="streetChange($event)">
+                                </ionic-selectable>
+                            </ion-item>
+                            <ion-item>
+                                <div tabindex="0"></div>
+                                <ion-label>{{'GLOBAL.labels.house' | translate}}</ion-label>
+                                <ion-input type="text" formControlName="house" placeholder="{{'GLOBAL.labels.house' | translate}}"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <div tabindex="0"></div>
+                                <ion-label>{{'GLOBAL.labels.app' | translate}}</ion-label>
+                                <ion-input type="number" formControlName="app" placeholder="{{'GLOBAL.labels.app' | translate}}"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <div tabindex="0"></div>
+                                <ion-label>{{'GLOBAL.labels.entrance' | translate}}</ion-label>
+                                <ion-input type="number" formControlName="entrance" placeholder="{{'GLOBAL.labels.entrance' | translate}}"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <div tabindex="0"></div>
+                                <ion-label>{{'GLOBAL.labels.floor' | translate}}</ion-label>
+                                <ion-input type="number" formControlName="floor" placeholder="{{'GLOBAL.labels.floor' | translate}}"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <div tabindex="0"></div>
+                                <ion-label>{{'GLOBAL.labels.code' | translate}}</ion-label>
+                                <ion-input type="number" formControlName="code" placeholder="{{'GLOBAL.labels.code' | translate}}"></ion-input>
+                            </ion-item>
+                            <div class="ion-text-center ion-margin-top">
+                                <ion-button size="small" color="primary" type="submit" [disabled]="!form.valid">
+                                    {{'GLOBAL.labels.add' | translate}}
+                                </ion-button>
+                            </div>
+                        </form>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
