@@ -10,6 +10,7 @@ import {IBaseRequest, IBaseResponse, IUser} from "../../../../shared/misc/http-d
 import {adminPath, listPath, usersPath} from "../../../../shared/misc/constants";
 import {AlertService} from "../../../../shared/services/alert.service";
 import {TranslateService} from "@ngx-translate/core";
+import * as moment from "moment";
 
 @Component({
     selector: 'app-edit',
@@ -114,7 +115,8 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
     }
 
     private save(user: IUser): void {
-        const rUser = {...user, password: user.newPassword}
+        const date = user.dob ? moment(user.dob).format('YYYY-MM-DD') : null;
+        const rUser = {...user, password: user.newPassword, dob: date};
         const adminRequest: IBaseRequest = {data: rUser};
         this.restService.put(`users/${String(user.id)}`, adminRequest)
             .subscribe({

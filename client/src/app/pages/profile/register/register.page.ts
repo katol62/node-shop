@@ -14,6 +14,7 @@ import {IMessageItem, NotificationMessageType, NotificationService} from "../../
 import { Plugins } from '@capacitor/core';
 import {HelpService} from "../../../shared/services/help.service";
 import {FcmService} from "../../../shared/services/fcm.service";
+import * as moment from "moment";
 
 export const { Device } = Plugins;
 
@@ -157,7 +158,9 @@ export class RegisterPage implements OnInit {
     }
 
     private processRegister(authData: IRegRequest): void {
-        this.restService.postForm('register', authData).subscribe({
+        const date = authData.dob ? moment(authData.dob).format('YYYY-MM-DD') : null;
+        const req: IRegRequest = {...authData, dob: date};
+        this.restService.postForm('register', req).subscribe({
             next: (value: IBaseResponse) => {
                 // const authData: IAuthRequest = value.data;
                 this.authService.login(authData)
