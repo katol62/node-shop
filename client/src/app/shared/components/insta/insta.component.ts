@@ -44,6 +44,12 @@ export class InstaComponent implements OnInit, AfterViewInit {
         this.getItems();
     }
 
+    public refresh(): void {
+        this.instaItems = [];
+        this.instaRawItems = [];
+        this.getItems();
+    }
+
     private getItems(): void {
         this.restService.get('insta').subscribe({
             next: (response: IBaseResponse) => {

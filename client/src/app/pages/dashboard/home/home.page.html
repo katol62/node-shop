@@ -1,15 +1,24 @@
 <app-menu-header [menuId]="menuId" [link]="link" [icon]="'enter-outline'" [title]="title"></app-menu-header>
 <ion-content id="{{menuId}}">
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12">
-        <app-slider></app-slider>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <app-insta></app-insta>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="chevron-down-circle-outline"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-grid>
+        <ion-row>
+            <ion-col size="12">
+                <app-slider></app-slider>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12">
+                <app-insta></app-insta>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
+

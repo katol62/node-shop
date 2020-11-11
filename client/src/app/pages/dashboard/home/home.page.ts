@@ -1,8 +1,8 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, Injector, OnInit, ViewChild} from '@angular/core';
 import {profilePath} from "../../../shared/misc/constants";
-import {MENU_HOME_ID} from "../../../shared/components/menu/menu.component";
-import {TranslateService} from "@ngx-translate/core";
 import {RootComponent} from "../../../shared/components/root/root.component";
+import {InstaComponent} from "../../../shared/components/insta/insta.component";
+import {SliderComponent} from "../../../shared/components/slider/slider.component";
 
 @Component({
     selector: 'app-home',
@@ -10,6 +10,9 @@ import {RootComponent} from "../../../shared/components/root/root.component";
     styleUrls: ['./home.page.scss'],
 })
 export class HomePage extends RootComponent implements OnInit {
+
+    @ViewChild(InstaComponent) insta: InstaComponent;
+    @ViewChild(SliderComponent) slider: SliderComponent;
 
     public profilePath = profilePath;
     public link: string = `/${profilePath}`;
@@ -34,4 +37,12 @@ export class HomePage extends RootComponent implements OnInit {
     protected afterInit(): void {
     }
 
+    doRefresh( $event: any ) {
+        this.slider.refresh();
+        this.insta.refresh();
+        setTimeout(() => {
+            console.log('Async operation has ended');
+            $event.target.complete();
+        }, 1000);
+    }
 }

@@ -49,6 +49,12 @@ export class SliderComponent implements OnInit, AfterViewInit {
         this.getBanners();
     }
 
+    public refresh(): void {
+        this.banners = [];
+        this.slider = null;
+        this.getBanners();
+    }
+
     private initSlider(): void {
         this.slider = {
             isBeginningSlide: true,
