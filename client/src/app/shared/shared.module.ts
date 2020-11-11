@@ -25,6 +25,8 @@ import {HomeFooterComponent} from "./components/home-footer/home-footer.componen
 import {ProductModalComponent} from "./components/product-modal/product-modal.component";
 import {YmapsModalComponent} from "./components/ymaps-modal/ymaps-modal.component";
 import {IonicSelectableModule} from "ionic-selectable";
+import {RemoteModalComponent} from "./components/remote-modal/remote-modal.component";
+import {RemoteModalService} from "./services/remote-modal.service";
 
 @NgModule({
     declarations: [
@@ -37,7 +39,8 @@ import {IonicSelectableModule} from "ionic-selectable";
         BannerModalComponent,
         HomeFooterComponent,
         ProductModalComponent,
-        YmapsModalComponent
+        YmapsModalComponent,
+        RemoteModalComponent
     ],
     exports: [
         FormsModule,
@@ -54,7 +57,8 @@ import {IonicSelectableModule} from "ionic-selectable";
         BannerModalComponent,
         HomeFooterComponent,
         ProductModalComponent,
-        YmapsModalComponent
+        YmapsModalComponent,
+        RemoteModalComponent
     ],
     imports: [
         CommonModule,
@@ -80,7 +84,8 @@ export class SharedModule {
                 ValidationService,
                 VerificationService,
                 HelpService,
-                LoaderService
+                LoaderService,
+                RemoteModalService
             ]
         };
     }

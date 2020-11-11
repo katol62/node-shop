@@ -44,6 +44,7 @@
                                 <ion-input type="text" formControlName="lastName" placeholder="{{'GLOBAL.labels.lastName' | translate}}"></ion-input>
                             </ion-item>
                             <ion-item>
+                                <div tabindex="0"></div>
                                 <ion-label position="floating">{{'GLOBAL.labels.dob' | translate}}</ion-label>
                                 <ion-datetime displayFormat="DD/MM/YYYY" min="1930-01-01" max="2010-01-01" formControlName="dob" placeholder="{{'GLOBAL.labels.dob' | translate}}"></ion-datetime>
                             </ion-item>
@@ -52,6 +53,14 @@
                                 <ion-label position="floating">{{'GLOBAL.labels.email' | translate}}</ion-label>
                                 <ion-input type="email" formControlName="email" placeholder="{{'GLOBAL.labels.email' | translate}}"></ion-input>
                             </ion-item>
+                            <ion-item>
+                                <div tabindex="0"></div>
+                                <ion-text>{{'GLOBAL.labels.termsConfirm' | translate}}</ion-text>
+                                <ion-checkbox slot="end" formControlName="terms"></ion-checkbox>
+                            </ion-item>
+                            <div class="ion-text-left ion-padding">
+                                <ion-text class="underline cursor-pointer" (click)="openTerms()">{{'GLOBAL.labels.terms' | translate}}</ion-text>
+                            </div>
                         </form>
                         <ng-container *ngIf="mobile && state === 'code'">
                             <div class="ion-text-center ion-padding">

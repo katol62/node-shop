@@ -1,0 +1,11 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>{{title}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">{{'GLOBAL.labels.close' | translate}}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <iframe #content frameBorder="0" scrolling="yes" [src]="urlSafe"></iframe>
+</ion-content>

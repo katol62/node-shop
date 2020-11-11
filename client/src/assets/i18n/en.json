@@ -38,7 +38,10 @@
             "floor": "Floor",
             "pleaseWait": "Please wait",
             "nothingChanged": "Nothing changed",
-            "findUs": "How to find us"
+            "findUs": "How to find us",
+            "termsConfirm": "Confirm terms and conditions",
+            "terms": "Terms & conditions",
+            "rules": "Official Rules"
         },
         "alert": {
             "cancel": "Cancel",

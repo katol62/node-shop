@@ -11,10 +11,11 @@ import {createTextMaskInputElement} from "text-mask-core";
 import {Router} from "@angular/router";
 import {RestService} from "../../../shared/services/rest.service";
 import {IMessageItem, NotificationMessageType, NotificationService} from "../../../shared/services/notification.service";
-import { Plugins } from '@capacitor/core';
+import {Plugins} from '@capacitor/core';
 import {HelpService} from "../../../shared/services/help.service";
 import {FcmService} from "../../../shared/services/fcm.service";
 import * as moment from "moment";
+import {ERemoteType, RemoteModalService} from "../../../shared/services/remote-modal.service";
 
 export const { Device } = Plugins;
 
@@ -57,6 +58,7 @@ export class RegisterPage implements OnInit {
                 private authService: AuthService,
                 private helpService: HelpService,
                 private fcmService: FcmService,
+                private remoteModalService: RemoteModalService,
                 private restService: RestService
     ) {
         this.registerForm = this.formBuilder.group({
@@ -68,6 +70,7 @@ export class RegisterPage implements OnInit {
             dob: [''],
             email: [''],
             deviceId: [null],
+            terms: [false],
             verified: [false]
         })
     }
@@ -87,12 +90,15 @@ export class RegisterPage implements OnInit {
             lastName: '',
             email: '',
             dob: '',
+            terms: false,
             deviceId: this.fcmService.token,
             verified: this.mobile ? true : false
         });
         this.registerForm.get('password').setErrors(null);
         this.registerForm.get('confirmPassword').setErrors(null);
         this.registerForm.get('password').setValidators(null);
+
+        this.registerForm.get('terms').setValidators([Validators.required, Validators.requiredTrue]);
 
         if (!this.mobile) {
             this.registerForm.get('password').setValidators([Validators.required, Validators.minLength(3)]);
@@ -196,4 +202,7 @@ export class RegisterPage implements OnInit {
     processCode( $event: any ) {
     }
 
+    openTerms() {
+        this.remoteModalService.presentModal(ERemoteType.REMOTE_TERMS);
+    }
 }
