@@ -33,7 +33,7 @@ CREATE TABLE `address` (
 
 CREATE TABLE `user_address` (
                                 `user` int(11) NOT NULL,
-                                `address` int(11) NOT NULL,
+                                `address` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 ALTER TABLE `user_address`

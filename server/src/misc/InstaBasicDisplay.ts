@@ -12,8 +12,8 @@ export class InstaBasicDisplay {
     private _redirectUri: string = 'https://httpstat.us/200';
     private _appSecret: string = 'a32d76ae0120dea9ed74909315dc9137';
     private _code: string = 'IGQVJWR253VHYyeThGdDNpN2x6dlhhNDFjTUt5Q2hJR0p5M2E5Tk12Y0xwZAkMwa2c5N3lReFdXSUhkUmN5QlFQaHlGRjBUa3ZAKQktfTkd0QVBRck5MRS15UkNwUEZAKZAGUwUXVvc2RCRVB6WTk0Sk0wQwZDZD';
-    private _codetvnt: string = 'IGQVJVZAEJ1MWxBNE9USjdEZAFFUaTdBSW9oWFZAqUnlvM1BDendveVpJTU1rTDFTLXN1VEFwbVcyeFp2QkZAjcTZA5QW5FN0JzbDVhcWNWblctdHZAmNTVpVlB5b283cVlmT1J2ZA3RHR1dTLVhsUmNqekllbgZDZD';
-
+    private _codetvntOld: string = 'IGQVJVZAEJ1MWxBNE9USjdEZAFFUaTdBSW9oWFZAqUnlvM1BDendveVpJTU1rTDFTLXN1VEFwbVcyeFp2QkZAjcTZA5QW5FN0JzbDVhcWNWblctdHZAmNTVpVlB5b283cVlmT1J2ZA3RHR1dTLVhsUmNqekllbgZDZD';
+    private _codetvnt: string = 'IGQVJWS3NTTDVORmNOMGFOMFpCUzFmYWVuMWdteEpxcVpBdkFTX2ZAfcHZAOXzBFUGpmUnNDQmJWb3ExNmtTTVc0ZA183WkM2OTktMDd5M053OHhQS3dlOG1ocS1UZAE5ZAcnZATc25jZAG94NXJOLUFKeDBJZAgZDZD';
     public get accessToken(): string {
         return this._codetvnt;
     }
