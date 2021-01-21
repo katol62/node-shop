@@ -6,7 +6,7 @@ import {RestService} from "../../../shared/services/rest.service";
 import {ActivatedRoute} from "@angular/router";
 import {AlertService} from "../../../shared/services/alert.service";
 import {IMessageItem, NotificationMessageType, NotificationService} from "../../../shared/services/notification.service";
-import {adminPath, detailsPath, listPath, profilePath, usersPath} from "../../../shared/misc/constants";
+import {detailsPath, profilePath} from "../../../shared/misc/constants";
 import {IBaseRequest, IBaseResponse, IUser} from "../../../shared/misc/http-data";
 import {createTextMaskInputElement} from "text-mask-core";
 import {Device} from "../register/register.page";
@@ -126,6 +126,10 @@ export class EditPage extends AuthorizedComponent implements OnInit, OnDestroy {
             return;
         }
         this.save(this.form.value);
+    }
+
+    refresh(): void {
+        this.getMe();
     }
 
     /**

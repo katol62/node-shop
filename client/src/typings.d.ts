@@ -1,6 +1,7 @@
 interface IVerification {
-    email: string;
-    password: string;
+    email?: string;
+    password?: string;
+    apiId?: string;
 }
 
 interface IEnvironment {

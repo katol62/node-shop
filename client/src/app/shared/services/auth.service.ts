@@ -1,10 +1,11 @@
 import {Injectable, Injector} from '@angular/core';
 import {RestService} from './rest.service';
 import {PersistentService} from './persistent.service';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {IAuthRequest, IAuthResponse, IUser} from '../misc/http-data';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {IAuthRefreshRequest, IAuthRequest, IAuthResponse, IUser} from '../misc/http-data';
 import * as jwt_decode from 'jwt-decode';
-import {map, tap} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
+import {IBaseResponse} from "../../../../../server/src/misc/db";
 
 export const STORAGE_KEY_LOGIN = 'authData';
 
@@ -35,11 +36,15 @@ export class AuthService extends RestService  {
 
     public get token(): string {
         const value: IAuthResponse = this.authData.value;
-        return value == null ? null : (this.isTokenExpired(value.token) ? null : value.token);
+        return value === null ? null : (this.isTokenExpired(value.token) ? null : value.token);
     }
     public get user(): IUser {
         const value: IAuthResponse = this.authData.value;
-        return value == null ? null : value.user;
+        return value === null ? null : value.user;
+    }
+    public get refreshToken(): string {
+        const value: IAuthResponse = this.authData.value;
+        return value === null ? null : value.refreshToken;
     }
     public get deviceToken(): string {
         const value: IAuthResponse = this.authData.value;
@@ -57,6 +62,30 @@ export class AuthService extends RestService  {
             );
     }
 
+    public refresh(): Observable<IAuthResponse> {
+        const req: IAuthRefreshRequest = {phone: this.user.phone, refreshToken: this.refreshToken};
+        return this.postForm('auth/refresh', req)
+            .pipe(
+                map((result: IAuthResponse) => this.setLoginToStorage(result)),
+                tap((result: IAuthResponse) => {
+                    this.afterLogin();
+                    const data = this.authData.value ? this.authData.value : {};
+                    this.authData.next({...data, ...result.data});
+                })
+            );
+    }
+
+    public logout(): Observable<IAuthResponse> {
+        const req = {phone: this.user.phone, refreshToken: this.refreshToken} as IAuthRequest
+        return this.postForm('auth/logout', req)
+            .pipe(
+                tap( (result: IAuthResponse) => {
+                    this.onLogout();
+                })
+            )
+
+    }
+
     public onLogout(): void {
         this.authData.complete();
         this.authData = new BehaviorSubject(null);
@@ -67,7 +96,9 @@ export class AuthService extends RestService  {
     }
 
     private setLoginToStorage(result: IAuthResponse): IAuthResponse {
-        this.storage.setItem(STORAGE_KEY_LOGIN, result.data);
+        const stored = this.storage.getItem(STORAGE_KEY_LOGIN);
+        const data = stored ? {...stored, ...result.data} : {...result.data}
+        this.storage.setItem(STORAGE_KEY_LOGIN, data);
         return result;
     }
 
@@ -101,6 +132,27 @@ export class AuthService extends RestService  {
         if (!token) { return null; }
         const decoded: IToken = jwt_decode(token);
         return decoded.id ? decoded.id : null;
+    }
+
+    public isAuthenticated(): Observable<boolean> {
+        if (this.isTokenExpired()) {
+            if (!this.refreshToken) {
+                this.onLogout();
+                return of(false);
+            }
+            return this.refresh()
+                .pipe(
+                    map((result: IAuthResponse) => {
+                        return true
+                    }),
+                    catchError( (error, caught)  => {
+                        this.onLogout();
+                        return of(false);
+                    })
+                )
+        } else {
+            return of(true);
+        }
     }
 
 

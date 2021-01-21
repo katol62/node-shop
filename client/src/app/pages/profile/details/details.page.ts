@@ -1,6 +1,6 @@
 import {Component, Injector, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "../../../shared/services/auth.service";
-import {IAuthResponse, IBaseResponse, IUser} from "../../../shared/misc/http-data";
+import {IAuthRequest, IAuthResponse, IBaseResponse, IUser} from "../../../shared/misc/http-data";
 import {Subscription} from "rxjs";
 import {Platform} from "@ionic/angular";
 import {addressesPath, adminPath, detailsPath, editPath, profilePath} from "../../../shared/misc/constants";
@@ -48,8 +48,15 @@ export class DetailsPage extends AuthorizedComponent implements OnInit, OnDestro
     }
 
     logout() {
-        this.authService.onLogout();
-        this.router.navigate(['/']);
+        this.authService.logout()
+            .subscribe({
+                next: (value: IBaseResponse) => {
+                    this.router.navigate(['/']);
+                },
+                error: err => {
+                    console.log(err);
+                }
+            })
     }
 
     isAdmin(): boolean {

@@ -75,7 +75,13 @@ export interface IRegRequest extends IBaseRequest{
 
 export interface IAuthResponse extends IBaseResponse{
     token?: string;
+    refreshToken?: string;
     user?: IUser;
+}
+
+export interface IAuthRefreshRequest extends IBaseRequest{
+    phone?: string;
+    refreshToken?: string;
 }
 
 export interface IVerificationRequest extends IBaseRequest {
@@ -92,6 +98,30 @@ export interface IVerificationResponse extends IBaseResponse {
         status: number;
         queue_num: number;
     }
+}
+
+export interface ISmsData {
+    status: string;
+    status_code: number;
+    sms_id?: string;
+    status_text?: string;
+}
+
+export interface ISmsVerifyRequest extends IBaseRequest {
+    api_id: string;
+    to: string;
+    msg: string;
+    json?: number;
+    test?: string;
+}
+
+export interface ISmsVerifyResponse extends IBaseResponse {
+    status: string;
+    status_code: number;
+    sms: {
+        [key: string]: ISmsData
+    },
+    balance: number;
 }
 
 export interface IBannerRequest extends IBaseRequest{

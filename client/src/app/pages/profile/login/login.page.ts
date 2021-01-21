@@ -9,6 +9,7 @@ import {createTextMaskInputElement} from 'text-mask-core';
 import {ICode, VerificationService} from "../../../shared/services/verification.service";
 import {IMessageItem, NotificationMessageType, NotificationService} from "../../../shared/services/notification.service";
 import {HelpService} from "../../../shared/services/help.service";
+import {ISmsCode, SmsVerificationService} from "../../../shared/services/sms-verification.service";
 
 export enum VerificationState {
     phone = 'phone', code = 'code', done = 'done'
@@ -52,6 +53,7 @@ export class LoginPage implements OnInit {
                 private router: Router,
                 private notificationService: NotificationService,
                 private verificationService: VerificationService,
+                private smsVerificationService: SmsVerificationService,
                 private helpService: HelpService,
                 private authService: AuthService) {
         this.loginForm = this.formBuilder.group({
@@ -86,6 +88,49 @@ export class LoginPage implements OnInit {
      */
 
     logIn(){
+        console.log(this.loginForm.value);
+        const full = this.loginForm.get('phone').value;
+        const phone = full.replace(/\D+/g, '');
+        if (this.mobile) {
+            if (this.state === VerificationState.phone) {
+                this.smsVerificationService.verifyPhone(phone).subscribe({
+                    next: ((result: ISmsCode) => {
+                        if (result) {
+                            if (Number(result.code) > 0 && Number(result.code) < 104) {
+                                this.state = VerificationState.code;
+                            } else {
+                                const message: IMessageItem = {
+                                    type: NotificationMessageType.error,
+                                    message: result.message,
+                                    messageCode: String(result.code)
+                                }
+                                this.notificationService.show(message);
+                            }
+                        }
+                    })
+                })
+            } else {
+                const code = String(this.code).replace(/\D+/g, '');
+                this.smsVerificationService.verifyCode(code).subscribe({
+                    next: ((result: boolean) => {
+                        if (result) {
+                            this.state = VerificationState.phone;
+                            const authData: IAuthRequest = {phone: phone, verified: true};
+                            this.processLogin(authData);
+                        } else {
+                            this.state = VerificationState.phone;
+                            this.resetForm();
+                        }
+                    })
+                })
+            }
+        } else {
+            const authData: IAuthRequest = {phone: phone, password: this.loginForm.get('password').value};
+            this.processLogin(authData);
+        }
+    }
+
+    logInOld(){
         console.log(this.loginForm.value);
         const full = this.loginForm.get('phone').value;
         const phone = full.replace(/\D+/g, '');

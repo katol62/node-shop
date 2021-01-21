@@ -11,6 +11,7 @@ import {categoryRoutes} from "./ApiCategoryRoute";
 import {instaRoutes} from "./ApiInstaRoute";
 import {productRoutes} from "./ApiProductRoute";
 import {firebaseRoutes} from "./ApiFirebaseNotificationRoute";
+import {verifySmsRoutes} from "./ApiSmsVerifyRoute";
 
 class ApiRoutes {
 
@@ -36,6 +37,7 @@ class ApiRoutes {
         this.router.use('/auth', authRoutes.router);
         this.router.use('/register', regRoutes.router);
         this.router.use('/verify', verifyRoutes.router);
+        this.router.use('/sms-verify', verifySmsRoutes.router);
         this.router.use('/insta', instaRoutes.router);
         this.router.use('/me', checkJwt, meRoutes.router);
         this.router.use('/banners', bannerRoutes.router);

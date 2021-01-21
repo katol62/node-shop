@@ -7,7 +7,8 @@ export const environment: IEnvironment = {
   apiUrl: 'http://192.168.1.51:3010/api',
   verification: {
     email: 'ktolochko@gmail.com',
-    password: '228ec98cc723515a082697d9ce6f8740'
+    password: '228ec98cc723515a082697d9ce6f8740',
+    apiId: 'FA032C9A-5221-F4D2-F2EA-F77ED6FF5D57'
   }
 };
 

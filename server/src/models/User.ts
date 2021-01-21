@@ -11,7 +11,7 @@ export interface IUser {
     email?: string;
     dob?: string;
     password?: string;
-    role?: 'admin' | 'user';
+    role?: 'super' | 'admin' | 'user';
 }
 
 export class User {

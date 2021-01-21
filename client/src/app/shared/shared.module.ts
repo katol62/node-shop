@@ -12,6 +12,7 @@ import {PlaceService} from "./services/place.service";
 import {RestService} from "./services/rest.service";
 import {ValidationService} from "./services/validation.service";
 import {VerificationService} from "./services/verification.service";
+import {SmsVerificationService} from './services/sms-verification.service';
 import {IonicModule} from "@ionic/angular";
 import {RouterModule} from "@angular/router";
 import {InstaComponent} from "./components/insta/insta.component";
@@ -83,6 +84,7 @@ export class SharedModule {
                 RestService,
                 ValidationService,
                 VerificationService,
+                SmsVerificationService,
                 HelpService,
                 LoaderService,
                 RemoteModalService

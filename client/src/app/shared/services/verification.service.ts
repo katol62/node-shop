@@ -26,7 +26,7 @@ export const Codes: ICode[] = [
     {code: 305, message: 'СМС доставлено'},
     {code: 306, message: 'Ошибка доставки СМС'},
     {code: 307, message: 'Запись о СМС не найдена'}
-]
+];
 
 @Injectable({
     providedIn: 'root'
